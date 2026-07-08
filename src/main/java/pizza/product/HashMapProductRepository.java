@@ -1,10 +1,13 @@
 package pizza.product;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Component
 public class HashMapProductRepository implements ProductRepository {
 
     private final Map<String, Product> productsMap = new HashMap<>();

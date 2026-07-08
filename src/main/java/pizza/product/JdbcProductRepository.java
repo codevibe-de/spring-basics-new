@@ -1,5 +1,6 @@
 package pizza.product;
 
+import org.springframework.stereotype.Component;
 import pizza.PersistenceException;
 
 import javax.sql.DataSource;
@@ -9,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class JdbcProductRepository implements ProductRepository {
 
     public static final String INSERT_SQL = "INSERT INTO products (pk, name, price) VALUES (?, ?, ?)";

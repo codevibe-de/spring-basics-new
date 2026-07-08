@@ -3,6 +3,7 @@ package pizza;
 import com.github.freva.asciitable.AsciiTable;
 import com.github.freva.asciitable.Column;
 import com.github.freva.asciitable.HorizontalAlign;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pizza.customer.Customer;
 import pizza.customer.CustomerService;
@@ -18,7 +19,7 @@ public class PizzaApp {
 
     public static void main(String[] args) {
         // Instantiate XML configured context ---
-        try (var beanContainer = new ClassPathXmlApplicationContext("/beans.xml")) {
+        try (var beanContainer = new AnnotationConfigApplicationContext(PizzaApp.class.getPackageName())) {
             // query and use beans
             beanContainer.getBean(DataLoader.class).run();
             ProductService productService = beanContainer.getBean(ProductService.class);

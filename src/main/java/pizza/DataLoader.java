@@ -2,6 +2,7 @@ package pizza;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 import pizza.customer.Address;
 import pizza.customer.Customer;
 import pizza.customer.CustomerService;
@@ -46,6 +47,7 @@ public abstract class DataLoader implements Runnable {
     // --- concrete implementations ---
     //
 
+    @Component("none")
     public static class None extends DataLoader {
         public None() {
             super(null, null);
@@ -57,6 +59,7 @@ public abstract class DataLoader implements Runnable {
     }
 
 
+    @Component("sample")
     public static class Sample extends DataLoader {
         public Sample(ProductService productService, CustomerService customerService) {
             super(productService, customerService);
@@ -80,6 +83,7 @@ public abstract class DataLoader implements Runnable {
     }
 
 
+    @Component("csv")
     public static class Csv extends DataLoader {
 
         public Csv(ProductService productService, CustomerService customerService) {
