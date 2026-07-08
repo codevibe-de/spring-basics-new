@@ -2,7 +2,6 @@ package pizza.order;
 
 import pizza.customer.Customer;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Order {
@@ -15,7 +14,7 @@ public class Order {
 
     private final Customer customer;
 
-    private final BigDecimal totalPrice;
+    private final Double totalPrice;
 
     private final LocalDateTime estimatedTimeOfDelivery;
 
@@ -23,13 +22,13 @@ public class Order {
     // --- constructors ---
     //
 
-    public Order(Customer customer, BigDecimal totalPrice, LocalDateTime estimatedTimeOfDelivery) {
+    public Order(Customer customer, Double totalPrice, LocalDateTime estimatedTimeOfDelivery) {
         this.customer = customer;
         this.totalPrice = totalPrice;
         this.estimatedTimeOfDelivery = estimatedTimeOfDelivery;
     }
 
-    public Order(Long id, Customer customer, BigDecimal totalPrice, LocalDateTime estimatedTimeOfDelivery) {
+    public Order(Long id, Customer customer, Double totalPrice, LocalDateTime estimatedTimeOfDelivery) {
         this.id = id;
         this.customer = customer;
         this.totalPrice = totalPrice;
@@ -55,7 +54,7 @@ public class Order {
         return customer;
     }
 
-    public BigDecimal getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
 

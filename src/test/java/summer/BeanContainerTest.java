@@ -2,7 +2,6 @@ package summer;
 
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import pizza.DataLoader;
@@ -29,8 +28,6 @@ class BeanContainerTest {
     private final BeanContainer beanContainer = new BeanContainer();
 
     @Test
-    // remove @Disabled annotation once bean-container has been implemented
-    @Disabled
     void getBean() {
         // given
         beanContainer.defineBean("prodRepo", HashMapProductRepository.class);
@@ -46,8 +43,6 @@ class BeanContainerTest {
 
 
     @Test
-    // remove @Disabled annotation once bean-container has been implemented
-    @Disabled
     void getBean__NoUniqueBeanDefinitionException() {
         // given
         beanContainer.defineBean("prodRepo", HashMapProductRepository.class);
@@ -66,8 +61,6 @@ class BeanContainerTest {
 
 
     @Test
-    // remove @Disabled annotation once bean-container has been implemented
-    @Disabled
     void refresh__failsForCircularDependencies() {
         // when
         beanContainer.defineBean("beanX", X.class);
