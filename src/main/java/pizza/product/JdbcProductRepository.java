@@ -28,7 +28,7 @@ public class JdbcProductRepository implements ProductRepository {
             try (PreparedStatement statement = connection.prepareStatement(INSERT_SQL)) {
                 statement.setString(1, product.getProductId());
                 statement.setString(2, product.getName());
-                statement.setDouble(3, product.getPrice());
+                statement.setBigDecimal(3, product.getPrice());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -98,7 +98,7 @@ public class JdbcProductRepository implements ProductRepository {
         return new Product(
                 rs.getString("pk"),
                 rs.getString("name"),
-                rs.getDouble("price")
+                rs.getBigDecimal("price")
         );
     }
 
