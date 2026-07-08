@@ -23,9 +23,7 @@ public class PizzaApp {
 
     public static void main(String[] args) {
         // Instantiate beans ---
-        H2TcpServer h2TcpServer = startDatabase();
-        DataSource dataSource = createDataSource();
-        ProductService productService = new ProductService(new JdbcProductRepository(dataSource));
+        ProductService productService = new ProductService(new HashMapProductRepository());
         CustomerService customerService = new CustomerService();
         OrderService orderService = new OrderService(customerService, productService);
         new DataLoader.Sample(productService, customerService).run();
