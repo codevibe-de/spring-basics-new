@@ -7,6 +7,7 @@ import org.h2.jdbcx.JdbcDataSource;
 import pizza.customer.Customer;
 import pizza.customer.CustomerService;
 import pizza.order.OrderService;
+import pizza.product.JdbcProductRepository;
 import pizza.product.Product;
 import pizza.product.ProductService;
 
@@ -20,14 +21,11 @@ public class PizzaApp {
 
     public static void main(String[] args) {
         // Instantiate beans ---
-        // hint: you only need the DataSource if you want to use the JdbcProductRepository
-        // (instead of HashMapProductRepository)
         H2TcpServer h2TcpServer = startDatabase();
         DataSource dataSource = createDataSource();
-        // TODO create services and required helper instances here
-        ProductService productService = null;
-        CustomerService customerService = null;
-        OrderService orderService = null;
+        ProductService productService = new ProductService(new JdbcProductRepository(dataSource));
+        CustomerService customerService = new CustomerService();
+        OrderService orderService = new OrderService(customerService, productService);
         new DataLoader.Sample(productService, customerService).run();
 
         // Work with the data:
