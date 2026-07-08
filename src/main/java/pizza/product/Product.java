@@ -1,5 +1,7 @@
 package pizza.product;
 
+import java.math.BigDecimal;
+
 public class Product {
 
     //
@@ -10,13 +12,13 @@ public class Product {
 
     private final String name;
 
-    private final Double price;
+    private final BigDecimal price;
 
     //
     // --- constructors ---
     //
 
-    public Product(String productId, String name, Double price) {
+    public Product(String productId, String name, BigDecimal price) {
         this.productId = productId;
         this.name = name;
         this.price = price;
@@ -34,7 +36,7 @@ public class Product {
         return name;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
