@@ -6,10 +6,10 @@ import com.github.freva.asciitable.HorizontalAlign;
 import pizza.customer.Customer;
 import pizza.customer.CustomerService;
 import pizza.order.OrderService;
-import pizza.product.HashMapProductRepository;
 import pizza.product.Product;
 import pizza.product.ProductService;
 import summer.BeanContainer;
+import summer.XmlBeanContainer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,13 +20,7 @@ public class PizzaApp {
 
     public static void main(String[] args) {
         // Instantiate beans ---
-        BeanContainer beanContainer = new BeanContainer();
-        beanContainer.defineBean("prdRepo", HashMapProductRepository.class);
-        beanContainer.defineBean("prdService", ProductService.class);
-        beanContainer.defineBean("cstmService", CustomerService.class);
-        beanContainer.defineBean("orderService", OrderService.class);
-        beanContainer.defineBean("sample", DataLoader.Sample.class);
-        beanContainer.refresh();
+        BeanContainer beanContainer = new XmlBeanContainer("/beans.xml");
 
         // query and use beans
         beanContainer.getBean(DataLoader.class).run();
