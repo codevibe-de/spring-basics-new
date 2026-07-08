@@ -1,6 +1,6 @@
 package pizza.product;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository {
@@ -9,7 +9,7 @@ public interface ProductRepository {
 
     boolean existsById(String productId);
 
-    Collection<Product> findAll();
+    List<Product> findAll();
 
     Optional<Product> findById(String productId);
 }
