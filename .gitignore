@@ -1,0 +1,25 @@
+# intellij
+.idea/
+*.iml
+
+# eclipse
+bin/
+.project
+.classpath
+.settings/
+
+# maven
+/target
+/maven.out
+
+# gradle
+.gradle/
+build/
+/gradle.out
+
+# claude code
+/.claude/settings.local.json
+/CLAUDE.md
+
+# jenv
+/.java-version
