@@ -6,6 +6,10 @@ plugins {
 group = 'de.codevibe'
 version = '013'
 
+ext {
+    springVersion = '6.2.15'
+}
+
 application {
     mainClass = 'pizza.PizzaApp'
 }
@@ -15,6 +19,7 @@ repositories {
 }
 
 dependencies {
+    implementation "org.springframework:spring-context:${springVersion}"
     implementation 'com.h2database:h2:2.3.232'
     testImplementation platform('org.junit:junit-bom:5.11.3')
     testImplementation 'org.junit.jupiter:junit-jupiter'
