@@ -26,7 +26,7 @@ public class PizzaApp {
         // Instantiate XML configured context ---
         try (var beanContainer = new AnnotationConfigApplicationContext(PizzaApp.class.getPackageName())) {
             // query and use beans
-            beanContainer.getBean(DataLoader.class).run();
+            beanContainer.getBean("sample", DataLoader.class).run();
             ProductService productService = beanContainer.getBean(ProductService.class);
             CustomerService customerService = beanContainer.getBean(CustomerService.class);
             OrderService orderService = beanContainer.getBean(OrderService.class);
