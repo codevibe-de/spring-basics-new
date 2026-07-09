@@ -1,9 +1,6 @@
 package pizza.product;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class HashMapProductRepository implements ProductRepository {
 
@@ -21,8 +18,8 @@ public class HashMapProductRepository implements ProductRepository {
     }
 
     @Override
-    public Collection<Product> findAll() {
-        return productsMap.values();
+    public List<Product> findAll() {
+        return productsMap.values().stream().toList();
     }
 
     @Override
