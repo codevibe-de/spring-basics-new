@@ -1,5 +1,7 @@
 package pizza.customer;
 
+import java.util.Objects;
+
 public class Customer {
 
     //
@@ -61,6 +63,19 @@ public class Customer {
     //
     // --- other methods ---
     //
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(id, customer.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 
     @Override
     public String toString() {
