@@ -1,6 +1,7 @@
 package pizza.product;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 public class ProductService {
@@ -19,7 +20,7 @@ public class ProductService {
     // business logic
     //
 
-    public Iterable<Product> getAllProducts() {
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
