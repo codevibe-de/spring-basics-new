@@ -8,6 +8,7 @@ import pizza.customer.CustomerService;
 import pizza.product.Product;
 import pizza.product.ProductService;
 
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -26,8 +27,8 @@ public abstract class DataLoader implements Runnable {
         this.customerService = customerService;
     }
 
-    protected void createProduct(String productId, String name, double price) {
-        this.productService.createProduct(new Product(productId, name, price));
+    protected void createProduct(String productId, String name, String price) {
+        this.productService.createProduct(new Product(productId, name, new BigDecimal(price)));
     }
 
     protected Address createAddress(String street, String postalCode, String city) {
@@ -64,12 +65,12 @@ public abstract class DataLoader implements Runnable {
 
         @Override
         public void run() {
-            createProduct("S-01", "Thunfisch Salat", 6.90);
-            createProduct("S-02", "Salat Italiano", 7.90);
-            createProduct("S-03", "Romana Salat", 8.90);
-            createProduct("P-10", "Pizza Margarita", 5.50);
-            createProduct("P-11", "Pizza Capricciosa", 7.50);
-            createProduct("P-12", "Pizza Spinat und Feta", 7.00);
+            createProduct("S-01", "Thunfisch Salat", "6.90");
+            createProduct("S-02", "Salat Italiano", "7.90");
+            createProduct("S-03", "Romana Salat", "8.90");
+            createProduct("P-10", "Pizza Margarita", "5.50");
+            createProduct("P-11", "Pizza Capricciosa", "7.50");
+            createProduct("P-12", "Pizza Spinat und Feta", "7.00");
 
             var address1 = createAddress("Wasserstr. 123", "40302", "Atlantis");
             var address2 = createAddress("Schlossallee 1", "88776", "Monopolhausen");
@@ -103,7 +104,7 @@ public abstract class DataLoader implements Runnable {
             if (parts.length != 3) {
                 throw new IllegalArgumentException("Invalid product line: " + line);
             }
-            createProduct(parts[0].trim(), parts[1].trim(), Double.parseDouble(parts[2].trim()));
+            createProduct(parts[0].trim(), parts[1].trim(), parts[2].trim());
         }
     }
 
