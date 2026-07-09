@@ -2,8 +2,8 @@ package pizza.product;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -24,8 +24,8 @@ public class HashMapProductRepository implements ProductRepository {
     }
 
     @Override
-    public Collection<Product> findAll() {
-        return productsMap.values();
+    public List<Product> findAll() {
+        return productsMap.values().stream().toList();
     }
 
     @Override

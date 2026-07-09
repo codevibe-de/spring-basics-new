@@ -2,7 +2,9 @@ package pizza.order;
 
 import pizza.customer.Customer;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Order {
 
@@ -14,7 +16,7 @@ public class Order {
 
     private final Customer customer;
 
-    private final Double totalPrice;
+    private final BigDecimal totalPrice;
 
     private final LocalDateTime estimatedTimeOfDelivery;
 
@@ -22,13 +24,13 @@ public class Order {
     // --- constructors ---
     //
 
-    public Order(Customer customer, Double totalPrice, LocalDateTime estimatedTimeOfDelivery) {
+    public Order(Customer customer, BigDecimal totalPrice, LocalDateTime estimatedTimeOfDelivery) {
         this.customer = customer;
         this.totalPrice = totalPrice;
         this.estimatedTimeOfDelivery = estimatedTimeOfDelivery;
     }
 
-    public Order(Long id, Customer customer, Double totalPrice, LocalDateTime estimatedTimeOfDelivery) {
+    public Order(Long id, Customer customer, BigDecimal totalPrice, LocalDateTime estimatedTimeOfDelivery) {
         this.id = id;
         this.customer = customer;
         this.totalPrice = totalPrice;
@@ -54,7 +56,7 @@ public class Order {
         return customer;
     }
 
-    public Double getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
@@ -65,6 +67,19 @@ public class Order {
     //
     // --- other methods ---
     //
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(id, order.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 
     @Override
     public String toString() {

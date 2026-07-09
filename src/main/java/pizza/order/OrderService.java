@@ -5,6 +5,7 @@ import pizza.customer.Customer;
 import pizza.customer.CustomerService;
 import pizza.product.ProductService;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class OrderService {
 
     private List<String> discountDays = new ArrayList<>();
 
-    private double discountRate = 0.0d;
+    private double discountRate = 0.0;
 
     private final ArrayList<Order> orders;
 
@@ -65,11 +66,11 @@ public class OrderService {
         Customer customer = this.customerService.getCustomerByPhoneNumber(phoneNumber);
 
         // calculate total price
-        Double totalPrice = this.productService.getTotalPrice(productQuantities);
+        BigDecimal totalPrice = this.productService.getTotalPrice(productQuantities);
 
         // discounts
         double todaysDiscountRate = getTodaysDiscountRate();
-        double discountedTotalPrice = totalPrice * (1.0 - todaysDiscountRate / 100.0);
+        BigDecimal discountedTotalPrice = totalPrice.multiply(BigDecimal.valueOf(1.0 - todaysDiscountRate / 100.0));
         System.out.println("Reducing price of order from " + totalPrice + " to " + discountedTotalPrice
                 + " due to today's discount of " + todaysDiscountRate + "%");
 

@@ -2,6 +2,8 @@ package pizza.product;
 
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -21,7 +23,7 @@ public class ProductService {
     // business logic
     //
 
-    public Iterable<Product> getAllProducts() {
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
@@ -31,8 +33,8 @@ public class ProductService {
                 .orElseThrow(() -> new ProductNotFoundException("For id " + productId));
     }
 
-    public Double getTotalPrice(Map<String, Integer> productQuantities) {
-        double result = 0.0;
+    public BigDecimal getTotalPrice(Map<String, Integer> productQuantities) {
+        BigDecimal result = BigDecimal.ZERO;
         // TODO implement calculation
         return result;
     }

@@ -31,7 +31,7 @@ public class CustomerService {
                 .orElseThrow(() -> new CustomerNotFoundException("For phoneNumber `" + phoneNumber + "`"));
     }
 
-    public Iterable<Customer> getAllCustomers() {
+    public List<Customer> getAllCustomers() {
         return Collections.unmodifiableList(this.customers);
     }
 
