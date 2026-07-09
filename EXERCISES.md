@@ -35,9 +35,18 @@ Hierfür können Sie eine Umgebungsvariable, ein VM System Property oder ein Pro
 
 Wird der erwartete Wert ausgegeben?
 
-## d) optionaler DataLoader
+## d) Neuer CSV DataLoader
 
-Machen Sie die Ausführung des DataLoaders konfigurierbar (an/aus) - oder sogar, welche DataLoader Bean ausgeführt werden
-soll (z.B. "none" oder "sample").
+Es gibt einen neuen DataLoader, der die Daten aus einer CSV-Datei lädt. Dafür wird ein Spring Konzept
+genutzt, das wir bisher noch nicht kennengelernt haben: Ressourcen.
+
+Vorerst reicht es aber, wenn Sie die `productsResource` Instanzvariable mit `@Value` annotieren
+und den Pfad zur CSV-Datei in der `application.properties` Datei setzen. Den Namen für das Property können Sie frei
+wählen, der Wert muss "classpath:/products.csv" sein.
+
+## e) optionaler DataLoader
+
+Machen Sie die Ausführung des `DataLoadRunners` konfigurierbar (an/aus) - oder sogar, welche DataLoader Bean ausgeführt
+werden soll (z.B. "none", "sample" oder der neue "csv").
 
 Hierfür gibt es mehrere Wege, die wir kennengelernt haben.

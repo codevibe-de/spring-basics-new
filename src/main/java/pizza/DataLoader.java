@@ -83,4 +83,35 @@ public abstract class DataLoader implements Runnable {
         }
     }
 
+
+    @Component("csv")
+    public static class Csv extends DataLoader {
+
+        // todo add @Value
+        Resource productsResource;
+
+        public Csv(ProductService productService, CustomerService customerService) {
+            super(productService, customerService);
+        }
+
+        @Override
+        public void run() {
+            try {
+                productsResource.getContentAsString(StandardCharsets.UTF_8).lines()
+                        .filter(line -> !line.isBlank())
+                        .forEach(this::parseAndCreateProduct);
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to load products from CSV", e);
+            }
+        }
+
+        private void parseAndCreateProduct(String line) {
+            String[] parts = line.split(";");
+            if (parts.length != 3) {
+                throw new IllegalArgumentException("Invalid product line: " + line);
+            }
+            createProduct(parts[0].trim(), parts[1].trim(), parts[2].trim());
+        }
+    }
+
 }
