@@ -1,33 +1,43 @@
-# Übungen zu 025 "Beans"
+# Übungen zum Kapitel "060 - Konfiguration"
 
-Machen Sie aus der bestehenden Kommandozeilenanwendung eine Spring Boot basierte Anwendung.
+## a) OrderService konfigurierbar machen
 
-Die bestehende Klasse `PizzaApp` ist hierfür der Ausgangspunkt. Diese wurde auf Basis einer bereits angepassten
-`pom.xml` bzw. `build.gradle` Datei bereits für Spring vorbereitet.
+Verändern Sie den `OrderService`, sodass die dort definierten Eigenschaften mittels Konfiguration
+gesetzt werden können:
 
-Diese Übung besteht aus **zwei Phasen**:
+* erwartete Lieferzeit in Minuten
+* die Wochentage, an denen der Rabatt gilt
+* der Rabattsatz (in %)
 
-## Phase 1
+Hinweis: Hierfür gibt es zwei Möglichkeiten (mittels `@Value` oder `@ConfigurationProperties`).
+Bei letzterem Ansatz brauchen Sie die Felder der Klasse nicht mehr, da Sie ja dann diese über
+eine neue `OrderProperties` Klasse injectet bekommen.
 
-Wir wollen, dass Spring nun alle Beans über Annotations findet.
+## b) Ausgabe der Konfiguration
 
-Somit müssen wir den erstellen ApplicationContext auf `AnnotationConfigApplicationContext` ändern und 
-die benötigten Annotationen in diversen Klassen hinzufügen.
+Ergänzen Sie den `OrderService` um eine Methode, in der die Konfiguration via `System.out`
+ausgegeben wird (damit wir sehen können, was gerade gilt).
 
-Sie können frei wählen, ob Sie dies per Stereotypen oder Bean-Methoden machen. Natürlich auch gemischt...
+Lassen Sie Spring diese Methode automatisch beim Start ausführen. Wie ging das nochmal ...? :)
 
-## Phase 2 -- optional
+Setzen Sie Werte für die Konfiguration des `OrderService` in der `application.properties` Datei.
 
-Wie arbeiten wir nun mit den Service-Beans?
+Starten Sie nun die Anwendung und prüfen Sie die tatsächlich vorliegende Konfiguration --
+wird der Wert aus der `application.properties` genutzt?
 
-Wir können die Ausführung der Geschäftslogik so belassen wie gehabt, oder wir nutzen das bereitgestellte
-`pizza.util.CommandLineRunner` Interface. Das geht wie folgt:
+## c) Konfiguration von außen
 
-1. Erstellung einer neuen Klasse `LogicRunner` (oder beliebiger anderer Name) im Package `pizza`, welche
-   das `CommandLineRunner` Interface implementiert.
-2. Annotation als Bean (z.B. `@Component`), damit Spring diese Klasse als Bean erkennt.
-3. Verschiebung der Geschäftslogik in die `run()` Methode dieser Klasse.
-4. Autowiring der benötigten Service-Beans in diese Klasse.
-5. Abfrage aller Beans des Typs `CommandLineRunner` in der `PizzaApp.main()` Methode und Ausführung der `run()`
-   Methoden.
+Starten Sie Ihre Anwendung auf eine Art und Weise, dass nicht die Lieferzeit in Minuten
+aus den `application.properties` genutzt wird, sondern von außen durch einen anderen Wert
+überschrieben wird.
 
+Hierfür können Sie eine Umgebungsvariable, ein VM System Property oder ein Programmargument nutzen.
+
+Wird der erwartete Wert ausgegeben?
+
+## d) optionaler DataLoader
+
+Machen Sie die Ausführung des DataLoaders konfigurierbar (an/aus) - oder sogar, welche DataLoader Bean ausgeführt werden
+soll (z.B. "none" oder "sample").
+
+Hierfür gibt es mehrere Wege, die wir kennengelernt haben.
