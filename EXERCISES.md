@@ -11,7 +11,7 @@ Diese Übung besteht aus **zwei Phasen**:
 
 Wir wollen, dass Spring nun alle Beans über Annotations findet.
 
-Somit müssen wir den erstellen ApplicationContext auf `AnnotationConfigApplicationContext` ändern und 
+Somit müssen wir den erstellen ApplicationContext auf `AnnotationConfigApplicationContext` ändern und
 die benötigten Annotationen in diversen Klassen hinzufügen.
 
 Sie können frei wählen, ob Sie dies per Stereotypen oder Bean-Methoden machen. Natürlich auch gemischt...
@@ -29,5 +29,7 @@ Wir können die Ausführung der Geschäftslogik so belassen wie gehabt, oder wir
 3. Verschiebung der Geschäftslogik in die `run()` Methode dieser Klasse.
 4. Autowiring der benötigten Service-Beans in diese Klasse.
 5. Abfrage aller Beans des Typs `CommandLineRunner` in der `PizzaApp.main()` Methode und Ausführung der `run()`
-   Methoden.
+   Methoden. Besonders leicht lässt sich dies (inkl. Sortierung) mit `BeanFactory.getBeanProvider(java.lang.Class<T>)`
+   und dessen `orderedStream()` Methode realisieren. So können wir später weitere Runner anlegen und diese in
+   der gewünschten Reihenfolge ausführen lassen.
 
