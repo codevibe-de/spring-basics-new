@@ -5,7 +5,7 @@
 
     <groupId>de.codevibe</groupId>
     <artifactId>pizza-app</artifactId>
-    <version>030</version>
+    <version>040</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -22,6 +22,11 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
         </dependency>
         <dependency>
