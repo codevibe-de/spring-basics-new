@@ -40,13 +40,21 @@ Wird der erwartete Wert ausgegeben?
 Es gibt einen neuen DataLoader, der die Daten aus einer CSV-Datei lädt. Dafür wird ein Spring Konzept
 genutzt, das wir bisher noch nicht kennengelernt haben: Ressourcen.
 
-Vorerst reicht es aber, wenn Sie die `productsResource` Instanzvariable mit `@Value` annotieren
-und den Pfad zur CSV-Datei in der `application.properties` Datei setzen. Den Namen für das Property können Sie frei
-wählen, der Wert muss "classpath:/products.csv" sein.
+Vorerst reicht es aber, wenn Sie ein Property mit folgendem Wert anlegen:
+
+```properties
+app.data-loader.csv.product-data=classpath:/products.csv
+```
+
+Lassen Sie den Wert dieses Properties mittels `@Value` der `productsResource` Instanzvariable zuweisen.
 
 ## e) optionaler DataLoader
 
-Machen Sie die Ausführung des `DataLoadRunners` konfigurierbar (an/aus) - oder sogar, welche DataLoader Bean ausgeführt
-werden soll (z.B. "none", "sample" oder der neue "csv").
+Es gibt eine neue `DataLoadRunner` Bean, in die der `run()`-Aufruf des DataLoaders ausgelagert wurde (vorher war dies
+Teil des LogicRunners)
 
-Hierfür gibt es mehrere Wege, die wir kennengelernt haben.
+Machen Sie die Ausführung der `DataLoadRunner`-Bean konfigurierbar (an/aus), z.B. mittels einer `@ConditionalOn...`
+Annotation.
+
+Alternativ können Sie sogar implementieren, dass über ein Property bestimmt werden kann, **welche** DataLoader Bean
+ausgeführt werden soll (z.B. "none", "sample" oder der neue "csv").

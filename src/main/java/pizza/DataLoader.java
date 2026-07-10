@@ -1,5 +1,6 @@
 package pizza;
 
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import pizza.customer.Address;
 import pizza.customer.Customer;
@@ -8,6 +9,7 @@ import pizza.product.Product;
 import pizza.product.ProductService;
 
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 
 /**
  * The <code>DataLoader</code> is an abstract class implementing the {@link Runnable}
