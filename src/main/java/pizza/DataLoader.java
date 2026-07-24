@@ -1,5 +1,6 @@
 package pizza;
 
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import pizza.customer.Address;
 import pizza.customer.Customer;
@@ -77,6 +78,35 @@ public abstract class DataLoader implements Runnable {
 
             createCustomer("Enrico Pallazzo", "+49 123 456789", address1);
             createCustomer("Elizabeth Magie", "+1 77 551237", address2);
+        }
+    }
+
+
+    /**
+     * Übung 027 b) -- lädt Produkte aus einer CSV-Datei (Format: {@code id;name;preis}).
+     * <p>
+     * Der Zugriff auf die Datei erfolgt über Springs {@link ResourceLoader}, der automatisch injiziert
+     * wird (der {@code ApplicationContext} selbst ist ein {@code ResourceLoader}). Damit lässt sich die
+     * Datei ortsunabhängig als {@code Resource} beschaffen.
+     */
+    @Component("csv")
+    public static class Csv extends DataLoader {
+
+        private final ResourceLoader resourceLoader;
+
+        public Csv(ProductService productService,
+                   CustomerService customerService,
+                   ResourceLoader resourceLoader) {
+            super(productService, customerService);
+            this.resourceLoader = resourceLoader;
+        }
+
+        @Override
+        public void run() {
+            // TODO 027 b): Beschaffen Sie die Datei über den ResourceLoader
+            //              (resourceLoader.getResource("classpath:products.csv")), lesen Sie deren Inhalt
+            //              aus, zerlegen Sie jede Zeile am ';' und legen Sie je Zeile über
+            //              createProduct(id, name, preis) ein Produkt an.
         }
     }
 
