@@ -10,6 +10,12 @@ ext {
     springVersion = '6.2.15'
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 application {
     mainClass = 'pizza.PizzaApp'
 }
@@ -21,13 +27,12 @@ repositories {
 dependencies {
     implementation "org.springframework:spring-context:${springVersion}"
     implementation "org.springframework:spring-test:${springVersion}"
+    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
     testImplementation platform('org.junit:junit-bom:5.11.3')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
     testImplementation 'org.assertj:assertj-core:3.26.3'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.2'
-    implementation 'com.sun.xml.bind:jaxb-impl:4.0.5'
     implementation 'com.github.freva:ascii-table:1.12.1'
 }
 
