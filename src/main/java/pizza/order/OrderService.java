@@ -1,5 +1,6 @@
 package pizza.order;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import pizza.customer.Customer;
 import pizza.customer.CustomerService;
@@ -10,7 +11,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -20,17 +20,13 @@ public class OrderService {
     // fields
     //
 
-    private Integer deliveryTimeInMinutes = 30;
-
-    private List<String> discountDays = new ArrayList<>();
-
-    private double discountRate = 0.0;
-
     private final ArrayList<Order> orders;
 
     //
     // injected beans
     //
+
+    private final OrderProperties orderProperties;
 
     private final CustomerService customerService;
 
@@ -40,10 +36,21 @@ public class OrderService {
     // constructors and setup
     //
 
-    public OrderService(CustomerService customerService, ProductService productService) {
+    public OrderService(OrderProperties orderProperties, CustomerService customerService, ProductService productService) {
+        this.orderProperties = orderProperties;
         this.customerService = customerService;
         this.productService = productService;
         this.orders = new ArrayList<>();
+    }
+
+    @PostConstruct
+    public void dumpConfiguration() {
+        System.out.printf("""
+                Using configuration:
+                - deliveryTimeInMinutes=%d
+                - discountDays=%s
+                - discountRate=%2.2f
+                %n""", orderProperties.deliveryTimeInMinutes(), orderProperties.discountDays(), orderProperties.discountRate());
     }
 
     //
@@ -78,7 +85,7 @@ public class OrderService {
         Order order = new Order(
                 customer,
                 discountedTotalPrice,
-                LocalDateTime.now().plusMinutes(this.deliveryTimeInMinutes));
+                LocalDateTime.now().plusMinutes(this.orderProperties.deliveryTimeInMinutes()));
 
         // persist and return it
         order.setId(orders.size() + 1);
@@ -88,8 +95,8 @@ public class OrderService {
 
     private double getTodaysDiscountRate() {
         String nameOfDayOfWeek = LocalDate.now().getDayOfWeek().name();
-        if (this.discountDays.contains(nameOfDayOfWeek)) {
-            return this.discountRate;
+        if (this.orderProperties.discountDays().contains(nameOfDayOfWeek)) {
+            return this.orderProperties.discountRate();
         } else {
             return 0.0d;
         }

@@ -1,5 +1,6 @@
 package pizza;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import pizza.customer.Address;
@@ -86,7 +87,7 @@ public abstract class DataLoader implements Runnable {
     @Component("csv")
     public static class Csv extends DataLoader {
 
-        // todo add @Value
+        @Value("${app.data-loader.csv.product-data}")
         Resource productsResource;
 
         public Csv(ProductService productService, CustomerService customerService) {
