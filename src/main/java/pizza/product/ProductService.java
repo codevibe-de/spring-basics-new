@@ -34,9 +34,13 @@ public class ProductService {
     }
 
     public BigDecimal getTotalPrice(Map<String, Integer> productQuantities) {
-        BigDecimal result = BigDecimal.ZERO;
-        // TODO implement calculation
-        return result;
+        return productQuantities.entrySet().stream()
+                .map(entry -> {
+                    Product product = getProduct(entry.getKey());
+                    BigDecimal quantity = BigDecimal.valueOf(entry.getValue());
+                    return quantity.multiply(product.getPrice());
+                })
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     public Product createProduct(Product product) {
