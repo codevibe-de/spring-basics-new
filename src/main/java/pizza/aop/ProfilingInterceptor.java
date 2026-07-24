@@ -14,9 +14,14 @@ public class ProfilingInterceptor implements MethodInterceptor {
 
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
-        // TODO 027 a): Messen Sie die Zeit vor und nach dem Aufruf und geben Sie die Dauer aus.
-        //              Der eigentliche (umwickelte) Aufruf erfolgt über invocation.proceed().
-        return invocation.proceed();
+        long startMillis = System.currentTimeMillis();
+        try {
+            return invocation.proceed();
+        } finally {
+            long durationMillis = System.currentTimeMillis() - startMillis;
+            System.out.printf("Execution of %s() took %d ms%n",
+                    invocation.getMethod().getName(), durationMillis);
+        }
     }
 
 }

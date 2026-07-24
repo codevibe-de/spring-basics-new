@@ -27,15 +27,14 @@ public class SpelParserApp {
 
             // Ausdruck auswerten:
             Object value = parser
-                    // TODO 027 c): Ersetzen Sie diesen Ausdruck durch einen SpEL-Ausdruck, der die Namen
-                    //              aller Produkte liefert -- nutzen Sie eine Bean-Referenz (@productService),
-                    //              Property-Zugriff (.allProducts) und eine Collection-Projection (.![...]).
+                    // Bean-Referenz (@productService) -> Property-Zugriff (.allProducts)
+                    // -> Collection-Projection (.![name]), die jedes Produkt auf seinen Namen abbildet.
                     //
-                    // Experimentieren Sie danach mit weiteren Ausdrücken, z.B.:
+                    // Weitere Ausdrücke zum Experimentieren:
                     //   @productService.allProducts.size()                              -> Anzahl
                     //   @productService.allProducts.?[price.doubleValue() < 7.0].![name] -> Selection + Projection
                     //   T(java.time.LocalDate).now()                                    -> Type-Reference
-                    .parseExpression("23 + 42")
+                    .parseExpression("@productService.allProducts.![name]")
                     .getValue(evaluationContext);
 
             System.out.println(value);

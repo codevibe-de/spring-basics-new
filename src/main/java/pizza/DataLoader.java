@@ -1,5 +1,6 @@
 package pizza;
 
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import pizza.customer.Address;
@@ -8,7 +9,9 @@ import pizza.customer.CustomerService;
 import pizza.product.Product;
 import pizza.product.ProductService;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 
 /**
  * The <code>DataLoader</code> is an abstract class implementing the {@link Runnable}
@@ -103,10 +106,22 @@ public abstract class DataLoader implements Runnable {
 
         @Override
         public void run() {
-            // TODO 027 b): Beschaffen Sie die Datei über den ResourceLoader
-            //              (resourceLoader.getResource("classpath:products.csv")), lesen Sie deren Inhalt
-            //              aus, zerlegen Sie jede Zeile am ';' und legen Sie je Zeile über
-            //              createProduct(id, name, preis) ein Produkt an.
+            Resource resource = resourceLoader.getResource("classpath:products.csv");
+            try {
+                resource.getContentAsString(StandardCharsets.UTF_8).lines()
+                        .filter(line -> !line.isBlank())
+                        .forEach(this::parseAndCreateProduct);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to load products from CSV resource " + resource, e);
+            }
+        }
+
+        private void parseAndCreateProduct(String line) {
+            String[] parts = line.split(";");
+            if (parts.length != 3) {
+                throw new IllegalArgumentException("Invalid product line: " + line);
+            }
+            createProduct(parts[0].trim(), parts[1].trim(), parts[2].trim());
         }
     }
 

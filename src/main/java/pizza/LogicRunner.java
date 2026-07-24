@@ -30,7 +30,7 @@ public class LogicRunner implements CommandLineRunner {
     private final OrderService orderService;
 
     public LogicRunner(
-            @Qualifier("sample") DataLoader dataLoader,
+            @Qualifier("csv") DataLoader dataLoader,
             ProductService productService,
             CustomerService customerService,
             OrderService orderService

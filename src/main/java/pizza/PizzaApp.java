@@ -1,8 +1,12 @@
 package pizza;
 
+import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import pizza.aop.ProfilingInterceptor;
+import pizza.aop.TraceBeforeMethodAdvice;
+import pizza.product.ProductService;
 import pizza.util.CommandLineRunner;
 
 @Configuration
@@ -18,11 +22,20 @@ public class PizzaApp {
                     .forEach(runner -> runner.run(args));
 
             // --- Übung 027 a) AOP ---
-            // TODO 027 a): Holen Sie sich eine bestehende Bean (z.B. die ProductService-Bean) aus dem
-            //              Container und erzeugen Sie mit Springs ProxyFactoryBean einen AOP-Proxy davon.
-            //              Fügen Sie Ihr TraceBeforeMethodAdvice und Ihren ProfilingInterceptor hinzu und
-            //              rufen Sie dann eine Methode auf dem Proxy auf (z.B. getProduct("P-10")),
-            //              damit die Aspekte zur Ausführung kommen.
+            // Bestehende Bean holen und mit einem AOP-Proxy umwickeln, der die Aufrufe
+            // zunächst trace't und anschließend deren Ausführungsdauer misst.
+            var productService = beanContainer.getBean(ProductService.class);
+
+            var proxyFactory = new ProxyFactoryBean();
+            proxyFactory.setTarget(productService);
+            proxyFactory.addAdvice(new TraceBeforeMethodAdvice());
+            proxyFactory.addAdvice(new ProfilingInterceptor());
+            var tracedProductService = (ProductService) proxyFactory.getObject();
+
+            // Jeder Aufruf läuft nun durch die Advices:
+            System.out.println("\n--- AOP demonstration ---");
+            tracedProductService.getAllProducts();
+            tracedProductService.getProduct("P-10");
         }
     }
 

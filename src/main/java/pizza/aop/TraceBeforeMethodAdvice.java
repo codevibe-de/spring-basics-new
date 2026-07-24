@@ -1,6 +1,7 @@
 package pizza.aop;
 
 import org.springframework.aop.MethodBeforeAdvice;
+import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 
@@ -14,8 +15,8 @@ public class TraceBeforeMethodAdvice implements MethodBeforeAdvice {
 
     @Override
     public void before(Method method, Object[] args, Object target) {
-        // TODO 027 a): Geben Sie den Namen der aufgerufenen Methode (und optional die Argumente)
-        //              auf der Konsole aus, bevor die eigentliche Methode ausgeführt wird.
+        var argsString = StringUtils.arrayToDelimitedString(args, ", ");
+        System.out.printf("About to execute %s(%s)%n", method.getName(), argsString);
     }
 
 }
