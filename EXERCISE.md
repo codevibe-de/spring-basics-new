@@ -32,7 +32,7 @@ Ziel: Methodenaufrufe einer bestehenden Bean mittels Spring AOP "umwickeln", ohn
    AOP-Proxy der `ProductService`-Bean, fügen Sie beide Advices hinzu (`addAdvice(...)`) und rufen Sie eine
    Methode auf dem Proxy auf (z.B. `getProduct("P-10")`).
 
-   Da `PizzaApp.main()` alle `CommandLineRunner`-Beans ausführt, kommen dann beide Aspekte in Aktion.
+   Da `PizzaApp.main()` alle `CommandLineRunner`-Beans ausführt, kommt automatisch auch der neue `AopRunner` zum Zug.
 
 ## b) Resources -- CSV-DataLoader
 

@@ -6,8 +6,6 @@ import org.springframework.util.StringUtils;
 import java.lang.reflect.Method;
 
 /**
- * Übung 027 a) -- Tracing-Aspekt.
- * <p>
  * Implementiert Springs {@link MethodBeforeAdvice}, um <b>vor</b> jedem Methodenaufruf
  * eine Nachricht auf {@link System#out} zu schreiben (z.&nbsp;B. {@code "About to execute getProduct(P-10)"}).
  */

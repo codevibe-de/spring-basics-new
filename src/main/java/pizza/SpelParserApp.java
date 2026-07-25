@@ -6,8 +6,6 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 /**
- * Übung 027 c) -- SpEL.
- * <p>
  * Kleine, eigenständige Anwendung zum Experimentieren mit der Spring Expression Language.
  * Der {@link StandardEvaluationContext} erhält über den {@link BeanFactoryResolver} Zugriff auf
  * die Beans des Containers, sodass Ausdrücke wie {@code @productService} Bean-Referenzen auflösen
