@@ -25,7 +25,7 @@ probeweise ausgegeben.
 Ergänzen Sie den `OrderService` um eine Methode, in der die Konfiguration via `System.out`
 ausgegeben wird (damit wir sehen können, was gerade gilt).
 
-Lassen Sie Spring diese Methode automatisch beim Start ausführen. Wie ging das nochmal ...? :)
+Lassen Sie Spring diese Methode automatisch beim Start ausführen. Wie ging das nochmal ...? :)
 
 Setzen Sie Werte für die Konfiguration des `OrderService` in der `application.properties` Datei.
 
@@ -49,4 +49,14 @@ soll (z.B. "none", "sample" or "csv").
 
 Hierfür gibt es mehrere Wege, die wir kennengelernt haben.
 
-> Die Ausführung der `DataLoader` Bean wurde in einen neuen `DataLoadRunner` ausgelagert, um die Konfiguration zu vereinfachen. 
+> Die Ausführung der `DataLoader` Bean wurde in einen neuen `DataLoadRunner` ausgelagert, um die Konfiguration zu
+> vereinfachen.
+
+## e) Resource Inject
+
+Eine Kleinigkeit kann noch verbessert werden:
+
+Der CSV-DataLoader nutzt noch einen `ResourceLoader` um die Ressource der CSV-Datei zu bekommen. Eine Resource kann aber
+auch direkt in eine Bean injectet werden. Ändern Sie den CSV-DataLoader so ab, dass die Ressource direkt injectet wird.
+
+Dazu nutzen Sie die `@Value` Annotation und den `classpath:` Prefix.
