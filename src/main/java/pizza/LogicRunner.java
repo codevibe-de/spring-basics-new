@@ -4,7 +4,6 @@ import com.github.freva.asciitable.AsciiTable;
 import com.github.freva.asciitable.Column;
 import com.github.freva.asciitable.ColumnData;
 import com.github.freva.asciitable.HorizontalAlign;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import pizza.customer.Customer;
@@ -26,18 +25,15 @@ import static com.github.freva.asciitable.HorizontalAlign.RIGHT;
 @Order(1)
 public class LogicRunner implements CommandLineRunner {
 
-    private final DataLoader dataLoader;
     private final ProductService productService;
     private final CustomerService customerService;
     private final OrderService orderService;
 
     public LogicRunner(
-            @Qualifier("csv") DataLoader dataLoader,
             ProductService productService,
             CustomerService customerService,
             OrderService orderService
     ) {
-        this.dataLoader = dataLoader;
         this.productService = productService;
         this.customerService = customerService;
         this.orderService = orderService;
@@ -45,9 +41,6 @@ public class LogicRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // Load data
-        dataLoader.run();
-
         // Work with the data:
         var products = productService.getAllProducts();
         printTable("Products", products, List.of(
