@@ -1,7 +1,7 @@
 package pizza;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import pizza.customer.Address;
 import pizza.customer.Customer;
@@ -87,21 +87,26 @@ public abstract class DataLoader implements Runnable {
     @Component("csv")
     public static class Csv extends DataLoader {
 
-        @Value("${app.data-loader.csv.product-data}")
-        Resource productsResource;
+        private ResourceLoader resourceLoader;
 
-        public Csv(ProductService productService, CustomerService customerService) {
+        public Csv(
+                ProductService productService,
+                CustomerService customerService,
+                ResourceLoader resourceLoader
+        ) {
             super(productService, customerService);
+            this.resourceLoader = resourceLoader;
         }
 
         @Override
         public void run() {
+            Resource resource = resourceLoader.getResource("classpath:products.csv");
             try {
-                productsResource.getContentAsString(StandardCharsets.UTF_8).lines()
+                resource.getContentAsString(StandardCharsets.UTF_8).lines()
                         .filter(line -> !line.isBlank())
                         .forEach(this::parseAndCreateProduct);
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to load products from CSV", e);
+            } catch (Throwable t) {
+                throw new RuntimeException("Failed to load products from CSV resource " + resource, t);
             }
         }
 

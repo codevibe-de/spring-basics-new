@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'de.codevibe'
-version = '040'
+version = '030'
 
 ext {
     springVersion = '6.2.15'
