@@ -6,8 +6,6 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 /**
- * Übung 027 c) -- SpEL.
- * <p>
  * Kleine, eigenständige Anwendung zum Experimentieren mit der Spring Expression Language.
  * Der {@link StandardEvaluationContext} erhält über den {@link BeanFactoryResolver} Zugriff auf
  * die Beans des Containers, sodass Ausdrücke wie {@code @productService} Bean-Referenzen auflösen
@@ -27,14 +25,13 @@ public class SpelParserApp {
 
             // Ausdruck auswerten:
             Object value = parser
-                    // TODO 027 c): Ersetzen Sie diesen Ausdruck durch einen SpEL-Ausdruck, der die Namen
-                    //              aller Produkte liefert -- nutzen Sie eine Bean-Referenz (@productService),
-                    //              Property-Zugriff (.allProducts) und eine Collection-Projection (.![...]).
-                    //
+                    // TODO Ersetzen Sie diesen Ausdruck durch einen SpEL-Ausdruck, der die Namen
+                    //      aller Produkte liefert -- nutzen Sie eine Bean-Referenz (@productService),
+                    //      Property-Zugriff (.allProducts) und eine Collection-Projection (.![...]).
                     // Experimentieren Sie danach mit weiteren Ausdrücken, z.B.:
-                    //   @productService.allProducts.size()                              -> Anzahl
+                    //   @productService.allProducts.size()                               -> Anzahl
                     //   @productService.allProducts.?[price.doubleValue() < 7.0].![name] -> Selection + Projection
-                    //   T(java.time.LocalDate).now()                                    -> Type-Reference
+                    //   T(java.time.LocalDate).now()                                     -> statische Methode über Type-Reference
                     .parseExpression("23 + 42")
                     .getValue(evaluationContext);
 

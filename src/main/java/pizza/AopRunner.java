@@ -6,8 +6,6 @@ import pizza.product.ProductService;
 import pizza.util.CommandLineRunner;
 
 /**
- * Übung 027 a) -- AOP.
- * <p>
  * Dedizierter {@link CommandLineRunner}, in dem der AOP-Proxy erzeugt und ausgeführt wird.
  * Läuft per {@link Order} nach dem {@code LogicRunner}, damit bereits Produkte geladen sind.
  */
@@ -22,10 +20,12 @@ public class AopRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // TODO erzeugen Sie eine ProxyFactoryBean und setzen Sie die productService-Bean als Target
-        // TODO fügen Sie ein TraceBeforeMethodAdvice und ein ProfilingInterceptor via addAdvice(...) hinzu
-        // TODO holen Sie den Proxy über getObject() und rufen Sie eine Methode auf ihm auf
-        //  (z.B. getProduct("P-10")), damit die Aspekte zur Ausführung kommen
+        // TODO Erzeugen Sie eine ProxyFactoryBean und setzen Sie die productService-Bean als Target.
+
+        // TODO Fügen Sie den TraceBeforeMethodAdvice und den ProfilingInterceptor via addAdvice(...) hinzu.
+
+        // TODO Holen Sie den Proxy über getObject() und rufen Sie eine Methode auf ihm auf
+        //      (z.B. getProduct("P-10")), damit die Aspekte zur Ausführung kommen.
     }
 
 }
