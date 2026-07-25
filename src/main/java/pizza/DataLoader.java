@@ -1,7 +1,7 @@
 package pizza;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import pizza.customer.Address;
 import pizza.customer.Customer;
@@ -87,20 +87,18 @@ public abstract class DataLoader implements Runnable {
     @Component("csv")
     public static class Csv extends DataLoader {
 
-        private ResourceLoader resourceLoader;
+        @Value("${app.data-loader.csv.product-data}")
+        Resource resource;
 
         public Csv(
                 ProductService productService,
-                CustomerService customerService,
-                ResourceLoader resourceLoader
+                CustomerService customerService
         ) {
             super(productService, customerService);
-            this.resourceLoader = resourceLoader;
         }
 
         @Override
         public void run() {
-            Resource resource = resourceLoader.getResource("classpath:products.csv");
             try {
                 resource.getContentAsString(StandardCharsets.UTF_8).lines()
                         .filter(line -> !line.isBlank())
