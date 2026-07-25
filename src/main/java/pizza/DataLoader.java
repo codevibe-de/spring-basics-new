@@ -91,10 +91,11 @@ public abstract class DataLoader implements Runnable {
 
         public Csv(
                 ProductService productService,
-                CustomerService customerService
+                CustomerService customerService,
                 ResourceLoader resourceLoader
         ) {
             super(productService, customerService);
+            this.resourceLoader = resourceLoader;
         }
 
         @Override
