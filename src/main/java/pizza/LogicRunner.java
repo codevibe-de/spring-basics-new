@@ -4,6 +4,7 @@ import com.github.freva.asciitable.AsciiTable;
 import com.github.freva.asciitable.Column;
 import com.github.freva.asciitable.ColumnData;
 import com.github.freva.asciitable.HorizontalAlign;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import pizza.customer.Customer;
@@ -11,6 +12,7 @@ import pizza.customer.CustomerService;
 import pizza.order.OrderService;
 import pizza.product.Product;
 import pizza.product.ProductService;
+import pizza.util.CliArgsPresentCondition;
 import pizza.util.CommandLineRunner;
 
 import java.util.Collection;
@@ -23,6 +25,7 @@ import static com.github.freva.asciitable.HorizontalAlign.RIGHT;
 
 @Component
 @Order(1)
+@Conditional(CliArgsPresentCondition.class)
 public class LogicRunner implements CommandLineRunner {
 
     private final ProductService productService;
