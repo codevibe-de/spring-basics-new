@@ -1,11 +1,12 @@
 # Übungen zu 027 "AOP, Resources & SpEL"
 
 In dieser Lektion lernen Sie drei Kern-Themen des Spring-Frameworks kennen. Ausgangspunkt ist die
-annotationsbasierte Pizza-Anwendung (`AnnotationConfigApplicationContext`, `@Component` / `@ComponentScan`).
+annotationsbasierte Pizza-Anwendung.
 
 Die drei Teilaufgaben sind **unabhängig** voneinander und können in beliebiger Reihenfolge gelöst werden.
-Für alle Aufgaben sind bereits Gerüst-Klassen bzw. `TODO`-Markierungen vorbereitet -- Sie müssen keine
-neuen Abhängigkeiten hinzufügen (`spring-context` bringt AOP, Resources und SpEL bereits mit).
+Für alle Aufgaben sind bereits Gerüst-Klassen bzw. `TODO`-Markierungen vorbereitet.
+
+Sie müssen keine neuen Abhängigkeiten hinzufügen (`spring-context` bringt AOP, Resources und SpEL bereits mit).
 
 ---
 
@@ -28,31 +29,22 @@ Ziel: Methodenaufrufe einer bestehenden Bean mittels Spring AOP "umwickeln", ohn
 
    Durch die Ausführung sollten dann beide Aspekte in Aktion treten.
 
----
-
 ## b) Resources -- CSV-DataLoader
 
 Ziel: Produkte aus einer Datei laden, die über Springs `Resource`-Abstraktion angesprochen wird.
 
-In `DataLoader.java` gibt es eine neue innere Klasse **`DataLoader.Csv`** (Bean-Name `"csv"`). Ihr wird
-Springs `ResourceLoader` in den Konstruktor injiziert (dieser wird automatisch bereitgestellt -- der
-`ApplicationContext` selbst ist ein `ResourceLoader`). Die Datei `src/main/resources/products.csv` hat das
-Format `id;name;preis`.
+In `DataLoader.java` gibt es eine neue innere Klasse **`DataLoader.Csv`** (Bean-Name `"csv"`). Ihr soll
+Springs `ResourceLoader` in den Konstruktor injiziert werden (eine solche Bean gibt uns Spring).
 
-1. Implementieren Sie das `TODO` in `DataLoader.Csv.run()`:
-    - Beschaffen Sie die Datei als `Resource` über den `ResourceLoader`:
-      `resourceLoader.getResource("classpath:products.csv")`.
-    - Lesen Sie den Inhalt aus (z.B. mit `resource.getContentAsString(StandardCharsets.UTF_8)`), zerlegen
-      Sie jede Zeile am `;` und legen Sie je Zeile über `createProduct(id, name, preis)` ein Produkt an.
+Die Datei `src/main/resources/products.csv` hat das Format `id;name;preis`.
 
+1. Implementieren Sie die `todo` Stellen `DataLoader.Csv`.
 2. Aktivieren Sie den neuen Loader, indem Sie in `LogicRunner` den `@Qualifier("sample")` auf
    `@Qualifier("csv")` umstellen. Beim Start der Anwendung sollten die Produkte nun aus der CSV-Datei
    stammen.
 
-   > Hinweis: Der Dateipfad ist hier noch fest verdrahtet. In der nächsten Lektion ("Configuration")
-   > werden Sie solche Werte nach außen in `application.properties` auslagern.
-
----
+> Hinweis: Der Dateipfad ist hier noch fest verdrahtet. In der nächsten Lektion ("Configuration")
+> werden Sie solche Werte in die Konfiguration auslagern.
 
 ## c) SpEL -- Spring Expression Language
 
@@ -77,4 +69,4 @@ Führen Sie `SpelParserApp` aus und experimentieren Sie anschließend mit weiter
 - `T(java.time.LocalDate).now()` -- eine **Type-Reference** (`T(...)`) mit statischem Methodenaufruf.
 
 > Hinweis: SpEL wird sehr häufig auch direkt in Annotationen genutzt, z.B. in `@Value("#{ ... }")`.
-> Diese Form lernen Sie in der nächsten Lektion ("Configuration") kennen.
+> Diese Form lernen Sie in der nächsten Lektion kennen.

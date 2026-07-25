@@ -1,5 +1,6 @@
 package pizza;
 
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import pizza.customer.Address;
@@ -82,31 +83,35 @@ public abstract class DataLoader implements Runnable {
     }
 
 
-    /**
-     * Übung 027 b) -- lädt Produkte aus einer CSV-Datei (Format: {@code id;name;preis}).
-     * <p>
-     * Der Zugriff auf die Datei erfolgt über Springs {@link ResourceLoader}, der automatisch injiziert
-     * wird (der {@code ApplicationContext} selbst ist ein {@code ResourceLoader}). Damit lässt sich die
-     * Datei ortsunabhängig als {@code Resource} beschaffen.
-     */
     @Component("csv")
     public static class Csv extends DataLoader {
 
-        private final ResourceLoader resourceLoader;
+        private ResourceLoader resourceLoader;  // TODO needs injection
 
-        public Csv(ProductService productService,
-                   CustomerService customerService,
-                   ResourceLoader resourceLoader) {
+        public Csv(
+                ProductService productService,
+                CustomerService customerService
+        ) {
             super(productService, customerService);
-            this.resourceLoader = resourceLoader;
         }
 
         @Override
         public void run() {
-            // TODO 027 b): Beschaffen Sie die Datei über den ResourceLoader
-            //              (resourceLoader.getResource("classpath:products.csv")), lesen Sie deren Inhalt
-            //              aus, zerlegen Sie jede Zeile am ';' und legen Sie je Zeile über
-            //              createProduct(id, name, preis) ein Produkt an.
+            Resource resource = null; // TODO needs to get resource from resourceLoader
+            try {
+                // TODO get content from resource as String, then use lines() to get a Stream<String>
+                //  and filter out blank lines, then for each line call parseAndCreateProduct
+            } catch (Throwable t) {
+                throw new RuntimeException("Failed to load products from CSV resource " + resource, t);
+            }
+        }
+
+        private void parseAndCreateProduct(String line) {
+            String[] parts = line.split(";");
+            if (parts.length != 3) {
+                throw new IllegalArgumentException("Invalid product line: " + line);
+            }
+            createProduct(parts[0].trim(), parts[1].trim(), parts[2].trim());
         }
     }
 
