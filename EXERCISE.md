@@ -23,11 +23,16 @@ Ziel: Methodenaufrufe einer bestehenden Bean mittels Spring AOP "umwickeln", ohn
       ausführen. Führen Sie eine Zeitmessung um `invocation.proceed()` durch und geben Sie aus, wie lange
       die umwickelte Methode gebraucht hat.
 
-2. Lassen Sie in `PizzaApp.main()` mit Springs `ProxyFactoryBean` einen AOP-Proxy einer bestehenden
-   Bean-Instanz erzeugen (z.B. der `ProductService`-Bean aus dem Container). Fügen Sie beide Advices hinzu
-   (`addAdvice(...)`) und rufen Sie anschließend eine Methode auf dem Proxy auf (z.B. `getProduct("P-10")`).
+2. Die Proxy-Erzeugung soll in einer eigenen `CommandLineRunner`-Implementierung **`AopRunner`**
+   (Package `pizza`) erfolgen -- ein Gerüst ist vorbereitet. Der `AopRunner` ist als `@Component`
+   registriert und läuft per `@Order(2)` nach dem `LogicRunner` (`@Order(1)`), sodass bereits Produkte
+   geladen sind.
 
-   Durch die Ausführung sollten dann beide Aspekte in Aktion treten.
+   Implementieren Sie die `todo` Stellen in `AopRunner`: Erzeugen Sie mit Springs `ProxyFactoryBean` einen
+   AOP-Proxy der `ProductService`-Bean, fügen Sie beide Advices hinzu (`addAdvice(...)`) und rufen Sie eine
+   Methode auf dem Proxy auf (z.B. `getProduct("P-10")`).
+
+   Da `PizzaApp.main()` alle `CommandLineRunner`-Beans ausführt, kommen dann beide Aspekte in Aktion.
 
 ## b) Resources -- CSV-DataLoader
 

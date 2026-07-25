@@ -5,6 +5,7 @@ import com.github.freva.asciitable.Column;
 import com.github.freva.asciitable.ColumnData;
 import com.github.freva.asciitable.HorizontalAlign;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import pizza.customer.Customer;
 import pizza.customer.CustomerService;
@@ -22,6 +23,7 @@ import static com.github.freva.asciitable.HorizontalAlign.LEFT;
 import static com.github.freva.asciitable.HorizontalAlign.RIGHT;
 
 @Component
+@Order(1)
 public class LogicRunner implements CommandLineRunner {
 
     private final DataLoader dataLoader;
