@@ -9,7 +9,6 @@ import pizza.customer.CustomerService;
 import pizza.product.Product;
 import pizza.product.ProductService;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 
@@ -85,23 +84,17 @@ public abstract class DataLoader implements Runnable {
     }
 
 
-    /**
-     * Übung 027 b) -- lädt Produkte aus einer CSV-Datei (Format: {@code id;name;preis}).
-     * <p>
-     * Der Zugriff auf die Datei erfolgt über Springs {@link ResourceLoader}, der automatisch injiziert
-     * wird (der {@code ApplicationContext} selbst ist ein {@code ResourceLoader}). Damit lässt sich die
-     * Datei ortsunabhängig als {@code Resource} beschaffen.
-     */
     @Component("csv")
     public static class Csv extends DataLoader {
 
-        private final ResourceLoader resourceLoader;
+        private ResourceLoader resourceLoader;
 
-        public Csv(ProductService productService,
-                   CustomerService customerService,
-                   ResourceLoader resourceLoader) {
+        public Csv(
+                ProductService productService,
+                CustomerService customerService
+                ResourceLoader resourceLoader
+        ) {
             super(productService, customerService);
-            this.resourceLoader = resourceLoader;
         }
 
         @Override
@@ -111,8 +104,8 @@ public abstract class DataLoader implements Runnable {
                 resource.getContentAsString(StandardCharsets.UTF_8).lines()
                         .filter(line -> !line.isBlank())
                         .forEach(this::parseAndCreateProduct);
-            } catch (IOException e) {
-                throw new RuntimeException("Failed to load products from CSV resource " + resource, e);
+            } catch (Throwable t) {
+                throw new RuntimeException("Failed to load products from CSV resource " + resource, t);
             }
         }
 
