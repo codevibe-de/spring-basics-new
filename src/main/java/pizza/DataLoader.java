@@ -88,20 +88,23 @@ public abstract class DataLoader implements Runnable {
     public static class Csv extends DataLoader {
 
         @Value("${app.data-loader.csv.product-data}")
-        Resource productsResource;
+        Resource resource;
 
-        public Csv(ProductService productService, CustomerService customerService) {
+        public Csv(
+                ProductService productService,
+                CustomerService customerService
+        ) {
             super(productService, customerService);
         }
 
         @Override
         public void run() {
             try {
-                productsResource.getContentAsString(StandardCharsets.UTF_8).lines()
+                resource.getContentAsString(StandardCharsets.UTF_8).lines()
                         .filter(line -> !line.isBlank())
                         .forEach(this::parseAndCreateProduct);
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to load products from CSV", e);
+            } catch (Throwable t) {
+                throw new RuntimeException("Failed to load products from CSV resource " + resource, t);
             }
         }
 

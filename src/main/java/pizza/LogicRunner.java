@@ -22,7 +22,7 @@ import static com.github.freva.asciitable.HorizontalAlign.LEFT;
 import static com.github.freva.asciitable.HorizontalAlign.RIGHT;
 
 @Component
-@Order(2)
+@Order(1)
 public class LogicRunner implements CommandLineRunner {
 
     private final ProductService productService;
@@ -41,6 +41,7 @@ public class LogicRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        // Work with the data:
         var products = productService.getAllProducts();
         printTable("Products", products, List.of(
                 column("ID", RIGHT, Product::getProductId),

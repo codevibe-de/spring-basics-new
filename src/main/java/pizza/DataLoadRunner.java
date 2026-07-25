@@ -11,7 +11,7 @@ import java.util.Map;
  * Performs loading of sample data after the context has started up.
  */
 @Component
-@Order(1)
+@Order(0)
 public class DataLoadRunner implements CommandLineRunner {
 
     private final DataLoader dataLoader;
