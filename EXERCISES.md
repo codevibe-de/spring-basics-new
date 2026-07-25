@@ -1,4 +1,4 @@
-# Übungen zum Kapitel "060 - Konfiguration"
+# Übungen zum Kapitel "030 - Konfiguration"
 
 ## a) OrderService konfigurierbar machen
 
@@ -9,16 +9,23 @@ gesetzt werden können:
 * die Wochentage, an denen der Rabatt gilt
 * der Rabattsatz (in %)
 
-Hinweis: Hierfür gibt es zwei Möglichkeiten (mittels `@Value` oder `@ConfigurationProperties`).
+Hinweis: Hierfür gibt es zwei Möglichkeiten:
+
+1. mittels `@Value`-Annotation am jeweiligen Feld
+2. oder über eine neue `OrderProperties` Klasse, welche die Werte aus dem `Environment` liest
+
 Bei letzterem Ansatz brauchen Sie die Felder der Klasse nicht mehr, da Sie ja dann diese über
 eine neue `OrderProperties` Klasse injectet bekommen.
+
+In der nächsten Übung b) werden die Werte in der `application.properties` Datei gesetzt und
+probeweise ausgegeben.
 
 ## b) Ausgabe der Konfiguration
 
 Ergänzen Sie den `OrderService` um eine Methode, in der die Konfiguration via `System.out`
 ausgegeben wird (damit wir sehen können, was gerade gilt).
 
-Lassen Sie Spring diese Methode automatisch beim Start ausführen. Wie ging das nochmal ...? :)
+Lassen Sie Spring diese Methode automatisch beim Start ausführen. Wie ging das nochmal ...? :)
 
 Setzen Sie Werte für die Konfiguration des `OrderService` in der `application.properties` Datei.
 
@@ -35,26 +42,11 @@ Hierfür können Sie eine Umgebungsvariable, ein VM System Property oder ein Pro
 
 Wird der erwartete Wert ausgegeben?
 
-## d) Neuer CSV DataLoader
+## d) optionaler DataLoader
 
-Es gibt einen neuen DataLoader, der die Daten aus einer CSV-Datei lädt. Dafür wird ein Spring Konzept
-genutzt, das wir bisher noch nicht kennengelernt haben: Ressourcen.
+Machen Sie die Ausführung des DataLoaders konfigurierbar (an/aus) - oder sogar, welche DataLoader Bean ausgeführt werden
+soll (z.B. "none", "sample" or "csv").
 
-Vorerst reicht es aber, wenn Sie ein Property mit folgendem Wert anlegen:
+Hierfür gibt es mehrere Wege, die wir kennengelernt haben.
 
-```properties
-app.data-loader.csv.product-data=classpath:/products.csv
-```
-
-Lassen Sie den Wert dieses Properties mittels `@Value` der `productsResource` Instanzvariable zuweisen.
-
-## e) optionaler DataLoader
-
-Es gibt eine neue `DataLoadRunner` Bean, in die der `run()`-Aufruf des DataLoaders ausgelagert wurde (vorher war dies
-Teil des LogicRunners)
-
-Machen Sie die Ausführung der `DataLoadRunner`-Bean konfigurierbar (an/aus), z.B. mittels einer `@ConditionalOn...`
-Annotation.
-
-Alternativ können Sie sogar implementieren, dass über ein Property bestimmt werden kann, **welche** DataLoader Bean
-ausgeführt werden soll (z.B. "none", "sample" oder der neue "csv").
+> Die Ausführung der `DataLoader` Bean wurde in einen neuen `DataLoadRunner` ausgelagert, um die Konfiguration zu vereinfachen. 
