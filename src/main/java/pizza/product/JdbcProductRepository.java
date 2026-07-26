@@ -12,7 +12,6 @@ import java.sql.Types;
 import java.util.List;
 import java.util.Optional;
 
-@Component
 public class JdbcProductRepository implements ProductRepository {
 
     public static final String INSERT_SQL = "INSERT INTO products (pk, name, price) VALUES (?, ?, ?)";

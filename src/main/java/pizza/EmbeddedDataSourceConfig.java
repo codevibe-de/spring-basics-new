@@ -1,4 +1,4 @@
-package com.example.jdbc;
+package pizza;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 /**
  * Embedded ephemeral (in-memory) H2 without Spring Boot.
  * <p>
- * Ideal for tests and self-contained demos.
+ * Ideal for tests and self-contained demos. 
  */
 @Configuration
 public class EmbeddedDataSourceConfig {
@@ -19,8 +19,9 @@ public class EmbeddedDataSourceConfig {
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
-                .addScript("classpath:schema.sql")   // DDL — CREATE TABLE ...
-                .addScript("classpath:data.sql")     // optional seed data
+                .addScript("classpath:schema.sql")  // defines schema (tables etc.)
+//                .addScript("classpath:data.sql")    // optional seed data
                 .build();
     }
+
 }
