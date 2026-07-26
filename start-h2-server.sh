@@ -2,6 +2,9 @@
 # Starts a standalone H2 TCP server for custom datasource exercises.
 # Data is stored in ./h2-data/ (persists between restarts).
 #
+# The H2 jar is resolved from the version declared in pom.xml (single source
+# of truth) via Maven's dependency:build-classpath — no hardcoded version here.
+#
 # Connect from your app with:
 #   spring.datasource.url=jdbc:h2:tcp://localhost:9092/./pizzadb
 #   spring.datasource.driver-class-name=org.h2.Driver
@@ -11,15 +14,22 @@
 # H2 web console: http://localhost:8082
 #   JDBC URL to paste there: jdbc:h2:tcp://localhost:9092/./pizzadb
 
-H2_JAR="$HOME/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar"
+set -euo pipefail
+cd "$(dirname "$0")"
 
-if [ ! -f "$H2_JAR" ]; then
-  echo "H2 jar not found at $H2_JAR"
+echo "Resolving H2 jar from pom.xml..."
+H2_JAR="$(./mvnw -q dependency:build-classpath \
+  -Dmdep.includeArtifactIds=h2 \
+  -Dmdep.outputFile=/dev/stdout 2>/dev/null | tr ':' '\n' | grep -F '/h2/' || true)"
+
+if [ -z "$H2_JAR" ] || [ ! -f "$H2_JAR" ]; then
+  echo "Could not resolve the H2 jar."
   echo "Run './mvnw dependency:resolve' first to populate the local Maven cache."
   exit 1
 fi
+echo "  Using: $H2_JAR"
 
-DATA_DIR="$(cd "$(dirname "$0")" && pwd)/h2-data"
+DATA_DIR="$(pwd)/h2-data"
 mkdir -p "$DATA_DIR"
 
 echo "Starting H2 TCP server..."
