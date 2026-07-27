@@ -1,20 +1,18 @@
-# Übungen zu 025 "Beans"
-
-Machen Sie aus der bestehenden Kommandozeilenanwendung eine Spring Boot basierte Anwendung.
-
-Die bestehende Klasse `PizzaApp` ist hierfür der Ausgangspunkt. Diese wurde auf Basis einer bereits angepassten
-`pom.xml` bzw. `build.gradle` Datei bereits für Spring vorbereitet.
+# Übungen zu 025 "Annotation-Config"
 
 Diese Übung besteht aus **zwei Phasen**:
 
 ## Phase 1
 
-Wir wollen, dass Spring nun alle Beans über Annotations findet.
+Wir wollen, dass Spring nun alle Beans über Annotationen findet.
 
-Somit müssen wir den erstellen ApplicationContext auf `AnnotationConfigApplicationContext` ändern und
-die benötigten Annotationen in diversen Klassen hinzufügen.
+Somit müssen wir:
 
-Sie können frei wählen, ob Sie dies per Stereotypen oder Bean-Methoden machen. Natürlich auch gemischt...
+1. den erstellen ApplicationContext auf `AnnotationConfigApplicationContext` ändern
+2. einen eleganten Einstiegspunkt in unsere Anwendung deklarieren, der
+   einen Component-Scan auslöst (`@Configuration` und `@ComponentScan`)
+3. die benötigten Bean-erzeugenden Annotationen in diversen Klassen hinzufügen. Sie können frei wählen, ob Sie dies per
+   Stereotypen oder Bean-Methoden machen. Oder auch gemischt …
 
 ## Phase 2 -- optional
 
