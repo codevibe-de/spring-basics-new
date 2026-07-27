@@ -1,7 +1,10 @@
 package pizza.product;
 
+import summer.Component;
+
 import java.util.*;
 
+@Component
 public class HashMapProductRepository implements ProductRepository {
 
     private final Map<String, Product> productsMap = new HashMap<>();
