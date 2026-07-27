@@ -1,13 +1,13 @@
 package pizza.customer;
 
-import componentscan.Component;
+import pizza.Component;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-@Component
+@Component("custSrv")
 public class CustomerService {
 
     private final List<Customer> customers = new ArrayList<>();

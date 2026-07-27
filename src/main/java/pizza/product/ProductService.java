@@ -1,12 +1,9 @@
 package pizza.product;
 
-import componentscan.Component;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-@Component
 public class ProductService {
 
     private final ProductRepository productRepository;

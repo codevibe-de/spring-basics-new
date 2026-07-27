@@ -1,4 +1,4 @@
-package componentscan;
+package pizza;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * Marks a class as a "component" that our {@link ComponentScanner} should detect.
  * <p>
- * This is a hand-written stand-in for Spring's {@code org.springframework.stereotype.Component},
+ * This is a handwritten stand-in for Spring's {@code org.springframework.stereotype.Component},
  * built to practice custom annotations and reflection before Spring takes over in lesson 025.
  */
 @Retention(RetentionPolicy.RUNTIME)     // must survive until runtime so reflection can read it
@@ -16,8 +16,8 @@ import java.lang.annotation.Target;
 public @interface Component {
 
     /**
-     * Optional component name. If left empty, the {@link ComponentScanner} derives a name from
-     * the class name – just like Spring does with {@code @Component}.
+     * Optional component name. If left empty, a name is derived from the class name.
      */
-    String name() default "";
+    String value() default "";
+
 }

@@ -3,7 +3,6 @@ package pizza.order;
 import pizza.customer.Customer;
 import pizza.customer.CustomerService;
 import pizza.product.ProductService;
-import componentscan.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-@Component
 public class OrderService {
 
     //

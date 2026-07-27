@@ -1,6 +1,7 @@
 package componentscan;
 
 import org.junit.jupiter.api.Test;
+import pizza.ComponentScanner;
 import pizza.customer.Address;
 import pizza.customer.CustomerService;
 import pizza.order.OrderService;
