@@ -1,6 +1,6 @@
 package pizza.product;
 
-import summer.Component;
+import componentscan.Component;
 
 import java.math.BigDecimal;
 import java.util.List;

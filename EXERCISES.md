@@ -15,32 +15,39 @@ Erstellen Sie eine eigene Annotation `@Info` und markieren Sie damit eine Klasse
    (`clazz.getAnnotation(Info.class)`) und geben Sie `author` und `version`
    auf der Konsole aus.
 
-## Übung 2: Vom `XmlBeanContainer` zum `AnnotationConfigBeanContainer`
+## Übung 2: Eigene `@Component`-Annotation und ein Mini-Component-Scanner
 
-In Lektion 013 haben wir mit dem `XmlBeanContainer` unsere Beans noch aus einer
-`beans.xml` definiert. Jetzt drehen wir den Spieß um: Statt jede Bean in XML
-aufzulisten, **markieren wir die Bean-Klassen mit einer eigenen Annotation** und
-lassen den Container die passenden Klassen per Reflection selbst finden. Damit
-bauen wir – zu Fuß – nach, was Spring in Lektion 025 mit `@Component` und
-`@ComponentScan` liefert.
+Wir bauen – zu Fuß und stark vereinfacht – nach, was Spring in Lektion 025 mit
+`@Component` und `@ComponentScan` liefert: Klassen werden mit einer eigenen
+Annotation markiert und per Reflection eingesammelt.
 
-1. Erstellen Sie eine eigene Marker-Annotation `@Component` (nach dem Muster aus
-   Übung 1: `@Retention(RUNTIME)`, `@Target(TYPE)`, zunächst ohne Elemente).
-2. Annotieren Sie die vorhandenen Bean-Klassen (z. B. `ProductService`,
-   `CustomerService`, `OrderService`, `HashMapProductRepository`, `DataLoader`)
-   mit `@Component`.
-3. Schreiben Sie eine Klasse `AnnotationConfigBeanContainer` – analog zum
-   `XmlBeanContainer`. Sie bekommt eine Liste von Kandidaten-Klassen übergeben
-   (das simuliert das "Scannen" eines Packages) und
-   - prüft per Reflection mit `clazz.isAnnotationPresent(Component.class)`,
-     welche davon eine Bean sind, und
-   - registriert jede gefundene Bean über `defineBean(name, clazz)` im
-     `BeanContainer` (den Bean-Namen können Sie z. B. aus dem einfachen
-     Klassennamen ableiten).
-4. Rufen Sie anschließend `refresh()` auf und holen Sie sich eine Bean mit
-   `getBean(...)`, um zu zeigen, dass Instanziierung und
-   Constructor-Injection wie beim XML-Container funktionieren.
+### Teil 1: Die `@Component`-Annotation
 
-**Bonus:** Geben Sie Ihrer `@Component`-Annotation ein Element
-`String value() default ""`, mit dem man den Bean-Namen explizit setzen kann –
-genau wie bei Springs `@Component("meinName")`.
+1. Erstellen Sie eine eigene Annotation `@Component` (nach dem Muster aus
+   Übung 1: `@Retention(RUNTIME)`, `@Target(TYPE)`).
+2. Geben Sie ihr ein Element `String name() default ""`, mit dem man einer
+   Komponente optional einen expliziten Namen geben kann – analog zu Springs
+   `@Component("meinName")`.
+3. Markieren Sie einige vorhandene Klassen mit der Annotation, z. B.
+   `ProductService`, `CustomerService`, `OrderService` und
+   `HashMapProductRepository` (bei einer davon können Sie das `name`-Attribut
+   setzen, z. B. `@Component(name = "productRepository")`).
+
+### Teil 2: Der `ComponentScanner`
+
+Schreiben Sie eine Klasse `ComponentScanner` mit einer Methode
+`scan(Class<?>... candidateClasses)`, die eine gegebene Menge an Klassen
+untersucht (das simuliert das "Scannen" eines Packages) und für jede mit
+`@Component` markierte Klasse deren Namen ausgibt.
+
+1. Prüfen Sie per Reflection mit `clazz.isAnnotationPresent(Component.class)`,
+   welche der übergebenen Klassen eine Komponente ist.
+2. Ermitteln Sie den Komponenten-Namen: Ist `name()` gesetzt, verwenden Sie
+   diesen, sonst leiten Sie ihn aus dem einfachen Klassennamen ab
+   (`ProductService` → `productService`).
+3. Geben Sie die gefundenen Namen auf der Konsole aus. Nicht annotierte Klassen
+   werden ignoriert.
+
+**Bonus:** Geben Sie zusätzlich den Wert des `name`-Attributs bzw. den
+abgeleiteten Namen aus und lassen Sie den Scanner die Liste aller gefundenen
+Namen zurückgeben.

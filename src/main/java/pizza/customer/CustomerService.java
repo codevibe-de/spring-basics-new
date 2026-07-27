@@ -1,6 +1,6 @@
 package pizza.customer;
 
-import summer.Component;
+import componentscan.Component;
 
 import java.util.ArrayList;
 import java.util.Collections;
