@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'de.codevibe'
-version = '013'
+version = '023'
 
 ext {
     springVersion = '6.2.15'
@@ -32,6 +32,8 @@ dependencies {
     testImplementation 'org.assertj:assertj-core:3.26.3'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.2'
+    implementation 'com.sun.xml.bind:jaxb-impl:4.0.5'
     implementation 'com.github.freva:ascii-table:1.12.1'
 }
 
