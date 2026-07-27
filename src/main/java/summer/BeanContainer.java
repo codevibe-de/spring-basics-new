@@ -38,23 +38,15 @@ public class BeanContainer {
         // 2) each map value is a list of bean names, which do not exist yet. Hence, we can only
         // start with creating beans that have an empty list. With each new bean we thin out these
         // lists to make other beans creatable
-        Map<String, Set<String>> workToDoMap = createBeanDependencyMap();
-        while (!workToDoMap.isEmpty()) {
-            // which bean to create/realize next? must have an empty set of missing dependencies
-            var beanName = workToDoMap.entrySet().stream()
-                    .filter(e -> e.getValue().isEmpty())
-                    .map(Map.Entry::getKey)
-                    .findFirst()
-                    .orElse(null);
+        BeanDependencyGraph graph = createBeanDependencyGraph();
+        while (!graph.isEmpty()) {
+            // which bean to create/realize next?
+            var beanName = graph.getNextBeanName();
             // got one?
             if (beanName == null) {
-                throw new BeansException("Circular dependency detected, unfinished beans: " + workToDoMap.keySet());
+                throw new BeansException("Circular dependency detected, unfinished beans: " + graph.getBeanNames());
             } else {
                 createBean(beanName);
-                // remove the newly created bean from our to-do list
-                workToDoMap.remove(beanName);
-                // remove the new bean from each others bean's missing list
-                workToDoMap.values().forEach(set -> set.remove(beanName));
             }
         }
     }
@@ -127,14 +119,14 @@ public class BeanContainer {
         return constructor.getParameterTypes();
     }
 
-    Map<String, Set<String>> createBeanDependencyMap() {
-        var map = new HashMap<String, Set<String>>();
+    BeanDependencyGraph createBeanDependencyGraph() {
+        var graph = new BeanDependencyGraph();
         for (var def : this.beanDefinitions) {
             Class<?>[] constructorParamTypes = findConstructorParameterTypes(def.getType());
             String[] constructorParamBeanNames = resolveBeanNames(constructorParamTypes);
-            map.put(def.getName(), new HashSet<>(Arrays.asList(constructorParamBeanNames)));
+            graph.addBean(def.getName(), new HashSet<>(Arrays.asList(constructorParamBeanNames)));
         }
-        return map;
+        return graph;
     }
 
     String[] resolveBeanNames(Class<?>[] types) {
