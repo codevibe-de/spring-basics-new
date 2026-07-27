@@ -1,6 +1,6 @@
 # Übungen zu 025 "Beans"
 
-Machen Sie aus der bestehenden Kommandozeilenanwendung eine Spring Boot basierte Anwendung.
+Machen Sie aus der bestehenden Kommandozeilenanwendung eine Spring basierte Anwendung.
 
 Die bestehende Klasse `PizzaApp` ist hierfür der Ausgangspunkt. Diese wurde auf Basis einer bereits angepassten
 `pom.xml` bzw. `build.gradle` Datei bereits für Spring vorbereitet.
