@@ -22,8 +22,8 @@ import static com.github.freva.asciitable.HorizontalAlign.RIGHT;
 public class PizzaApp {
 
     public static void main(String[] args) {
-        // Instantiate XML configured context ---
-        try (var beanContainer = new ClassPathXmlApplicationContext("/beans.xml")) {
+        // Instantiate application context a.k.a. bean container ---
+        try (ClassPathXmlApplicationContext beanContainer = new ClassPathXmlApplicationContext("/beans.xml")) {
             // query and use beans
             beanContainer.getBean(DataLoader.class).run();
             ProductService productService = beanContainer.getBean(ProductService.class);
