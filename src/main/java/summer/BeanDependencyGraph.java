@@ -50,4 +50,11 @@ public class BeanDependencyGraph {
     boolean isEmpty() {
         return this.unfulfilledDependencies.isEmpty();
     }
+
+    /**
+     * Returns the names of all beans that have not yet been handed out via {@link #getNextBeanName()}.
+     */
+    public Set<String> getBeanNames() {
+        return this.unfulfilledDependencies.keySet();
+    }
 }
