@@ -4,13 +4,16 @@ import com.github.freva.asciitable.AsciiTable;
 import com.github.freva.asciitable.Column;
 import com.github.freva.asciitable.ColumnData;
 import com.github.freva.asciitable.HorizontalAlign;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pizza.customer.Customer;
 import pizza.customer.CustomerService;
 import pizza.order.OrderService;
 import pizza.product.Product;
 import pizza.product.ProductService;
+import summer.BeanContainer;
+import summer.XmlBeanContainer;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -22,44 +25,44 @@ import static com.github.freva.asciitable.HorizontalAlign.RIGHT;
 public class PizzaApp {
 
     public static void main(String[] args) {
-        // Instantiate XML configured context ---
-        try (var beanContainer = new ClassPathXmlApplicationContext("/beans.xml")) {
-            // query and use beans
-            beanContainer.getBean(DataLoader.class).run();
-            ProductService productService = beanContainer.getBean(ProductService.class);
-            CustomerService customerService = beanContainer.getBean(CustomerService.class);
-            OrderService orderService = beanContainer.getBean(OrderService.class);
+        // Instantiate beans ---
+        BeanContainer beanContainer = new XmlBeanContainer("/beans.xml");
 
-            // Work with the data:
-            var products = productService.getAllProducts();
-            printTable("Products", products, List.of(
-                    column("ID", RIGHT, Product::getProductId),
-                    column("Name", LEFT, Product::getName),
-                    column("Price", RIGHT, p -> String.format("%.2f EUR", p.getPrice()))
+        // query and use beans
+        beanContainer.getBean(DataLoader.class).run();
+        ProductService productService = beanContainer.getBean(ProductService.class);
+        CustomerService customerService = beanContainer.getBean(CustomerService.class);
+        OrderService orderService = beanContainer.getBean(OrderService.class);
+
+        // Work with the data:
+        var products = productService.getAllProducts();
+        printTable("Products", products, List.of(
+                column("ID", RIGHT, Product::getProductId),
+                column("Name", LEFT, Product::getName),
+                column("Price", RIGHT, p -> String.format("%.2f EUR", p.getPrice()))
+        ));
+
+        var customers = customerService.getAllCustomers();
+        printTable("Customers", customers, List.of(
+                column("ID", RIGHT, c -> String.valueOf(c.getId())),
+                column("Name", LEFT, Customer::getFullName),
+                column("Phone", LEFT, Customer::getPhoneNumber),
+                column("Address", LEFT, c ->
+                        c.getAddress().getStreet() + ", " + c.getAddress().getPostalCode() + " " + c.getAddress().getCity())
+        ));
+
+        if (!products.isEmpty() && !customers.isEmpty()) {
+            var order = orderService.placeOrder(
+                    customers.get(0).getPhoneNumber(),
+                    Map.of(products.get(0).getProductId(), 2,
+                            products.get(products.size() > 1 ? 1 : 0).getProductId(), 1)
+            );
+            printTable("Order placed", List.of(order), List.of(
+                    column("ID", RIGHT, o -> String.valueOf(o.getId())),
+                    column("Customer", LEFT, o -> o.getCustomer().getFullName()),
+                    column("Total", RIGHT, o -> String.format("%.2f EUR", o.getTotalPrice())),
+                    column("Est. Delivery", LEFT, o -> o.getEstimatedTimeOfDelivery().toLocalTime().toString())
             ));
-
-            var customers = customerService.getAllCustomers();
-            printTable("Customers", customers, List.of(
-                    column("ID", RIGHT, c -> String.valueOf(c.getId())),
-                    column("Name", LEFT, Customer::getFullName),
-                    column("Phone", LEFT, Customer::getPhoneNumber),
-                    column("Address", LEFT, c ->
-                            c.getAddress().getStreet() + ", " + c.getAddress().getPostalCode() + " " + c.getAddress().getCity())
-            ));
-
-            if (!products.isEmpty() && !customers.isEmpty()) {
-                var order = orderService.placeOrder(
-                        customers.get(0).getPhoneNumber(),
-                        Map.of(products.get(0).getProductId(), 2,
-                                products.get(products.size() > 1 ? 1 : 0).getProductId(), 1)
-                );
-                printTable("Order placed", List.of(order), List.of(
-                        column("ID", RIGHT, o -> String.valueOf(o.getId())),
-                        column("Customer", LEFT, o -> o.getCustomer().getFullName()),
-                        column("Total", RIGHT, o -> String.format("%.2f EUR", o.getTotalPrice())),
-                        column("Est. Delivery", LEFT, o -> o.getEstimatedTimeOfDelivery().toLocalTime().toString())
-                ));
-            }
         }
     }
 
