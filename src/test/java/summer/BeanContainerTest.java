@@ -15,10 +15,9 @@ import summer.exception.NoSuchBeanDefinitionException;
 import summer.exception.NoUniqueBeanDefinitionException;
 
 import java.io.Closeable;
-import java.util.Map;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-import static java.util.Map.entry;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -143,23 +142,27 @@ class BeanContainerTest {
 
 
     @Test
-    void createBeanDependencyMap() {
+    void getNextBeanName() {
         // given
-        beanContainer.defineBean("a", A.class);
-        beanContainer.defineBean("b", B.class);
-        beanContainer.defineBean("c", C.class);
-        beanContainer.defineBean("d", D.class);
+        beanContainer.defineBean("a", A.class); // depends on b, c, d
+        beanContainer.defineBean("b", B.class); // no dependencies
+        beanContainer.defineBean("c", C.class); // depends on d
+        beanContainer.defineBean("d", D.class); // no dependencies
+        BeanDependencyGraph graph = beanContainer.createBeanDependencyGraph();
 
-        // when
-        Map<String, Set<String>> dependencyMap = beanContainer.createBeanDependencyMap();
+        // when: repeatedly ask for the next bean whose dependencies are all fulfilled
+        List<String> creationOrder = new ArrayList<>();
+        for (String name = graph.getNextBeanName(); name != null; name = graph.getNextBeanName()) {
+            creationOrder.add(name);
+        }
 
-        // then
-        assertThat(dependencyMap).contains(
-                entry("a", Set.of("b", "c", "d")),
-                entry("b", Set.of()),
-                entry("c", Set.of("d")),
-                entry("d", Set.of())
-        );
+        // then: every bean is handed out exactly once...
+        assertThat(creationOrder).containsExactlyInAnyOrder("a", "b", "c", "d");
+        // ...and only after the beans it depends on
+        assertThat(creationOrder.indexOf("b")).isLessThan(creationOrder.indexOf("a"));
+        assertThat(creationOrder.indexOf("c")).isLessThan(creationOrder.indexOf("a"));
+        assertThat(creationOrder.indexOf("d")).isLessThan(creationOrder.indexOf("a"));
+        assertThat(creationOrder.indexOf("d")).isLessThan(creationOrder.indexOf("c"));
     }
 }
 

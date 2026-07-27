@@ -73,14 +73,14 @@ public class BeanContainer {
         return constructor.getParameterTypes();
     }
 
-    Map<String, Set<String>> createBeanDependencyMap() {
-        var map = new HashMap<String, Set<String>>();
+    BeanDependencyGraph createBeanDependencyGraph() {
+        var graph = new BeanDependencyGraph();
         for (var def : this.beanDefinitions) {
             Class<?>[] constructorParamTypes = findConstructorParameterTypes(def.getType());
             String[] constructorParamBeanNames = resolveBeanNames(constructorParamTypes);
-            map.put(def.getName(), new HashSet<>(Arrays.asList(constructorParamBeanNames)));
+            graph.addBean(def.getName(), new HashSet<>(Arrays.asList(constructorParamBeanNames)));
         }
-        return map;
+        return graph;
     }
 
     String[] resolveBeanNames(Class<?>[] types) {
