@@ -1,7 +1,6 @@
 package pizza.order;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -21,15 +20,12 @@ import java.util.Map;
 import java.util.Optional;
 
 @SpringJUnitConfig({PizzaApp.class})
-// TODO b): @TestPropertySource so befüllen, dass der Test läuft.
-//          - Es muss der "sample"-DataLoader aktiv sein (sonst fehlen Kunde & Produkte im Test).
-//          - Denk außerdem daran, dass der Gesamtpreis vom (tagesabhängigen!) Rabatt abhängt:
-//            damit der Test deterministisch ist, sollte die Rabatt-Konfiguration hier fixiert werden.
 @TestPropertySource(properties = {
-        "app.data-loader=sample"
+        "app.data-loader=sample",
+        // Rabatt deaktivieren, damit der erwartete Gesamtpreis tagesunabhängig (deterministisch) ist
+        "app.order.discount-days="
 })
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@Disabled("Übung b): zum Bearbeiten diese @Disabled-Annotation entfernen")
 class OrderServiceTest {
 
     @Autowired
