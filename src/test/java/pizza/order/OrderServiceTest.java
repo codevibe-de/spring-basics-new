@@ -1,6 +1,7 @@
 package pizza.order;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -20,10 +21,15 @@ import java.util.Map;
 import java.util.Optional;
 
 @SpringJUnitConfig({PizzaApp.class})
+// TODO b): @TestPropertySource so befüllen, dass der Test läuft.
+//          - Es muss der "sample"-DataLoader aktiv sein (sonst fehlen Kunde & Produkte im Test).
+//          - Denk außerdem daran, dass der Gesamtpreis vom (tagesabhängigen!) Rabatt abhängt:
+//            damit der Test deterministisch ist, sollte die Rabatt-Konfiguration hier fixiert werden.
 @TestPropertySource(properties = {
         "app.data-loader=sample"
 })
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Disabled("Übung b): zum Bearbeiten diese @Disabled-Annotation entfernen")
 class OrderServiceTest {
 
     @Autowired
@@ -43,7 +49,7 @@ class OrderServiceTest {
         });
 
         // when -- die Produkt-Preise kommen aus dem DummyProductRepository:
-        //         2 * 8.00 (Margherita) + 1 * 9.50 (Salami) = 25.50, kein Rabatt (siehe TestConfig)
+        //         2 * 8.00 (Margherita) + 1 * 10.00 (Salami) = 26.00, kein Rabatt (via @TestPropertySource abgeschaltet)
         Order order = orderService.placeOrder(
                 "+49 123 456789",
                 Map.of(
@@ -55,7 +61,7 @@ class OrderServiceTest {
         // then
         Assertions.assertThat(order).isNotNull();
         Assertions.assertThat(order.getId()).isEqualTo(1L);
-        Assertions.assertThat(order.getTotalPrice()).isEqualByComparingTo(new BigDecimal("25.50"));
+        Assertions.assertThat(order.getTotalPrice()).isEqualByComparingTo(new BigDecimal("26.00"));
 
         // und: der OrderService hält genau diese eine Bestellung
         Assertions.assertThat(orderService.getOrders()).hasSize(1);
@@ -88,7 +94,7 @@ class OrderServiceTest {
 
         private final Map<String, Product> products = Map.of(
                 "PM", new Product("PM", "Fake Pizza Margherita", new BigDecimal("8.00")),
-                "PS", new Product("PS", "Fake Pizza Salami", new BigDecimal("9.50"))
+                "PS", new Product("PS", "Fake Pizza Salami", new BigDecimal("10.00"))
         );
 
         @Override

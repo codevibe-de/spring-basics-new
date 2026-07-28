@@ -1,15 +1,15 @@
 package pizza.customer;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import pizza.PizzaApp;
 
-@SpringJUnitConfig(PizzaApp.class)
+@Disabled("Übung a): zum Bearbeiten diese @Disabled-Annotation entfernen")
+// TODO a): Diese Testklasse als Spring-Test konfigurieren
+//          (passende Annotation an der Klasse, damit ein ApplicationContext hochgefahren wird).
 class CustomerServiceTest {
 
-    @Autowired
+    // TODO a): den CustomerService aus dem Spring-Context injizieren lassen
     CustomerService customerService;
 
     @Test
