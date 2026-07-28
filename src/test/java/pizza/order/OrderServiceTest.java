@@ -29,6 +29,7 @@ import java.util.Optional;
         "todo=todo"
 })
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Disabled("zum Bearbeiten diese @Disabled-Annotation entfernen")
 class OrderServiceTest {
 
     @Autowired
