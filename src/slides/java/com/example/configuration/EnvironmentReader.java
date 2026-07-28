@@ -4,19 +4,25 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+import java.awt.geom.Point2D;
+
 @Component
 public class EnvironmentReader {
 
-    private final Environment environment;
+    private final Environment env;
 
-    public EnvironmentReader(Environment environment) {
-        this.environment = environment;
+    public EnvironmentReader(Environment env) {
+        this.env = env;
     }
 
     @PostConstruct
     void init() {
-        String title = environment.getProperty("app.title", "My Super App");
-        String version = environment.getProperty("app.version");
-        boolean active = environment.getProperty("app.enabled", Boolean.class, true);
+        String version = env.getRequiredProperty("app.version");
+
+        String title = env.getProperty("app.title", "My Super App");
+        boolean active = env.getProperty("app.enabled", Boolean.class, true);
+
+        Point2D loc = env.getProperty("app.default-location",
+                Point2D.class, new Point2D.Double(0, 0));
     }
 }

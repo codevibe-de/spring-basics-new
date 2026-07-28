@@ -2,16 +2,18 @@
 
 ## a) Laden der `application.properties` vorbereiten
 
-Wir nutzen hier reines Spring (kein Spring Boot), daher wird die `application.properties` nicht
-automatisch geladen. Damit die Werte im `Environment` bzw. für `@Value` verfügbar sind, binden Sie die
-Datei über eine `@Configuration`-Klasse mit `@PropertySource("classpath:application.properties")` ein.
+Wir nutzen hier reines Spring (kein Spring Boot), daher wird die `application.properties` nicht automatisch geladen.
+
+Damit die Werte im `Environment` bzw. für `@Value` verfügbar sind:
+
+- erstellen Sie eine `application.properties` Datei
+- und binden Sie sie über eine `@Configuration`-Klasse mit `@PropertySource("classpath:application.properties")` ein
 
 Diese Grundlage nutzen wir in den folgenden Übungen, um die Konfiguration zu setzen und auszulesen.
 
 ## b) OrderService konfigurierbar machen
 
-Verändern Sie den `OrderService`, sodass die dort definierten Eigenschaften mittels Konfiguration
-gesetzt werden können:
+Verändern Sie den `OrderService`, sodass die dort definierten Eigenschaften mittels Konfiguration gesetzt werden können:
 
 * erwartete Lieferzeit in Minuten
 * die Wochentage, an denen der Rabatt gilt
@@ -22,11 +24,10 @@ Hinweis: Hierfür gibt es zwei Möglichkeiten:
 1. mittels `@Value`-Annotation am jeweiligen Feld
 2. oder über eine neue `OrderProperties` Klasse, welche die Werte aus dem `Environment` liest
 
-Bei letzterem Ansatz brauchen Sie die Felder der Klasse nicht mehr, da Sie ja dann diese über
-eine neue `OrderProperties` Klasse injectet bekommen.
+Bei letzterem Ansatz brauchen Sie die Felder der Klasse nicht mehr, da Sie ja dann diese über eine neue
+`OrderProperties` Klasse injectet bekommen.
 
-In der nächsten Übung c) werden die Werte in der `application.properties` Datei gesetzt und
-probeweise ausgegeben.
+In der nächsten Übung c) werden die Werte in der `application.properties` Datei gesetzt und probeweise ausgegeben.
 
 ## c) Ausgabe der Konfiguration
 
@@ -37,16 +38,15 @@ Lassen Sie Spring diese Methode automatisch beim Start ausführen. Wie ging das 
 
 Setzen Sie Werte für die Konfiguration des `OrderService` in der `application.properties` Datei.
 
-Starten Sie nun die Anwendung und prüfen Sie die tatsächlich vorliegende Konfiguration --
-wird der Wert aus der `application.properties` genutzt?
+Starten Sie nun die Anwendung und prüfen Sie die tatsächlich vorliegende Konfiguration -- wird der Wert aus der
+`application.properties` genutzt?
 
 ## d) Konfiguration von außen
 
-Starten Sie Ihre Anwendung auf eine Art und Weise, dass nicht die Lieferzeit in Minuten
-aus den `application.properties` genutzt wird, sondern von außen durch einen anderen Wert
-überschrieben wird.
+Starten Sie Ihre Anwendung auf eine Art und Weise, dass nicht die Lieferzeit in Minuten aus den `application.properties`
+genutzt wird, sondern von außen durch einen anderen Wert überschrieben wird.
 
-Hierfür können Sie eine Umgebungsvariable, ein VM System Property oder ein Programmargument nutzen.
+Hierfür können Sie eine Umgebungsvariable oder ein VM System Property nutzen.
 
 Wird der erwartete Wert ausgegeben?
 
