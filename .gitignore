@@ -23,4 +23,7 @@ build/
 
 # jenv
 /.java-version
+
+# other
 /h2-data/pizzadb.mv.db
+/src/demo/java/
