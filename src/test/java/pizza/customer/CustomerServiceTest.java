@@ -4,13 +4,11 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-@Disabled("Übung a): zum Bearbeiten diese @Disabled-Annotation entfernen")
-// TODO a): Diese Testklasse als Spring-Test konfigurieren
-//          (passende Annotation an der Klasse, damit ein ApplicationContext hochgefahren wird).
+@Disabled("zum Bearbeiten diese @Disabled-Annotation entfernen")
+// TODO Diese Testklasse als Spring-Test konfigurieren, damit ein Context zur Verfügung steht
 class CustomerServiceTest {
 
-    // TODO a): den CustomerService aus dem Spring-Context injizieren lassen
-    CustomerService customerService;
+    // TODO CustomerService aus dem Spring-Context injizieren lassen
 
     @Test
     void createCustomer() {
@@ -19,7 +17,7 @@ class CustomerServiceTest {
         Customer customer = new Customer("John Doe", address, "0170-123123123");
 
         // when
-        Customer createdCustomer = customerService.createCustomer(customer);
+        Customer createdCustomer = null; // TODO call CustomerService
 
         // then
         Assertions.assertThat(createdCustomer).isNotNull();

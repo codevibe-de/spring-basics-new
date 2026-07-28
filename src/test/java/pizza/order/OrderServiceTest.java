@@ -20,24 +20,23 @@ import java.util.Map;
 import java.util.Optional;
 
 @SpringJUnitConfig({PizzaApp.class})
-// TODO b): @TestPropertySource so befüllen, dass der Test läuft.
+// TODO @TestPropertySource so befüllen, dass der Test läuft.
 //          - Es muss der "sample"-DataLoader aktiv sein (sonst fehlen Kunde & Produkte im Test).
 //          - Denk außerdem daran, dass der Gesamtpreis vom (tagesabhängigen!) Rabatt abhängt:
 //            damit der Test deterministisch ist, sollte die Rabatt-Konfiguration hier fixiert werden.
 @TestPropertySource(properties = {
-        // TODO b): diesen Platzhalter durch die passende(n) Property(s) ersetzen
-        "exercise.todo=bitte-konfigurieren"
+        // TODO diesen Platzhalter durch die passende(n) Property(s) ersetzen
+        "todo=todo"
 })
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@Disabled("Übung b): zum Bearbeiten diese @Disabled-Annotation entfernen")
 class OrderServiceTest {
 
     @Autowired
     OrderService orderService;
 
     @Test
-    // TODO b): Annotation ergänzen, damit der in diesem Test (per Reflection-Hack) veränderte
-    //          ApplicationContext danach verworfen und für den nächsten Test neu aufgebaut wird.
+    // TODO Annotation ergänzen, damit der in diesem Test (per Reflection-Hack) veränderte
+    //      ApplicationContext danach verworfen und für den nächsten Test neu aufgebaut wird.
     @org.junit.jupiter.api.Order(1)
     void placeOrder(@Autowired ProductService productService) {
         // Overwrite the productRepository instance in the productService with our dummy repository.
@@ -70,7 +69,8 @@ class OrderServiceTest {
 
 
     /**
-     * This test works with the original ProductRepository bean
+     * This test works with the original ProductRepository bean -- and fails, if the previous test hasn't cleaned up
+     * its modified context.
      */
     @Test
     @org.junit.jupiter.api.Order(2)
