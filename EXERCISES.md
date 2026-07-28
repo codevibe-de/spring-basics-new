@@ -1,6 +1,14 @@
 # Übungen zum Kapitel "030 - Konfiguration"
 
-## a) OrderService konfigurierbar machen
+## a) Laden der `application.properties` vorbereiten
+
+Wir nutzen hier reines Spring (kein Spring Boot), daher wird die `application.properties` nicht
+automatisch geladen. Damit die Werte im `Environment` bzw. für `@Value` verfügbar sind, binden Sie die
+Datei über eine `@Configuration`-Klasse mit `@PropertySource("classpath:application.properties")` ein.
+
+Diese Grundlage nutzen wir in den folgenden Übungen, um die Konfiguration zu setzen und auszulesen.
+
+## b) OrderService konfigurierbar machen
 
 Verändern Sie den `OrderService`, sodass die dort definierten Eigenschaften mittels Konfiguration
 gesetzt werden können:
@@ -17,10 +25,10 @@ Hinweis: Hierfür gibt es zwei Möglichkeiten:
 Bei letzterem Ansatz brauchen Sie die Felder der Klasse nicht mehr, da Sie ja dann diese über
 eine neue `OrderProperties` Klasse injectet bekommen.
 
-In der nächsten Übung b) werden die Werte in der `application.properties` Datei gesetzt und
+In der nächsten Übung c) werden die Werte in der `application.properties` Datei gesetzt und
 probeweise ausgegeben.
 
-## b) Ausgabe der Konfiguration
+## c) Ausgabe der Konfiguration
 
 Ergänzen Sie den `OrderService` um eine Methode, in der die Konfiguration via `System.out`
 ausgegeben wird (damit wir sehen können, was gerade gilt).
@@ -32,7 +40,7 @@ Setzen Sie Werte für die Konfiguration des `OrderService` in der `application.p
 Starten Sie nun die Anwendung und prüfen Sie die tatsächlich vorliegende Konfiguration --
 wird der Wert aus der `application.properties` genutzt?
 
-## c) Konfiguration von außen
+## d) Konfiguration von außen
 
 Starten Sie Ihre Anwendung auf eine Art und Weise, dass nicht die Lieferzeit in Minuten
 aus den `application.properties` genutzt wird, sondern von außen durch einen anderen Wert
@@ -42,7 +50,7 @@ Hierfür können Sie eine Umgebungsvariable, ein VM System Property oder ein Pro
 
 Wird der erwartete Wert ausgegeben?
 
-## d) optionaler DataLoader
+## e) optionaler DataLoader
 
 Machen Sie die Ausführung des DataLoaders konfigurierbar (an/aus) - oder sogar, welche DataLoader Bean ausgeführt werden
 soll (z.B. "none", "sample" or "csv").
@@ -52,7 +60,7 @@ Hierfür gibt es mehrere Wege, die wir kennengelernt haben.
 > Die Ausführung der `DataLoader` Bean wurde in einen neuen `DataLoadRunner` ausgelagert, um die Konfiguration zu
 > vereinfachen.
 
-## e) Resource Inject
+## f) Resource Inject
 
 Eine Kleinigkeit kann noch verbessert werden:
 
