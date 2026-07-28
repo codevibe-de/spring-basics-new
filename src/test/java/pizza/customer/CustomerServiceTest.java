@@ -1,8 +1,10 @@
 package pizza.customer;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+@Disabled("Übung a): zum Bearbeiten diese @Disabled-Annotation entfernen")
 // TODO a): Diese Testklasse als Spring-Test konfigurieren
 //          (passende Annotation an der Klasse, damit ein ApplicationContext hochgefahren wird).
 class CustomerServiceTest {

@@ -1,5 +1,9 @@
 # Übungen zum Kapitel "040 - Testing"
 
+> **Hinweis:** Die Testklassen beider Übungen sind mit `@Disabled` deaktiviert, damit
+> der Build im Ausgangszustand grün ist. Entferne die `@Disabled`-Annotation der
+> jeweiligen Klasse, bevor du mit der Übung beginnst.
+
 ## a) CustomerServiceTest – Spring-Konfiguration ergänzen
 
 Der eigentliche Test-Code für `CustomerService.createCustomer(...)` ist in der

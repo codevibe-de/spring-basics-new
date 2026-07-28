@@ -1,6 +1,7 @@
 package pizza.order;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -28,6 +29,7 @@ import java.util.Optional;
         "exercise.todo=bitte-konfigurieren"
 })
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Disabled("Übung b): zum Bearbeiten diese @Disabled-Annotation entfernen")
 class OrderServiceTest {
 
     @Autowired
