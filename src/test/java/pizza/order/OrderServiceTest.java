@@ -65,7 +65,8 @@ class OrderServiceTest {
 
 
     /**
-     * This test works with the original ProductRepository bean
+     * This test works with the original ProductRepository bean -- and fails, if the previous test hasn't cleaned up
+     * its modified context.
      */
     @Test
     @org.junit.jupiter.api.Order(2)
