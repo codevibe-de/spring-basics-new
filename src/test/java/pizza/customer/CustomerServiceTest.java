@@ -19,7 +19,7 @@ class CustomerServiceTest {
         Customer customer = new Customer("John Doe", address, "0170-123123123");
 
         // when
-        Customer createdCustomer = null; // TODO call CustomerService
+        Customer createdCustomer = customerService.createCustomer(customer);
 
         // then
         Assertions.assertThat(createdCustomer).isNotNull();
