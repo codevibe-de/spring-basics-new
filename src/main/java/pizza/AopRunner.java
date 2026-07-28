@@ -1,5 +1,6 @@
 package pizza;
 
+import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -26,11 +27,11 @@ public class AopRunner implements CommandLineRunner {
     public void run(String... args) {
         // Bestehende `productService` Bean mit einem AOP-Proxy umwickeln, der die Aufrufe
         // zunächst trace't und anschließend deren Ausführungsdauer misst.
-        var proxyFactory = new ProxyFactoryBean();
+        var proxyFactory = new ProxyFactory();
         proxyFactory.setTarget(productService);
         proxyFactory.addAdvice(new TraceBeforeMethodAdvice());
         proxyFactory.addAdvice(new ProfilingInterceptor());
-        ProductService tracedProductService = (ProductService) proxyFactory.getObject();
+        ProductService tracedProductService = (ProductService) proxyFactory.getProxy();
 
         // Jeder Aufruf läuft nun durch die Advices:
         System.out.println("\n--- AOP demonstration ---");
