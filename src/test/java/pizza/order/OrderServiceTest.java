@@ -21,7 +21,9 @@ import java.util.Optional;
 
 @SpringJUnitConfig({PizzaApp.class})
 @TestPropertySource(properties = {
-        "app.data-loader=sample"
+        "app.data-loader=sample",
+        // Rabatt deaktivieren, damit der erwartete Gesamtpreis tagesunabhängig (deterministisch) ist
+        "app.order.discount-days="
 })
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class OrderServiceTest {
@@ -43,7 +45,7 @@ class OrderServiceTest {
         });
 
         // when -- die Produkt-Preise kommen aus dem DummyProductRepository:
-        //         2 * 8.00 (Margherita) + 1 * 9.50 (Salami) = 25.50, kein Rabatt (siehe TestConfig)
+        //         2 * 8.00 (Margherita) + 1 * 10.00 (Salami) = 26.00, kein Rabatt (via @TestPropertySource abgeschaltet)
         Order order = orderService.placeOrder(
                 "+49 123 456789",
                 Map.of(
@@ -55,7 +57,7 @@ class OrderServiceTest {
         // then
         Assertions.assertThat(order).isNotNull();
         Assertions.assertThat(order.getId()).isEqualTo(1L);
-        Assertions.assertThat(order.getTotalPrice()).isEqualByComparingTo(new BigDecimal("25.50"));
+        Assertions.assertThat(order.getTotalPrice()).isEqualByComparingTo(new BigDecimal("26.00"));
 
         // und: der OrderService hält genau diese eine Bestellung
         Assertions.assertThat(orderService.getOrders()).hasSize(1);
@@ -63,7 +65,8 @@ class OrderServiceTest {
 
 
     /**
-     * This test works with the original ProductRepository bean
+     * This test works with the original ProductRepository bean -- and fails, if the previous test hasn't cleaned up
+     * its modified context.
      */
     @Test
     @org.junit.jupiter.api.Order(2)
@@ -88,7 +91,7 @@ class OrderServiceTest {
 
         private final Map<String, Product> products = Map.of(
                 "PM", new Product("PM", "Fake Pizza Margherita", new BigDecimal("8.00")),
-                "PS", new Product("PS", "Fake Pizza Salami", new BigDecimal("9.50"))
+                "PS", new Product("PS", "Fake Pizza Salami", new BigDecimal("10.00"))
         );
 
         @Override
