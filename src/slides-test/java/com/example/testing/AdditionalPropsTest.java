@@ -16,11 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 )
 public class AdditionalPropsTest {
 
-    @Autowired
-    Environment environment;
-
     @Test
-    void additionalProperties() {
+    void additionalProperties(@Autowired Environment environment) {
         assertThat(environment.getProperty("app.order.delivery-time-in-minutes")).isEqualTo("12");
         assertThat(environment.getProperty("app.order.discount-rate")).isEqualTo("0.0");
         assertThat(environment.getProperty("app.name")).isEqualTo("NewName!");
