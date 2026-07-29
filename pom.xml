@@ -16,6 +16,9 @@
         <thymeleaf.version>3.1.5.RELEASE</thymeleaf.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <!-- Retain method parameter names so Spring MVC can bind @PathVariable /
+             @RequestParam without explicit names (Spring Boot enables this by default). -->
+        <maven.compiler.parameters>true</maven.compiler.parameters>
         <exec.mainClass>pizza.PizzaApp</exec.mainClass>
         <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
