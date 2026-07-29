@@ -24,8 +24,8 @@ public abstract class DataLoader implements Runnable {
         this.customerService = customerService;
     }
 
-    protected void createProduct(String productId, String name, String price) {
-        this.productService.createProduct(new Product(productId, name, new BigDecimal(price)));
+    protected void createProduct(String id, String name, String price) {
+        this.productService.createProduct(new Product(id, name, new BigDecimal(price)));
     }
 
     protected Address createAddress(String street, String postalCode, String city) {
