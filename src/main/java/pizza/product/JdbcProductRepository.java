@@ -1,10 +1,14 @@
 package pizza.product;
 
-import pizza.PersistenceException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.sql.*;
-import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,93 +20,70 @@ public class JdbcProductRepository implements ProductRepository {
     public static final String SELECT_ALL_SQL = "SELECT p.* FROM products p";
     public static final String SELECT_ONE_SQL = "SELECT p.* FROM products p WHERE p.pk = ?";
 
-    private final DataSource dataSource;
+    private final JdbcTemplate jdbcTemplate;
+    private final RowMapper<Product> rowMapper;
 
     public JdbcProductRepository(DataSource dataSource) {
-        this.dataSource = dataSource;
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+        this.rowMapper = new ProductRowMapper();
     }
-
 
     @Override
     public Product save(Product product) {
-        try (Connection connection = dataSource.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(INSERT_SQL)) {
-                statement.setString(1, product.getProductId());
-                statement.setString(2, product.getName());
-                statement.setBigDecimal(3, product.getPrice());
-                statement.executeUpdate();
-            }
-        } catch (SQLException e) {
-            rethrowSqlException(e);
-        }
-        return findById(product.getProductId())
-                .orElseThrow(() -> new PersistenceException("Cannot find persisted product"));
+        this.jdbcTemplate.update(
+                INSERT_SQL,
+                product.getProductId(), product.getName(), product.getPrice()
+        );
+        return product;
     }
-
 
     @Override
     public boolean existsById(String productId) {
-        try (Connection connection = dataSource.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(SELECT_COUNT_SQL)) {
-                statement.setString(1, productId);
-                ResultSet resultSet = statement.executeQuery();
-                if (resultSet.next()) {
-                    int count = resultSet.getInt(1);
-                    return count == 1;
-                }
-            }
-        } catch (SQLException e) {
-            rethrowSqlException(e);
-        }
-        return false;
+        var count = this.jdbcTemplate.queryForObject(
+                SELECT_COUNT_SQL,
+                Integer.class,
+                productId
+        );
+        return (count != null && count == 1);
     }
-
 
     @Override
     public List<Product> findAll() {
-        List<Product> products = new ArrayList<>();
-
-        try (Connection connection = dataSource.getConnection()) {
-            try (Statement statement = connection.createStatement()) {
-                try (ResultSet resultSet = statement.executeQuery(SELECT_ALL_SQL)) {
-                    while (resultSet.next()) {
-                        products.add(mapRow(resultSet));
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            rethrowSqlException(e);
-        }
-        return products;
-    }
-
-
-    @Override
-    public Optional<Product> findById(String productId) {
-        try (Connection connection = dataSource.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(SELECT_ONE_SQL)) {
-                statement.setString(1, productId);
-                ResultSet resultSet = statement.executeQuery();
-                if (resultSet.next()) {
-                    return Optional.of(mapRow(resultSet));
-                }
-            }
-        } catch (SQLException e) {
-            rethrowSqlException(e);
-        }
-        return Optional.empty();
-    }
-
-
-    private Product mapRow(ResultSet rs) throws SQLException {
-        return new Product(
-                rs.getString("pk"),
-                rs.getString("name"),
-                rs.getBigDecimal("price")
+        return this.jdbcTemplate.query(
+                SELECT_ALL_SQL,
+                new Object[]{},
+                new int[]{},
+                this.rowMapper
         );
     }
 
-    private void rethrowSqlException(SQLException e) throws PersistenceException {
-        throw new PersistenceException(e);
+    @Override
+    public Optional<Product> findById(String productId) {
+        try {
+            Product p = this.jdbcTemplate.queryForObject(
+                    SELECT_ONE_SQL,
+                    new Object[]{productId},
+                    new int[]{Types.VARCHAR},
+                    this.rowMapper
+            );
+            return Optional.ofNullable(p);
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return Optional.empty();
+        }
+    }
+
+    //
+    // --- inner classes ---
+    //
+
+    static class ProductRowMapper implements RowMapper<Product> {
+        @Override
+        public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new Product(
+                    rs.getString("pk"),
+                    rs.getString("name"),
+                    rs.getBigDecimal("price")
+            );
+        }
     }
 }
