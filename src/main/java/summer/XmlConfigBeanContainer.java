@@ -11,9 +11,9 @@ import summer.exception.BeanDefinitionStoreException;
 import java.io.IOException;
 import java.util.List;
 
-public class XmlBeanContainer extends BeanContainer {
+public class XmlConfigBeanContainer extends BeanContainer {
 
-    public XmlBeanContainer(String xmlResourcePath) {
+    public XmlConfigBeanContainer(String xmlResourcePath) {
         this.load(xmlResourcePath);
         this.refresh();
     }
