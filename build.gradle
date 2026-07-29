@@ -26,6 +26,12 @@ repositories {
     mavenCentral()
 }
 
+// Retain method parameter names so Spring MVC can bind @PathVariable / @RequestParam
+// without explicit names (Spring Boot enables this by default).
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs << '-parameters'
+}
+
 dependencies {
     implementation "org.springframework:spring-context:${springVersion}"
     implementation "org.springframework:spring-test:${springVersion}"
