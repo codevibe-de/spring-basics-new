@@ -10,6 +10,21 @@ GET http://localhost:8080/customers
 
 ###
 
+POST http://localhost:8080/customers
+Content-Type: application/json
+
+{
+  "fullName": "Enrico Pallazzo",
+  "address": {
+    "street": "Wasserstr. 123",
+    "postalCode": "40302",
+    "city": "Atlantis"
+  },
+  "phoneNumber": "+49 123 456789"
+}
+
+###
+
 GET http://localhost:8080/orders
 
 ###
