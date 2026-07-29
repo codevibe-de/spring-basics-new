@@ -19,10 +19,10 @@
 10. letztendlich Reihenfolge angehen, dazu `createBeanDependencyMap()` aufrufen
     und abarbeiten
 
-# 013 Ablauf der XmlBeanContainer Demo-Programmierung 
+# 013 Ablauf der XmlConfigBeanContainer Demo-Programmierung 
 
-1. Neue Klasse `XmlBeanContainer` anlegen, die von `BeanContainer` vererbt (da dessen Verhalten ergänzt wird)
+1. Neue Klasse `XmlConfigBeanContainer` anlegen, die von `BeanContainer` vererbt (da dessen Verhalten ergänzt wird)
 2. Klassen `BeansElement` und `BeanElement` anlegen, welche die XML-Elemente der XML-Konfiguration repräsentieren (z.B.
-   als nicht public top-level Klassen in `XmlBeanContainer`)
-3. Konstruktor von `XmlBeanContainer` implementieren, der die XML-Datei einliest (`this.load(..)`), parst
+   als nicht public top-level Klassen in `XmlConfigBeanContainer`)
+3. Konstruktor von `XmlConfigBeanContainer` implementieren, der die XML-Datei einliest (`this.load(..)`), parst
    und die Bean-Definitionen in `BeanContainer` einträgt (über `defineBean(..)`)
