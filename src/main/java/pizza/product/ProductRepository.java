@@ -7,9 +7,10 @@ public interface ProductRepository {
 
     Product save(Product product);
 
-    boolean existsById(String productId);
+    boolean existsById(String id);
 
     List<Product> findAll();
 
-    Optional<Product> findById(String productId);
+    Optional<Product> findById(String id);
+
 }
