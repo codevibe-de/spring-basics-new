@@ -7,7 +7,6 @@ import com.github.freva.asciitable.HorizontalAlign;
 import pizza.customer.Customer;
 import pizza.customer.CustomerService;
 import pizza.order.OrderService;
-import pizza.product.HashMapProductRepository;
 import pizza.product.Product;
 import pizza.product.ProductService;
 
@@ -31,7 +30,7 @@ public class PizzaApp {
         // Work with the data:
         var products = productService.getAllProducts();
         printTable("Products", products, List.of(
-                column("ID", RIGHT, Product::getProductId),
+                column("ID", RIGHT, Product::getId),
                 column("Name", LEFT, Product::getName),
                 column("Price", RIGHT, p -> String.format("%.2f EUR", p.getPrice()))
         ));
@@ -46,12 +45,13 @@ public class PizzaApp {
         ));
 
         if (!products.isEmpty() && !customers.isEmpty()) {
+            System.out.println("\n=== Now placing a sample order… ===");
             var order = orderService.placeOrder(
                     customers.get(0).getPhoneNumber(),
-                    Map.of(products.get(0).getProductId(), 2,
-                            products.get(products.size() > 1 ? 1 : 0).getProductId(), 1)
+                    Map.of(products.get(0).getId(), 2,
+                            products.get(products.size() > 1 ? 1 : 0).getId(), 1)
             );
-            printTable("Order placed", List.of(order), List.of(
+            printTable("Orders", List.of(order), List.of(
                     column("ID", RIGHT, o -> String.valueOf(o.getId())),
                     column("Customer", LEFT, o -> o.getCustomer().getFullName()),
                     column("Total", RIGHT, o -> String.format("%.2f EUR", o.getTotalPrice())),
