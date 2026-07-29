@@ -10,10 +10,8 @@ import pizza.order.OrderService;
 import pizza.product.Product;
 import pizza.product.ProductService;
 import summer.BeanContainer;
-import summer.XmlBeanContainer;
+import summer.XmlConfigBeanContainer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +24,7 @@ public class PizzaApp {
 
     public static void main(String[] args) {
         // Instantiate beans ---
-        BeanContainer beanContainer = new XmlBeanContainer("/beans.xml");
+        BeanContainer beanContainer = new XmlConfigBeanContainer("/beans.xml");
 
         // query and use beans
         beanContainer.getBean(DataLoader.class).run();
@@ -37,7 +35,7 @@ public class PizzaApp {
         // Work with the data:
         var products = productService.getAllProducts();
         printTable("Products", products, List.of(
-                column("ID", RIGHT, Product::getProductId),
+                column("ID", RIGHT, Product::getId),
                 column("Name", LEFT, Product::getName),
                 column("Price", RIGHT, p -> String.format("%.2f EUR", p.getPrice()))
         ));
@@ -52,12 +50,13 @@ public class PizzaApp {
         ));
 
         if (!products.isEmpty() && !customers.isEmpty()) {
+            System.out.println("\n=== Now placing a sample order… ===");
             var order = orderService.placeOrder(
                     customers.get(0).getPhoneNumber(),
-                    Map.of(products.get(0).getProductId(), 2,
-                            products.get(products.size() > 1 ? 1 : 0).getProductId(), 1)
+                    Map.of(products.get(0).getId(), 2,
+                            products.get(products.size() > 1 ? 1 : 0).getId(), 1)
             );
-            printTable("Order placed", List.of(order), List.of(
+            printTable("Orders", List.of(order), List.of(
                     column("ID", RIGHT, o -> String.valueOf(o.getId())),
                     column("Customer", LEFT, o -> o.getCustomer().getFullName()),
                     column("Total", RIGHT, o -> String.format("%.2f EUR", o.getTotalPrice())),
