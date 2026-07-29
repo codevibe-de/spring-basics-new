@@ -1,48 +1,27 @@
 package pizza;
 
-import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
-import pizza.util.CliArgs;
-import pizza.util.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
-import java.util.List;
-
-@Configuration
-// WebConfig (@EnableWebMvc) must NOT land in this shared root context: it is also
-// used by the CLI main() and the (non-web) service tests, which have no ServletContext.
-// It is registered explicitly for the web tier in AppInitializer instead.
-@ComponentScan(excludeFilters = @ComponentScan.Filter(
-        type = FilterType.ASSIGNABLE_TYPE, classes = WebConfig.class))
+/**
+ * Spring Boot entry point.
+ *
+ * <p>{@code @SpringBootApplication} bundles {@code @Configuration},
+ * {@code @ComponentScan} (rooted at this package) and {@code @EnableAutoConfiguration}.
+ * The latter is what wires up the embedded Tomcat + {@code DispatcherServlet}, the
+ * H2 {@code DataSource}, Thymeleaf view resolution and Jackson — all the infrastructure
+ * we previously declared by hand.
+ *
+ * <p>{@link SpringApplication#run} also invokes every {@link org.springframework.boot.CommandLineRunner}
+ * bean after startup, so the old {@code @EventListener(ContextRefreshedEvent)} plumbing is gone.
+ */
+@SpringBootApplication
+@ConfigurationPropertiesScan
 public class PizzaApp {
 
-    @Autowired
-    private List<CommandLineRunner> commandLineRunners;
-
-    // CliArgs is only registered by main(). A test that boots the context (e.g. @SpringJUnitConfig)
-    // never runs main(), so the bean may be absent
-    @Autowired(required = false)
-    private CliArgs cliArgs;
-
-    @EventListener(ContextRefreshedEvent.class)
-    public void runRunners() {
-        String[] args = (cliArgs == null) ? new String[0] : cliArgs.args();
-        this.commandLineRunners.forEach(r -> r.run(args));
-    }
-
-
     public static void main(String[] args) {
-        // Instantiate annotation configured context ---
-        try (var beanContainer = new AnnotationConfigApplicationContext()) {
-            beanContainer.register(PizzaApp.class);
-            beanContainer.registerBean(CliArgs.class, () -> new CliArgs(args));
-            beanContainer.refresh();
-        }
+        SpringApplication.run(PizzaApp.class, args);
     }
 
 }

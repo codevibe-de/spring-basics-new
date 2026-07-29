@@ -5,11 +5,11 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.util.ReflectionUtils;
-import pizza.PizzaApp;
 import pizza.product.Product;
 import pizza.product.ProductRepository;
 import pizza.product.ProductService;
@@ -19,7 +19,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@SpringJUnitConfig({PizzaApp.class})
+// @SpringBootTest boots via SpringApplication so the DataLoadRunner runs and seeds the data;
+// @ActiveProfiles("test") excludes the noisy LogicRunner (see @Profile("!test") on it).
+@SpringBootTest
+@ActiveProfiles("test")
 @TestPropertySource(properties = {
         "app.data-loader=sample",
         // Rabatt deaktivieren, damit der erwartete Gesamtpreis tagesunabhängig (deterministisch) ist

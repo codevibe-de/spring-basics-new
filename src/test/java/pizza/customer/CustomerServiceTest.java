@@ -3,10 +3,14 @@ package pizza.customer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import pizza.PizzaApp;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
-@SpringJUnitConfig(PizzaApp.class)
+// @SpringBootTest boots the context via SpringApplication (like the real app), so Boot's
+// CommandLineRunners — including the DataLoadRunner — actually run. The "test" profile keeps
+// the noisy LogicRunner out (see @Profile("!test") on it).
+@SpringBootTest
+@ActiveProfiles("test")
 class CustomerServiceTest {
 
     @Autowired

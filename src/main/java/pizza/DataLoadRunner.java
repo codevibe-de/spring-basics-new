@@ -1,9 +1,9 @@
 package pizza;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import pizza.util.CommandLineRunner;
 
 import java.util.Map;
 
