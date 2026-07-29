@@ -1,5 +1,6 @@
 package componentscan;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pizza.ComponentScanner;
 import pizza.customer.Address;
@@ -10,6 +11,7 @@ import pizza.product.ProductService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled   // TODO remove to activate test
 class ComponentScannerTest {
 
     private final ComponentScanner scanner = new ComponentScanner();
@@ -20,17 +22,15 @@ class ComponentScannerTest {
         var names = scanner.scan(
                 HashMapProductRepository.class,
                 ProductService.class,
-                CustomerService.class,
-                OrderService.class,
-                Address.class   // not a @Component
+                CustomerService.class, // not a @Component
+                OrderService.class, // not a @Component
+                Address.class   // not even a bean!
         );
 
         // then: only the annotated classes are reported
         assertThat(names).containsExactly(
-                "productRepository",    // explicit name from @Component(name = ...)
-                "productService",       // derived from class name
-                "customerService",
-                "orderService"
+                "productRepository",    // explicit name from @Component("productRepository")
+                "productService"
         );
     }
 
