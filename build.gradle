@@ -1,16 +1,12 @@
 plugins {
-    id 'application'
-    id 'war'
+    id 'java'
+    id 'org.springframework.boot' version '3.5.16'
+    id 'io.spring.dependency-management' version '1.1.7'
     id 'com.github.ben-manes.versions' version '0.51.0'
 }
 
 group = 'de.codevibe'
 version = '077'
-
-ext {
-    springVersion = '6.2.15'
-    thymeleafVersion = '3.1.5.RELEASE'
-}
 
 java {
     toolchain {
@@ -18,38 +14,25 @@ java {
     }
 }
 
-application {
-    mainClass = 'pizza.PizzaApp'
-}
-
 repositories {
     mavenCentral()
 }
 
-// Retain method parameter names so Spring MVC can bind @PathVariable / @RequestParam
-// without explicit names (Spring Boot enables this by default).
-tasks.withType(JavaCompile).configureEach {
-    options.compilerArgs << '-parameters'
-}
-
 dependencies {
-    implementation "org.springframework:spring-context:${springVersion}"
-    implementation "org.springframework:spring-test:${springVersion}"
-    implementation "org.springframework:spring-jdbc:${springVersion}"
-    implementation "org.springframework:spring-webmvc:${springVersion}"
-    implementation "org.thymeleaf:thymeleaf:${thymeleafVersion}"
-    implementation "org.thymeleaf:thymeleaf-spring6:${thymeleafVersion}"
-    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
-    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
-    testImplementation platform('org.junit:junit-bom:5.11.3')
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
-    testImplementation 'org.assertj:assertj-core:3.26.3'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    implementation 'com.h2database:h2:2.4.240'
+    // Web tier: embedded Tomcat, Spring MVC, Jackson (all auto-configured).
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // Thymeleaf view resolution (TemplateResolver -> Engine -> ViewResolver) auto-configured.
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // JDBC + DataSource auto-configuration (embedded H2 picked up below).
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    runtimeOnly 'com.h2database:h2'
+    // ASCII table rendering for the CLI runners (not managed by the Boot BOM).
     implementation 'com.github.freva:ascii-table:1.12.1'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-test {
+tasks.named('test') {
     useJUnitPlatform()
 }
