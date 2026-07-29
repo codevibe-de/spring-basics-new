@@ -10,10 +10,8 @@ import pizza.order.OrderService;
 import pizza.product.Product;
 import pizza.product.ProductService;
 import summer.BeanContainer;
-import summer.XmlBeanContainer;
+import summer.XmlConfigBeanContainer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +24,7 @@ public class PizzaApp {
 
     public static void main(String[] args) {
         // Instantiate beans ---
-        BeanContainer beanContainer = new XmlBeanContainer("/beans.xml");
+        BeanContainer beanContainer = new XmlConfigBeanContainer("/beans.xml");
 
         // query and use beans
         beanContainer.getBean(DataLoader.class).run();
