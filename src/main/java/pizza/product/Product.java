@@ -9,7 +9,7 @@ public class Product {
     // --- fields ---
     //
 
-    private final String productId;
+    private final String id;
 
     private final String name;
 
@@ -19,8 +19,8 @@ public class Product {
     // --- constructors ---
     //
 
-    public Product(String productId, String name, BigDecimal price) {
-        this.productId = productId;
+    public Product(String id, String name, BigDecimal price) {
+        this.id = id;
         this.name = name;
         this.price = price;
     }
@@ -29,8 +29,8 @@ public class Product {
     // --- get / set ---
     //
 
-    public String getProductId() {
-        return productId;
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -50,18 +50,18 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(productId, product.productId);
+        return Objects.equals(id, product.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(productId);
+        return Objects.hashCode(id);
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "productId='" + productId + '\'' +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 '}';

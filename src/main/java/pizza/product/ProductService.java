@@ -24,10 +24,10 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product getProduct(String productId) {
+    public Product getProduct(String id) {
         return productRepository
-                .findById(productId)
-                .orElseThrow(() -> new ProductNotFoundException("For id " + productId));
+                .findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("For id " + id));
     }
 
     public BigDecimal getTotalPrice(Map<String, Integer> productQuantities) {
@@ -41,8 +41,8 @@ public class ProductService {
     }
 
     public Product createProduct(Product product) {
-        if (productRepository.existsById(product.getProductId())) {
-            throw new IllegalStateException("The product-repository already contains a product with id " + product.getProductId());
+        if (productRepository.existsById(product.getId())) {
+            throw new IllegalStateException("The product-repository already contains a product with id " + product.getId());
         }
         return productRepository.save(product);
     }
