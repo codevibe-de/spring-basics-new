@@ -8,6 +8,9 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * Matches only when a {@link CliArgs} bean has been registered in the context.
  * <p>
  * This is the hand-written equivalent of Spring Boot's {@code @ConditionalOnBean(CliArgs.class)}.
+ * <p>
+ * ÜBUNG b.3): Diese Klasse ist fertig vorgegeben. Du musst sie nur noch anwenden, indem du
+ * den {@code LogicRunner} mit {@code @Conditional(CliArgsPresentCondition.class)} annotierst.
  */
 public class CliArgsPresentCondition implements Condition {
 
