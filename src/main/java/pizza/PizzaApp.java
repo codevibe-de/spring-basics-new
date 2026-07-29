@@ -33,7 +33,7 @@ public class PizzaApp {
             // Work with the data:
             var products = productService.getAllProducts();
             printTable("Products", products, List.of(
-                    column("ID", RIGHT, Product::getProductId),
+                    column("ID", RIGHT, Product::getId),
                     column("Name", LEFT, Product::getName),
                     column("Price", RIGHT, p -> String.format("%.2f EUR", p.getPrice()))
             ));
@@ -50,8 +50,8 @@ public class PizzaApp {
             if (!products.isEmpty() && !customers.isEmpty()) {
                 var order = orderService.placeOrder(
                         customers.get(0).getPhoneNumber(),
-                        Map.of(products.get(0).getProductId(), 2,
-                                products.get(products.size() > 1 ? 1 : 0).getProductId(), 1)
+                        Map.of(products.get(0).getId(), 2,
+                                products.get(products.size() > 1 ? 1 : 0).getId(), 1)
                 );
                 printTable("Order placed", List.of(order), List.of(
                         column("ID", RIGHT, o -> String.valueOf(o.getId())),
