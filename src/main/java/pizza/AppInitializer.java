@@ -17,9 +17,12 @@ public class AppInitializer implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) {
         // Reuse the existing annotation-driven configuration (component scan,
-        // data loaders, WebConfig) as the DispatcherServlet's application context.
+        // data loaders) as the DispatcherServlet's application context, and add
+        // the web-only WebConfig (@EnableWebMvc, view resolver, static resources).
+        // WebConfig is deliberately excluded from PizzaApp's @ComponentScan so it
+        // only ever loads here, where a ServletContext is available.
         var context = new AnnotationConfigWebApplicationContext();
-        context.register(PizzaApp.class);
+        context.register(PizzaApp.class, WebConfig.class);
 
         var dispatcher = new DispatcherServlet(context);
         ServletRegistration.Dynamic registration =
