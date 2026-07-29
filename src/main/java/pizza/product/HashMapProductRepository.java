@@ -1,10 +1,13 @@
 package pizza.product;
 
+import componentscan.Component;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Component("productRepository")
 public class HashMapProductRepository implements ProductRepository {
 
     private final Map<String, Product> productsMap = new HashMap<>();

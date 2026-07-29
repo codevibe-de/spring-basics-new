@@ -23,12 +23,15 @@ public class ComponentScanner {
      */
     public List<String> scan(Class<?>... candidateClasses) {
         var result = new ArrayList<String>();
-        // TODO
-        //  1. für jede Klasse prüfen, ob diese mit @Component annotiert ist
-        //  2. Namen mit resolveName(...) ermitteln (siehe unten)
-        //  3. gefundene Namen der Ergebnisliste hinzufügen
-        //  4. Liste zurückgeben
-        throw new UnsupportedOperationException("TODO: ComponentScanner.scan(...) implementieren");
+        for (Class<?> candidate : candidateClasses) {
+            if (candidate.isAnnotationPresent(Component.class)) {
+                String name = resolveName(candidate);
+                result.add(name);
+                System.out.printf("Found component: %-28s -> bean name '%s'%n", candidate.getSimpleName(), name);
+            }
+        }
+        System.out.println(result.size() + " component(s) found.");
+        return result;
     }
 
     /**

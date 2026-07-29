@@ -1,8 +1,6 @@
 package componentscan;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import pizza.ComponentScanner;
 import pizza.customer.Address;
 import pizza.customer.CustomerService;
 import pizza.order.OrderService;
@@ -11,7 +9,6 @@ import pizza.product.ProductService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Disabled   // TODO remove to activate test
 class ComponentScannerTest {
 
     private final ComponentScanner scanner = new ComponentScanner();
