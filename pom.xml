@@ -5,7 +5,7 @@
 
     <groupId>de.codevibe</groupId>
     <artifactId>pizza-app</artifactId>
-    <version>075</version>
+    <version>077</version>
     <packaging>war</packaging>
 
     <properties>
