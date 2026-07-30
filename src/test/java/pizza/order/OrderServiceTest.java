@@ -21,7 +21,6 @@ import java.util.Optional;
 
 @SpringJUnitConfig({PizzaApp.class})
 @TestPropertySource(properties = {
-        "app.data-loader=sample",
         // Rabatt deaktivieren, damit der erwartete Gesamtpreis tagesunabhängig (deterministisch) ist
         "app.order.discount-days="
 })
