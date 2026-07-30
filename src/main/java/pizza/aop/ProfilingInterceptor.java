@@ -4,17 +4,23 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * Implementiert das AOP-Alliance Interface {@link MethodInterceptor}, um Code <b>vor und nach</b>
- * einem Methodenaufruf ausführen zu können ("Umwicklung" des Aufrufs). Damit lässt sich die
- * Ausführungsdauer der umwickelten Methode messen und ausgeben.
+ * Implementiert das AOP-Alliance Interface {@link MethodInterceptor}, um die
+ * Ausführungsdauer der umwickelten Methode messen und ausgeben zu können.
  */
-public class ProfilingInterceptor implements MethodInterceptor {
+public class ProfilingInterceptor {  // TODO: implements MethodInterceptor ergänzen (import ist bereits vorhanden)
 
-    @Override
-    public Object invoke(MethodInvocation invocation) throws Throwable {
-        // TODO Messen Sie die Zeit vor und nach dem Aufruf und geben Sie die Dauer aus.
-        //      Der eigentliche (umwickelte) Aufruf erfolgt über invocation.proceed().
-        return invocation.proceed();
+    // TODO Die Zeitmess-Logik unten ist bereits fertig vorgegeben -- die Signatur der Methode muss
+    //  aber noch angepasst werden, dann kann der Code durch Entfernung der Kommentare aktiviert werden.
+    //  Denken Sie auch daran, die Methode mit @Override zu markieren.
+    public void foo() {
+//        long startMillis = System.currentTimeMillis();
+//        try {
+//            return invocation.proceed();
+//        } finally {
+//            long durationMillis = System.currentTimeMillis() - startMillis;
+//            System.out.printf("Execution of %s() took %d ms%n",
+//                    invocation.getMethod().getName(), durationMillis);
+//        }
     }
 
 }
