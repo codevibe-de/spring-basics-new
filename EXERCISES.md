@@ -78,9 +78,7 @@ Der `DataLoadRunner` bleibt **ohne** Condition, damit die Testdaten weiterhin ge
 
 ### 4. Zwei Test-Annotationen in OrderServiceTest ergänzen
 
-1. **`@TestPropertySource`** – Fülle die `properties` mit zwei Einträgen:
-    - `app.data-loader=sample`, damit der `sample`-DataLoader verwendet wird. Andernfalls greift der Default aus
-      `application.properties` (`csv`), der nur Produkte, aber keine Kunden lädt.
+1. **`@TestPropertySource`** – Fülle die `properties` mit einem Eintrag:
     - `app.order.discount-days=` (leer), um den (tagesabhängigen!) Rabatt abzuschalten. So ist der erwartete Gesamtpreis
       deterministisch – unabhängig davon, an welchem Wochentag der Test läuft.
 2. **`@DirtiesContext`** – Der Test `placeOrder` ersetzt das `productRepository` im

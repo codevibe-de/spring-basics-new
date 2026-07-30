@@ -21,11 +21,10 @@ import java.util.Optional;
 
 @SpringJUnitConfig({PizzaApp.class})
 // TODO @TestPropertySource so befüllen, dass der Test läuft.
-//          - Es muss der "sample"-DataLoader aktiv sein (sonst fehlen Kunde & Produkte im Test).
-//          - Denk außerdem daran, dass der Gesamtpreis vom (tagesabhängigen!) Rabatt abhängt:
-//            damit der Test deterministisch ist, sollte die Rabatt-Konfiguration hier fixiert werden.
+//          - Der Gesamtpreis hängt vom (tagesabhängigen!) Rabatt ab: damit der Test deterministisch ist,
+//            sollte die Rabatt-Konfiguration hier fixiert werden.
 @TestPropertySource(properties = {
-        // TODO diesen Platzhalter durch die passende(n) Property(s) ersetzen
+        // TODO diesen Platzhalter durch die passende Property ersetzen
         "todo=todo"
 })
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
