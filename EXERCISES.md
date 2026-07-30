@@ -18,17 +18,21 @@ Ziel: Methodenaufrufe einer bestehenden Bean mittels Spring AOP "umwickeln", ohn
     - **`TraceBeforeMethodAdvice`** implementiert Springs `MethodBeforeAdvice`.
       Implementieren Sie die `before(...)`-Methode so, dass **vor** jedem Methodenaufruf eine Nachricht
       auf `System.out` geschrieben wird (z.B. `About to execute getProduct(P-10)`).
-    - **`ProfilingInterceptor`** implementiert das AOP-Alliance-Interface
-      `org.aopalliance.intercept.MethodInterceptor`. Damit können Sie Code **vor und nach** einem Aufruf
-      ausführen. Führen Sie eine Zeitmessung um `invocation.proceed()` durch und geben Sie aus, wie lange
-      die umwickelte Methode gebraucht hat.
+    - **`ProfilingInterceptor`** soll das AOP-Alliance-Interface
+      `org.aopalliance.intercept.MethodInterceptor` implementieren, um Code **vor und nach** einem Aufruf
+      ausführen zu können. Die Zeitmessung um `invocation.proceed()` ist bereits fertig vorgegeben, aber
+      auskommentiert. Ihre Aufgabe ist es, aus der Klasse eine echte `MethodInterceptor`-Implementierung zu
+      machen: Ergänzen Sie das `implements MethodInterceptor`, passen Sie die Signatur der vorgegebenen
+      Methode `foo()` an die Interface-Methode an (umbenennen in `invoke(...)`, Parameter
+      `MethodInvocation invocation` ergänzen, Rückgabetyp `Object` und `throws Throwable`, mit `@Override`
+      markieren) und aktivieren Sie den vorgegebenen Rumpf, indem Sie die Kommentare entfernen.
 
 2. Die Proxy-Erzeugung soll in einer eigenen `CommandLineRunner`-Implementierung **`AopRunner`**
    (Package `pizza`) erfolgen -- ein Gerüst ist vorbereitet. Der `AopRunner` ist als `@Component`
    registriert und läuft per `@Order(2)` nach dem `LogicRunner` (`@Order(1)`), sodass bereits Produkte
    geladen sind.
 
-   Implementieren Sie die `todo` Stellen in `AopRunner`: Erzeugen Sie mit Springs `ProxyFactoryBean` einen
+   Implementieren Sie die `todo` Stellen in `AopRunner`: Erzeugen Sie mit Springs `ProxyFactory` einen
    AOP-Proxy der `ProductService`-Bean, fügen Sie beide Advices hinzu (`addAdvice(...)`) und rufen Sie eine
    Methode auf dem Proxy auf (z.B. `getProduct("P-10")`).
 

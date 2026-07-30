@@ -4,9 +4,8 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * Implementiert das AOP-Alliance Interface {@link MethodInterceptor}, um Code <b>vor und nach</b>
- * einem Methodenaufruf ausführen zu können ("Umwicklung" des Aufrufs). Damit lässt sich die
- * Ausführungsdauer der umwickelten Methode messen und ausgeben.
+ * Implementiert das AOP-Alliance Interface {@link MethodInterceptor}, um die
+ * Ausführungsdauer der umwickelten Methode messen und ausgeben zu können.
  */
 public class ProfilingInterceptor implements MethodInterceptor {
 
