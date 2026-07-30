@@ -20,12 +20,12 @@ public class AopRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // TODO Erzeugen Sie eine ProxyFactoryBean und setzen Sie die productService-Bean als Target.
+        // TODO Erzeugen Sie eine ProxyFactory und setzen Sie die productService-Bean als Target.
 
         // TODO Fügen Sie den TraceBeforeMethodAdvice und den ProfilingInterceptor via addAdvice(...) hinzu.
 
-        // TODO Holen Sie den Proxy über getObject() und rufen Sie eine Methode auf ihm auf
-        //      (z.B. getProduct("P-10")), damit die Aspekte zur Ausführung kommen.
+        // TODO Holen Sie den Proxy über getProxy() und rufen Sie eine Methode auf ihm auf
+        //      (z.B. getProduct("P-10")), damit die Advices zur Ausführung kommen.
     }
 
 }

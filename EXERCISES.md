@@ -28,7 +28,7 @@ Ziel: Methodenaufrufe einer bestehenden Bean mittels Spring AOP "umwickeln", ohn
    registriert und läuft per `@Order(2)` nach dem `LogicRunner` (`@Order(1)`), sodass bereits Produkte
    geladen sind.
 
-   Implementieren Sie die `todo` Stellen in `AopRunner`: Erzeugen Sie mit Springs `ProxyFactoryBean` einen
+   Implementieren Sie die `todo` Stellen in `AopRunner`: Erzeugen Sie mit Springs `ProxyFactory` einen
    AOP-Proxy der `ProductService`-Bean, fügen Sie beide Advices hinzu (`addAdvice(...)`) und rufen Sie eine
    Methode auf dem Proxy auf (z.B. `getProduct("P-10")`).
 
