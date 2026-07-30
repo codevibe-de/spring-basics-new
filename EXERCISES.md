@@ -57,6 +57,9 @@ soll (z.B. "none", "sample" or "csv").
 
 Hierfür gibt es mehrere Wege, die wir kennengelernt haben.
 
+Das Property, welches Sie hierfür definieren, können Sie mit dem bisherigen Wert "sample" in die `application.properties`
+einfügen und beim Ausführen z. B. mittels einer Umgebungsvariable überschreiben.
+
 > Die Ausführung der `DataLoader` Bean wurde in einen neuen `DataLoadRunner` ausgelagert, um die Konfiguration zu
 > vereinfachen.
 
