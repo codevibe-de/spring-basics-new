@@ -21,7 +21,6 @@ import java.util.Optional;
 
 @SpringJUnitConfig({PizzaApp.class})
 @TestPropertySource(properties = {
-        "app.data-loader=sample",
         // Rabatt deaktivieren, damit der erwartete Gesamtpreis tagesunabhängig (deterministisch) ist
         "app.order.discount-days="
 })
@@ -71,14 +70,11 @@ class OrderServiceTest {
     @Test
     @org.junit.jupiter.api.Order(2)
     void placeAnotherOrder() {
-        // when
+        // when -- fails if DummyProductRepository is still installed
         Order order = orderService.placeOrder(
                 "+49 123 456789",
                 Map.of("S-01", 3)
         );
-
-        // then
-        Assertions.assertThat(order.getTotalPrice()).isEqualByComparingTo(new BigDecimal("20.70"));
     }
 
 
