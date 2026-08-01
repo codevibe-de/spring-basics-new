@@ -11,13 +11,13 @@ public class HashMapProductRepository implements ProductRepository {
 
     @Override
     public Product save(Product product) {
-        productsMap.put(product.getProductId(), product);
+        productsMap.put(product.getId(), product);
         return product;
     }
 
     @Override
-    public boolean existsById(String productId) {
-        return productsMap.containsKey(productId);
+    public boolean existsById(String id) {
+        return productsMap.containsKey(id);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class HashMapProductRepository implements ProductRepository {
     }
 
     @Override
-    public Optional<Product> findById(String productId) {
-        return Optional.ofNullable(productsMap.get(productId));
+    public Optional<Product> findById(String id) {
+        return Optional.ofNullable(productsMap.get(id));
     }
 }
