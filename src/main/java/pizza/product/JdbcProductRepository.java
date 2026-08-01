@@ -26,7 +26,7 @@ public class JdbcProductRepository implements ProductRepository {
     public Product save(Product product) {
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(INSERT_SQL)) {
-                statement.setString(1, product.getProductId());
+                statement.setString(1, product.getId());
                 statement.setString(2, product.getName());
                 statement.setBigDecimal(3, product.getPrice());
                 statement.executeUpdate();
@@ -34,7 +34,7 @@ public class JdbcProductRepository implements ProductRepository {
         } catch (SQLException e) {
             rethrowSqlException(e);
         }
-        return findById(product.getProductId())
+        return findById(product.getId())
                 .orElseThrow(() -> new PersistenceException("Cannot find persisted product"));
     }
 
