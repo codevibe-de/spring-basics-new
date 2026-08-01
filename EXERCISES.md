@@ -82,9 +82,10 @@ Der `DataLoadRunner` bleibt **ohne** Condition, damit die Testdaten weiterhin ge
     - `app.order.discount-days=` (leer), um den (tagesabhängigen!) Rabatt abzuschalten. So ist der erwartete Gesamtpreis
       deterministisch – unabhängig davon, an welchem Wochentag der Test läuft.
 2. **`@DirtiesContext`** – Der Test `placeOrder` ersetzt das `productRepository` im
-   `productService` per Reflection (ein Hack, der ein Singleton verändert). Markiere die Methode mit `@DirtiesContext`,
-   damit der Context danach verworfen und für `placeAnotherOrder` sauber neu aufgebaut wird -- sonst schlägt dieser Test
-   fehl, ohne dass es hierfür einen unmittelbaren Grund zu sehen gibt.
+   `productService` per Reflection-Hack mit einer Instanz eines `DummyProductRepository`, damit im Test definierte
+   Produkte zur Verfügung stehen. Markiere die Methode mit `@DirtiesContext`, damit der Context danach verworfen und für
+   `placeAnotherOrder` sauber neu aufgebaut wird -- sonst schlägt dieser Test fehl, ohne dass es hierfür einen
+   unmittelbaren Grund zu sehen gibt.
 
 ### Ziel
 
