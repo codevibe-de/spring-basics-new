@@ -7,7 +7,7 @@ group = 'de.codevibe'
 version = '013'
 
 ext {
-    springVersion = '6.2.15'
+    springVersion = '7.0.9'
 }
 
 java {
