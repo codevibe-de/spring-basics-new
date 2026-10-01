@@ -8,7 +8,7 @@ group = 'de.codevibe'
 version = '075'
 
 ext {
-    springVersion = '6.2.15'
+    springVersion = '7.0.9'
     thymeleafVersion = '3.1.5.RELEASE'
 }
 
@@ -41,10 +41,10 @@ dependencies {
     implementation "org.thymeleaf:thymeleaf-spring6:${thymeleafVersion}"
     compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
-    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
-    testImplementation platform('org.junit:junit-bom:5.11.3')
+    implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0'
+    testImplementation platform('org.junit:junit-bom:6.0.3')
     testImplementation 'org.junit.jupiter:junit-jupiter-engine'
-    testImplementation 'org.assertj:assertj-core:3.26.3'
+    testImplementation 'org.assertj:assertj-core:3.27.7'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'com.h2database:h2:2.4.240'
     implementation 'com.github.freva:ascii-table:1.12.1'
