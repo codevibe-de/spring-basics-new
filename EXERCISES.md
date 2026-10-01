@@ -63,8 +63,8 @@ Die eigenständige Klasse `SpelParserApp` richtet einen `SpelExpressionParser` u
 `StandardEvaluationContext` ein. Über einen `BeanFactoryResolver` hat der Ausdruck Zugriff auf die Beans des
 Containers (Referenz per `@beanName`).
 
-Ersetzen Sie in `SpelParserApp` den Platzhalter-Ausdruck (`"23 + 42"`) durch einen SpEL-Ausdruck, der die
-**Namen aller Produkte** liefert. Verwenden Sie dabei:
+Ersetzen Sie in `SpelParserApp` den Platzhalter-Ausdruck (`"23 + 42"`) durch einen SpEL-Ausdruck, der die **Namen aller
+Produkte** liefert. Verwenden Sie dabei:
 
 - eine **Bean-Referenz** (`@productService`),
 - **Property-Zugriff** (`.allProducts` -> `getAllProducts()`),
