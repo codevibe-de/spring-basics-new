@@ -1,12 +1,17 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.5.16'
+    id 'org.springframework.boot' version '4.1.1'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'com.github.ben-manes.versions' version '0.51.0'
 }
 
 group = 'de.codevibe'
 version = '080'
+
+ext {
+    springVersion = '7.0.9'
+    thymeleafVersion = '3.1.5.RELEASE'
+}
 
 java {
     toolchain {
@@ -19,15 +24,10 @@ repositories {
 }
 
 dependencies {
-    // Web tier: embedded Tomcat, Spring MVC, Jackson (all auto-configured).
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    // Thymeleaf view resolution (TemplateResolver -> Engine -> ViewResolver) auto-configured.
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    // JDBC + DataSource auto-configuration (embedded H2 picked up below).
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-
     runtimeOnly 'com.h2database:h2'
-    // ASCII table rendering for the CLI runners (not managed by the Boot BOM).
     implementation 'com.github.freva:ascii-table:1.12.1'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
