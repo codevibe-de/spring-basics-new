@@ -8,11 +8,6 @@ plugins {
 group = 'de.codevibe'
 version = '080'
 
-ext {
-    springVersion = '7.0.9'
-    thymeleafVersion = '3.1.5.RELEASE'
-}
-
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
@@ -27,6 +22,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
     implementation 'com.github.freva:ascii-table:1.12.1'
 
