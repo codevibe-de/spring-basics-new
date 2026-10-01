@@ -16,7 +16,7 @@ public class PropertiesConfig {
     OrderProperties orderProperties(Environment env) {
         return new OrderProperties(
                 env.getProperty("app.order.delivery-time-in-minutes", Integer.class, 30),
-                env.getProperty("app.order.discount-days", List.class, List.of()),
+                List.of(env.getProperty("app.order.discount-days", String[].class, new String[0])),
                 env.getProperty("app.order.discount-rate", Double.class, 0.0)
         );
     }

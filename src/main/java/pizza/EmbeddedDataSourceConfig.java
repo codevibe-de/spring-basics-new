@@ -18,6 +18,7 @@ public class EmbeddedDataSourceConfig {
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
+                .generateUniqueName(true)           // separate DB per context (e.g. cached test contexts)
                 .setType(EmbeddedDatabaseType.H2)
                 .addScript("classpath:schema.sql")  // defines schema (tables etc.)
 //                .addScript("classpath:data.sql")    // optional seed data
