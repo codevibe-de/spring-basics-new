@@ -61,9 +61,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
+            <groupId>tools.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.18.2</version>
+            <version>3.2.2</version>
         </dependency>
         <dependency>
             <groupId>jakarta.annotation</groupId>

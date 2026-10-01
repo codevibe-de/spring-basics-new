@@ -40,7 +40,7 @@ dependencies {
     implementation "org.thymeleaf:thymeleaf:${thymeleafVersion}"
     implementation "org.thymeleaf:thymeleaf-spring6:${thymeleafVersion}"
     compileOnly 'jakarta.servlet:jakarta.servlet-api:6.1.0'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+    implementation 'tools.jackson.core:jackson-databind:3.2.2'
     implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0'
     testImplementation platform('org.junit:junit-bom:6.0.3')
     testImplementation 'org.junit.jupiter:junit-jupiter-engine'
