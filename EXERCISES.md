@@ -59,8 +59,18 @@ können, betten Sie einen Tomcat programmatisch ein.
 
 ➡️ Ergänzen Sie in den Build-Skripten die Abhängigkeit auf einen eingebetteten Tomcat, z. B.:
 
-- Maven: `org.apache.tomcat.embed:tomcat-embed-core:10.1.57`
-- Gradle: `implementation 'org.apache.tomcat.embed:tomcat-embed-core:10.1.57'`
+- Maven:
+  ```xml
+  <dependency>
+    <groupId>org.apache.tomcat.embed</groupId>
+    <artifactId>tomcat-embed-core</artifactId>
+    <version>11.0.24</version>
+  </dependency>
+  ```
+- Gradle:
+  ```
+  implementation 'org.apache.tomcat.embed:11.0.24:'
+  ```
 
 ➡️ Schreiben Sie eine kleine `main`-Methode (z. B. in einer neuen Klasse `WebLauncher` oder in `PizzaApp`), die einen
 `Tomcat` auf Port `8080` startet. Wichtig: Der Container muss die `AppInitializer`-Klasse über den
