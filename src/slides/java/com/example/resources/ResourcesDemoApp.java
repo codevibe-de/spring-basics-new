@@ -1,9 +1,6 @@
 package com.example.resources;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import pizza.util.CommandLineRunner;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
