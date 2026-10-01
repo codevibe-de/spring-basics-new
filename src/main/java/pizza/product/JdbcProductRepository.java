@@ -32,7 +32,7 @@ public class JdbcProductRepository implements ProductRepository {
     public Product save(Product product) {
         this.jdbcTemplate.update(
                 INSERT_SQL,
-                product.getProductId(), product.getName(), product.getPrice()
+                product.getId(), product.getName(), product.getPrice()
         );
         return product;
     }
