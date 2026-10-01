@@ -1,7 +1,6 @@
 package pizza.aop;
 
 import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
 
 /**
  * Implementiert das AOP-Alliance Interface {@link MethodInterceptor}, um die
