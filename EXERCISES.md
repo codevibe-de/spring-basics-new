@@ -1,6 +1,6 @@
 # Übungen zum Kapitel "040 - Testing"
 
-> **Disabled:** Die Testklassen beider Übungen sind mit `@Disabled` deaktiviert, damit
+> **Disabled:** Die Testklassen der Übungen a) und b) sind mit `@Disabled` deaktiviert, damit
 > der Build im Ausgangszustand grün ist. Entferne die `@Disabled`-Annotation der
 > jeweiligen Klasse, bevor du mit der Übung beginnst.
 
@@ -92,3 +92,21 @@ Der `DataLoadRunner` bleibt **ohne** Condition, damit die Testdaten weiterhin ge
 Führe `OrderServiceTest` aus, bis beide Testmethoden grün sind. Die Referenzlösung findest du im Branch
 `040-testing-solution`.
 
+## c) DataLoaderTest – parametrisiert über Bean-Namen
+
+Im Context gibt es drei `DataLoader`-Beans mit den Namen `none`, `sample` und `csv`. Schreibe einen
+Test `pizza.DataLoaderTest`, der jeden Loader einzeln ausführt und prüft, wie viele Produkte und
+Kunden er anlegt. Diese Übung ist unabhängig von b).
+
+1. **Context ohne Daten starten** – `@SpringJUnitConfig(PizzaApp.class)` und
+   `@TestPropertySource(properties = "app.data-loader=none")`, damit beim Start nichts geladen wird.
+2. **Beans injizieren** – alle Loader als `Map<String, DataLoader>` (Key = Bean-Name), dazu
+   `ProductService` und `CustomerService`.
+3. **Parametrisieren** – eine `@ParameterizedTest`-Methode mit `@CsvSource`: Bean-Name, erwartete
+   Anzahl Produkte, erwartete Anzahl Kunden. Hole den Loader über `loaders.get(beanName)`, rufe
+   `run()` auf und prüfe beide Anzahlen mit AssertJ.
+4. **Ausführen und beobachten** – Ein Aufruf schlägt fehl. Welcher, und warum? Behebe es mit
+   einer Annotation, die du schon aus b) kennst.
+
+**Bonus:** Stelle mit einem zweiten Test sicher, dass `loaders.keySet()` genau die drei Namen enthält.
+So fällt auf, wenn jemand einen neuen Loader hinzufügt, ohne ihn in die `@CsvSource` aufzunehmen.
