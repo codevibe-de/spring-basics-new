@@ -22,7 +22,7 @@ Folgendes wurde für Sie **bereits erledigt** — Sie müssen an den Build-Skrip
   - Maven nutzt jetzt `spring-boot-starter-parent` als Parent-POM, Gradle das `org.springframework.boot`- und das
     `io.spring.dependency-management`-Plugin.
   - Die einzelnen `spring-*`-Abhängigkeiten und deren Versionen wurden durch **Starter** ersetzt:
-    `spring-boot-starter-web`, `spring-boot-starter-thymeleaf`, `spring-boot-starter-jdbc` sowie (für Tests)
+    `spring-boot-starter-webmvc`, `spring-boot-starter-thymeleaf`, `spring-boot-starter-jdbc` sowie (für Tests)
     `spring-boot-starter-test`. Die Versionen verwaltet nun das Boot-BOM — explizite `<version>`-Angaben entfallen.
   - Das Packaging wurde von `war` auf `jar` umgestellt; die `jakarta.servlet-api` (Scope `provided`),
     `failOnMissingWebXml` sowie der explizite `-parameters`-Compiler-Schalter werden nicht mehr benötigt
@@ -45,7 +45,7 @@ SpringApplication.run(PizzaApp.class, args);
 ```
 
 ➡️ Löschen Sie die Klasse `AppInitializer`. Ihren Job — einen `DispatcherServlet` samt eingebettetem Servlet-Container
-hochzuziehen — übernimmt jetzt die Auto-Konfiguration von `spring-boot-starter-web` (embedded Tomcat auf Port `8080`).
+hochzuziehen — übernimmt jetzt die Auto-Konfiguration von `spring-boot-starter-webmvc` (embedded Tomcat auf Port `8080`).
 
 ## b) `DataSource` per Auto-Konfiguration
 
