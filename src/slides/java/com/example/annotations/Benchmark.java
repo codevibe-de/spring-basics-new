@@ -1,3 +1,4 @@
+// Folie 61 – Eigene Annotationen
 package com.example.annotations;
 
 import java.lang.annotation.*;
