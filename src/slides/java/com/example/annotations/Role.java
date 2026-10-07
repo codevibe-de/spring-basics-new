@@ -1,3 +1,4 @@
+// Folie 64 – Vererbung
 package com.example.annotations;
 
 import java.lang.annotation.*;
