@@ -1,3 +1,4 @@
+// Keine Folie mit Code – Live Coding / Übung a) Kapitel 027 (AOP)
 package com.example.aop;
 
 import org.springframework.aop.framework.ProxyFactory;
