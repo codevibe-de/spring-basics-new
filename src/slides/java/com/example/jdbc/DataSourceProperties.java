@@ -1,3 +1,4 @@
+// Keine Folie mit Code – Ergänzung Kapitel 045 (externe H2 per TCP, spring.datasource.*-Keys ohne Boot)
 package com.example.jdbc;
 
 /**

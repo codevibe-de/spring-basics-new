@@ -1,3 +1,4 @@
+// Folie 168 – Verbindung JUnit mit Spring
 package com.example.testing;
 
 import org.junit.jupiter.api.Test;
