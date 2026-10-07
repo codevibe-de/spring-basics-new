@@ -1,3 +1,4 @@
+// Folie 65 – Komponierte Annotationen
 package com.example.annotations;
 
 import java.lang.annotation.ElementType;

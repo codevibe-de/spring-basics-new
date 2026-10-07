@@ -1,3 +1,4 @@
+// Folie 62 – Annotationselemente
 package com.example.annotations;
 
 public @interface PersonInfo {
