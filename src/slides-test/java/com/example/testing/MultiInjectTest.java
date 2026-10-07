@@ -1,3 +1,4 @@
+// Folie 170 – Beans in Testklassen nutzen
 package com.example.testing;
 
 import org.junit.jupiter.api.Test;
