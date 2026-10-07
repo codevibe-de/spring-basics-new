@@ -69,7 +69,7 @@ können, betten Sie einen Tomcat programmatisch ein.
   ```
 - Gradle:
   ```
-  implementation 'org.apache.tomcat.embed:11.0.24:'
+  implementation 'org.apache.tomcat.embed:tomcat-embed-core:11.0.24'
   ```
 
 ➡️ Schreiben Sie eine kleine `main`-Methode (z. B. in einer neuen Klasse `WebLauncher` oder in `PizzaApp`), die einen
