@@ -1,3 +1,4 @@
+// Folie 154 – Option B: Environment Bean
 package com.example.configuration;
 
 import jakarta.annotation.PostConstruct;

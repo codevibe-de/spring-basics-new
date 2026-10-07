@@ -1,3 +1,4 @@
+// Folie 136 – Beispiel (SpEL)
 package com.example.spel;
 
 import jakarta.annotation.PostConstruct;
