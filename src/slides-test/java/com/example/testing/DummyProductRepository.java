@@ -1,3 +1,4 @@
+// Keine Folie – Übung Kapitel 040 (Test-Dummy für ProductRepository)
 package com.example.testing;
 
 import pizza.product.Product;

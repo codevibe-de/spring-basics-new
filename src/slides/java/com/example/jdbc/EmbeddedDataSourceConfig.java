@@ -1,3 +1,4 @@
+// Folie 195 – DataSource definieren
 package com.example.jdbc;
 
 import org.springframework.context.annotation.Bean;
@@ -19,8 +20,8 @@ public class EmbeddedDataSourceConfig {
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
-                .addScript("classpath:schema.sql")   // DDL — CREATE TABLE ...
-                .addScript("classpath:data.sql")     // optional seed data
+                .addScript("classpath:schema.sql")  // defines schema
+                .addScript("classpath:data.sql")    // optional seed
                 .build();
     }
 }
