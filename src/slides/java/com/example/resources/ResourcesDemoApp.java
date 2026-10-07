@@ -1,3 +1,4 @@
+// Keine Folie mit Code – Live Coding / Übung b) Kapitel 027 (Resources per ApplicationContext)
 package com.example.resources;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
