@@ -1,4 +1,4 @@
-// Folie 124 – Beispiel Vererbungs-Proxy
+// Folie 127 – Beispiel Vererbungs-Proxy
 package com.example.aop;
 
 import pizza.product.Product;

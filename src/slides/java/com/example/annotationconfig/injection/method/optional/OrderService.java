@@ -1,4 +1,4 @@
-// Folie 86 – Method Injection – optionale Beans
+// Folie 88 – Method Injection – optionale Beans
 // @Nullable aus JSpecify (org.jspecify.annotations), nicht das in Spring 7 deprecated org.springframework.lang.Nullable
 package com.example.annotationconfig.injection.method.optional;
 

@@ -1,4 +1,4 @@
-// Folie 101 – Map von Beans
+// Folie 103 – Map von Beans
 package com.example.annotationconfig.collections.map;
 
 import com.example.annotationconfig.naming.MyBean;
