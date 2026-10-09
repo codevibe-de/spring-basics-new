@@ -1,4 +1,4 @@
-// Folie 155 – Optional C: Konfigurationsklassen
+// Folie 158 – Optional C: Konfigurationsklassen
 package com.example.properties;
 
 import java.util.List;

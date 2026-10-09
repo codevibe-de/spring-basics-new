@@ -1,4 +1,4 @@
-// Folie 141 – EvaluationContext - Objekt (Hilfsklasse)
+// Folie 144 – EvaluationContext - Objekt (Hilfsklasse)
 package com.example.spel;
 
 public class PowerOfCalculator {

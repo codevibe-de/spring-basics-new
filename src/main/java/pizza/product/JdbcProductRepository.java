@@ -3,7 +3,7 @@ package pizza.product;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -12,7 +12,7 @@ import java.sql.Types;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class JdbcProductRepository implements ProductRepository {
 
     public static final String INSERT_SQL = "INSERT INTO products (pk, name, price) VALUES (?, ?, ?)";

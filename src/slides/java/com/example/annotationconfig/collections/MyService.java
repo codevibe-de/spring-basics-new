@@ -1,4 +1,4 @@
-// Folie 100 – Listen von Beans
+// Folie 102 – Listen von Beans
 package com.example.annotationconfig.collections;
 
 import com.example.annotationconfig.naming.MyBean;
