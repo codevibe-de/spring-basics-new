@@ -1,5 +1,5 @@
-// Folie 123 – Beispiel JDK-Proxy
-// Folie 121 – InvocationHandler (Interface aus java.lang.reflect)
+// Folie 126 – Beispiel JDK-Proxy
+// Folie 124 – InvocationHandler (Interface aus java.lang.reflect)
 package com.example.aop;
 
 import java.lang.reflect.InvocationHandler;
