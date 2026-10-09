@@ -1,4 +1,4 @@
-// Folie 188 – Parametrisiert über Bean-Namen
+// Folie 191 – Parametrisiert über Bean-Namen
 package com.example.testing.param;
 
 import org.junit.jupiter.params.ParameterizedTest;

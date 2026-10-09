@@ -1,5 +1,5 @@
-// Folie 151 – Properties laden (Kopf der Klasse)
-// Folie 155 – Optional C: Konfigurationsklassen
+// Folie 154 – Properties laden (Kopf der Klasse)
+// Folie 158 – Optional C: Konfigurationsklassen
 package com.example.properties;
 
 import org.springframework.context.annotation.Bean;
@@ -14,6 +14,7 @@ import java.util.List;
 public class PropertiesConfig {
 
     @Bean
+    @SuppressWarnings("unchecked") // List.class wie auf der Folie
     OrderProperties orderProperties(Environment env) {
         return new OrderProperties(
                 env.getProperty("app.order.delivery-time-in-minutes", Integer.class, 30),
