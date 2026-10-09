@@ -1,4 +1,4 @@
-// Folie 179 – Beans überschreiben (Hilfsklasse)
+// Folie 182 – Beans überschreiben (Hilfsklasse)
 package com.example.testing;
 
 import pizza.product.Product;

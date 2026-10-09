@@ -1,5 +1,5 @@
 // Folie 75 – Bean Definitionen per XML (Mischform mit @ImportResource)
-// Recap Folie 261 – XML-Konfiguration in einer Spring-Anwendung
+// Recap Folie 273 – XML-Konfiguration in einer Spring-Anwendung
 package com.example.annotationconfig.xmlconfig;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
