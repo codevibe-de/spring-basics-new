@@ -1,4 +1,4 @@
-// Folie 142 – EvaluationContext - BeanFactory (Bean "dummy1" aus beans/default-beans.xml)
+// Folie 145 – EvaluationContext - BeanFactory (Bean "dummy1" aus beans/default-beans.xml)
 package com.example.spel;
 
 public class Dummy {

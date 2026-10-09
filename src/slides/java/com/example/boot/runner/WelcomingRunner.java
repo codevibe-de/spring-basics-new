@@ -1,4 +1,4 @@
-// Folie 239 – CommandLineRunner
+// Folie 242 – CommandLineRunner
 package com.example.boot.runner;
 
 import org.springframework.boot.CommandLineRunner;

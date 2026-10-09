@@ -1,4 +1,4 @@
-// Folie 187 – Parametrisierte Tests
+// Folie 190 – Parametrisierte Tests
 package com.example.testing.param;
 
 import org.junit.jupiter.params.ParameterizedTest;
