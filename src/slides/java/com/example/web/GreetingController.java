@@ -1,5 +1,5 @@
-// Folie 213 – Controller
-// View "greeting" -> src/slides/resources/templates/greeting.html (Folie 211)
+// Folie 216 – Controller
+// View "greeting" -> src/slides/resources/templates/greeting.html (Folie 215)
 package com.example.web;
 
 import org.springframework.stereotype.Controller;

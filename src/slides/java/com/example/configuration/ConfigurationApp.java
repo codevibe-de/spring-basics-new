@@ -1,4 +1,4 @@
-// Folie 160 – Platzhalter (liest placeholder.properties, ${app.name} in app.description)
+// Folie 163 – Platzhalter (liest placeholder.properties, ${app.name} in app.description)
 package com.example.configuration;
 
 import jakarta.annotation.PostConstruct;
