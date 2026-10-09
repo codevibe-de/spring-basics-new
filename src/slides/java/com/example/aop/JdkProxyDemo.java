@@ -1,4 +1,4 @@
-// Folie 123 – Beispiel JDK-Proxy
+// Folie 126 – Beispiel JDK-Proxy
 package com.example.aop;
 
 import pizza.product.HashMapProductRepository;

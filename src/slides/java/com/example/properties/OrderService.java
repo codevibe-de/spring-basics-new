@@ -1,4 +1,4 @@
-// Folie 153 – Option A: Inject einzelner Konfigurationswerte
+// Folie 156 – Option A: Inject einzelner Konfigurationswerte
 package com.example.properties;
 
 import org.springframework.beans.factory.annotation.Value;

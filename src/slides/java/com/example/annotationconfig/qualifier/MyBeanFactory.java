@@ -1,4 +1,4 @@
-// Folie 95 – Beans qualifizieren
+// Folie 97 – Beans qualifizieren
 // Folie: "public BeanFactory{" -- hier korrigiert zu "public class MyBeanFactory {" (eigener Name, damit es nicht mit Springs BeanFactory kollidiert)
 package com.example.annotationconfig.qualifier;
 
