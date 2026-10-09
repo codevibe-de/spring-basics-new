@@ -4,7 +4,6 @@ package com.example.annotationconfig.beanmethods;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pizza.customer.CustomerService;
-import pizza.order.OrderService;
 import pizza.product.HashMapProductRepository;
 import pizza.product.ProductService;
 
