@@ -1,4 +1,4 @@
-// Folie 136 – Beispiel (SpEL), Hilfs-Bean "namingService"
+// Folie 139 – Beispiel (SpEL), Hilfs-Bean "namingService"
 package com.example.spel;
 
 import org.springframework.stereotype.Component;

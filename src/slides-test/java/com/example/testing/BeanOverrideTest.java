@@ -1,6 +1,6 @@
-// Folie 179 – Beans überschreiben
+// Folie 182 – Beans überschreiben
 // Korrigiert gegenüber Folie v3.1: keine Boot-Annotation @TestConfiguration, sondern eine innere
-// @Configuration wie auf Folie 172; kein Boot-Property spring.main.allow-bean-definition-overriding
+// @Configuration wie auf Folie 175; kein Boot-Property spring.main.allow-bean-definition-overriding
 // (reines Spring erlaubt das Überschreiben per Default); Bean-Name der Kapitel-040-App statt "productJdbcDao".
 package com.example.testing;
 

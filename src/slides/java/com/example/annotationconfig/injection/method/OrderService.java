@@ -1,4 +1,4 @@
-// Folie 85 – Method Injection
+// Folie 87 – Method Injection
 package com.example.annotationconfig.injection.method;
 
 import org.springframework.beans.factory.annotation.Autowired;
