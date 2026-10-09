@@ -15,9 +15,9 @@ u. a. die Tabelle `products` an).
 Aktuell nutzt die Anwendung noch das `HashMapProductRepository`. Wir wollen stattdessen die JDBC-Variante verwenden,
 die die soeben beschriebene `DataSource` injiziert bekommt.
 
-➡️ Machen Sie `JdbcProductRepository` zur aktiven Spring-Bean: Annotieren Sie die Klasse mit `@Component` und
-entfernen Sie im Gegenzug das `@Component` an `HashMapProductRepository` (es darf nur *eine* `ProductRepository`-Bean
-im Context geben).
+➡️ Machen Sie `JdbcProductRepository` zur aktiven Spring-Bean: Annotieren Sie die Klasse mit `@Repository`, dem
+Stereotyp für Datenzugriffsklassen, und entfernen Sie im Gegenzug das `@Component` an `HashMapProductRepository`
+(es darf nur *eine* `ProductRepository`-Bean im Context geben).
 
 ➡️ Starten Sie die Anwendung. Die Produkte werden nun über JDBC aus der H2-Datenbank geladen.
 
