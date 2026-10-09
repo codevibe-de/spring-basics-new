@@ -14,6 +14,7 @@ import java.util.List;
 public class PropertiesConfig {
 
     @Bean
+    @SuppressWarnings("unchecked") // List.class wie auf der Folie
     OrderProperties orderProperties(Environment env) {
         return new OrderProperties(
                 env.getProperty("app.order.delivery-time-in-minutes", Integer.class, 30),
