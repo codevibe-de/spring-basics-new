@@ -1,4 +1,4 @@
-// Folie 82 – Constructor Injection - Besonderheiten (@Lazy)
+// Folie 84 – Constructor Injection - Besonderheiten (@Lazy)
 package com.example.annotationconfig.injection.constructor;
 
 import org.springframework.stereotype.Service;
