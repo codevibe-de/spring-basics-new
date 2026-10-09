@@ -1,4 +1,4 @@
-// Folie 102 – Scopes: PROTOTYPE mit LocalDateTime
+// Folie 104 – Scopes: PROTOTYPE mit LocalDateTime
 package com.example.annotationconfig.scopes;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
