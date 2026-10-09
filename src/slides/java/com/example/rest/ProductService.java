@@ -1,4 +1,4 @@
-// Folien 260, 262 – Hilfsklasse: pizza.product.ProductService kennt kein deleteProductsWithNamePrefix()
+// Folien 263, 265 – Hilfsklasse: pizza.product.ProductService kennt kein deleteProductsWithNamePrefix()
 package com.example.rest;
 
 import org.springframework.stereotype.Service;
