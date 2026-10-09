@@ -1,4 +1,4 @@
-// Folie 93 – Beans benennen
+// Folie 95 – Beans benennen
 package com.example.annotationconfig.naming;
 
 import org.springframework.stereotype.Service;

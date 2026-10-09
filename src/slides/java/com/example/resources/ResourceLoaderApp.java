@@ -1,4 +1,4 @@
-// Folie 130 – ResourceLoader
+// Folie 133 – ResourceLoader
 // "exists"-Kommentare gelten beim Start im Projekt-Root (pom.xml) mit beans.xml im Classpath (src/slides/resources)
 package com.example.resources;
 

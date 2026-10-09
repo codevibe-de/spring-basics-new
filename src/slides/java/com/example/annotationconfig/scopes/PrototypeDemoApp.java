@@ -1,4 +1,4 @@
-// Folie 102 – Scopes: jede Abfrage liefert eine neue Instanz
+// Folie 104 – Scopes: jede Abfrage liefert eine neue Instanz
 package com.example.annotationconfig.scopes;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

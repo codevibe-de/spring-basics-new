@@ -1,4 +1,4 @@
-// Folie 102 – Scopes
+// Folie 104 – Scopes
 package com.example.annotationconfig.scopes;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;

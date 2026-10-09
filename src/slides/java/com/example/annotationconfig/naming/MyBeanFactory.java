@@ -1,4 +1,4 @@
-// Folie 93 – Beans benennen
+// Folie 95 – Beans benennen
 // Folie: "public BeanFactory{" -- hier korrigiert zu "public class MyBeanFactory {" (eigener Name, damit es nicht mit Springs BeanFactory kollidiert)
 package com.example.annotationconfig.naming;
 
