@@ -1,4 +1,4 @@
-// Folie 263 – Antwort gestalten: ResponseEntity
+// Folie 266 – Antwort gestalten: ResponseEntity
 package com.example.rest;
 
 import org.springframework.http.ResponseEntity;

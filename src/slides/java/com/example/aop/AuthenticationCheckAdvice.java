@@ -1,4 +1,4 @@
-// Folie 112 – Beispiel MethodBefore Advice
+// Folie 115 – Beispiel MethodBefore Advice
 package com.example.aop;
 
 import org.springframework.aop.MethodBeforeAdvice;

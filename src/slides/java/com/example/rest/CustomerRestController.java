@@ -1,5 +1,5 @@
-// Folie 259 – RestController - GET
-// Folie 261 – RestController - POST
+// Folie 262 – RestController - GET
+// Folie 264 – RestController - POST
 package com.example.rest;
 
 import org.springframework.http.HttpStatus;
@@ -24,14 +24,14 @@ public class CustomerRestController {
         this.customerService = customerService;
     }
 
-    // --- Folie 251 ---
+    // --- Folie 262 ---
 
     @GetMapping(GET_ALL_ENDPOINT)
     public Iterable<Customer> getAllCustomers() {
         return customerService.getAllCustomers();
     }
 
-    // --- Folie 253 ---
+    // --- Folie 264 ---
     // Achtung: Customer hat zwei Konstruktoren und keinen Default-Konstruktor, Jackson kann es so nicht
     // deserialisieren. Der Hauptcode (pizza.customer.CustomerRestController) nimmt daher einen
     // CreateCustomerRequest-Record entgegen.

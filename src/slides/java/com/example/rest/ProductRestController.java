@@ -1,5 +1,5 @@
-// Folie 260 – RestController – GET mit Pfadvariable
-// Folie 262 – Query Parameter
+// Folie 263 – RestController – GET mit Pfadvariable
+// Folie 265 – Query Parameter
 package com.example.rest;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,14 +21,14 @@ public class ProductRestController {
         this.productService = productService;
     }
 
-    // --- Folie 252 ---
+    // --- Folie 263 ---
 
     @GetMapping(GET_ONE_ENDPOINT)
     public Product getProduct(@PathVariable("id") String prdId) {
         return this.productService.getProduct(prdId);
     }
 
-    // --- Folie 254 ---
+    // --- Folie 265 ---
 
     @DeleteMapping("/products")
     public Integer deleteProducts(
