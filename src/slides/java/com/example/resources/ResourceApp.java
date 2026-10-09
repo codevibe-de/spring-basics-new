@@ -1,4 +1,4 @@
-// Folie 129 – Dateien als Resource lesen
+// Folie 132 – Dateien als Resource lesen
 // beans.xml liegt unter src/slides/resources
 package com.example.resources;
 

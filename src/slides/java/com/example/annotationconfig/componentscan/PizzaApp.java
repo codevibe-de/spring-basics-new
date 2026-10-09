@@ -1,4 +1,4 @@
-// Folie 78 – Component-Scan (neu ohne Spring Boot)
+// Folie 80 – Component-Scan (neu ohne Spring Boot)
 // Auf der Folie steht "package pizza;" -- hier unter com.example, damit nichts mit der echten App kollidiert.
 package com.example.annotationconfig.componentscan;
 

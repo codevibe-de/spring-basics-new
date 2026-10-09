@@ -1,4 +1,4 @@
-// Folie 95 – Beans qualifizieren
+// Folie 97 – Beans qualifizieren
 package com.example.annotationconfig.qualifier;
 
 import com.example.annotationconfig.naming.MyBean;
