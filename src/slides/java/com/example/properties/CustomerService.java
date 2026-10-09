@@ -1,4 +1,4 @@
-// Folie 146 – Warum überhaupt konfigurieren? (Negativbeispiel: hart kodierte URL)
+// Folie 149 – Warum überhaupt konfigurieren? (Negativbeispiel: hart kodierte URL)
 package com.example.properties;
 
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-// Folie 91/92 – Lifecycle Hooks: Demo. Beim Schließen des Kontexts läuft zuerst
+// Folie 93/94 – Lifecycle Hooks: Demo. Beim Schließen des Kontexts läuft zuerst
 // HeartbeatLogger.stop() (@PreDestroy), danach shutdown() am Executor (destroyMethod).
 // Ohne shutdown() liefe der Executor-Thread weiter und die JVM würde nicht beenden.
 package com.example.annotationconfig.lifecycle;
