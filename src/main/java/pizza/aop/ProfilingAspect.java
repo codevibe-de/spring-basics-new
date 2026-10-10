@@ -1,14 +1,18 @@
 package pizza.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
 /**
  * Aspekt, der die Ausführungsdauer der Methoden von {@code ProductService} misst und ausgibt.
  */
-public class ProfilingAspect {  // TODO: als Aspekt und als Bean markieren
+@Aspect
+@Component
+public class ProfilingAspect {
 
-    // TODO Die Zeitmessung ist bereits fertig. Machen Sie die Methode zu einem Around-Advice, dessen
-    //  Pointcut-Expression alle Methoden von pizza.product.ProductService erfasst.
+    @Around("execution(* pizza.product.ProductService.*(..))")
     public Object profile(ProceedingJoinPoint joinPoint) throws Throwable {
         long startMillis = System.currentTimeMillis();
         try {

@@ -3,10 +3,12 @@ package pizza;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import pizza.util.CommandLineRunner;
 
 @Configuration
 @ComponentScan
+@EnableAspectJAutoProxy
 public class PizzaApp {
 
     public static void main(String[] args) {
