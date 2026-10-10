@@ -23,7 +23,8 @@ Folgendes wurde für Sie **bereits erledigt** — Sie müssen an den Build-Skrip
     `io.spring.dependency-management`-Plugin.
   - Die einzelnen `spring-*`-Abhängigkeiten und deren Versionen wurden durch **Starter** ersetzt:
     `spring-boot-starter-webmvc`, `spring-boot-starter-thymeleaf`, `spring-boot-starter-jdbc`,
-    `spring-boot-starter-aspectj` sowie (für Tests) `spring-boot-starter-test`. Die Versionen verwaltet nun das Boot-BOM — explizite `<version>`-Angaben entfallen.
+    `spring-boot-starter-aspectj` sowie (für Tests) `spring-boot-starter-test`. Die Versionen verwaltet nun das
+    Boot-BOM — explizite `<version>`-Angaben entfallen.
   - Das Packaging wurde von `war` auf `jar` umgestellt; die `jakarta.servlet-api` (Scope `provided`),
     `failOnMissingWebXml` sowie der explizite `-parameters`-Compiler-Schalter werden nicht mehr benötigt
     (Boot bringt all das mit).
