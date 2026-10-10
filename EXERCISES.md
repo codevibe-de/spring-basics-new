@@ -6,37 +6,36 @@ annotationsbasierte Pizza-Anwendung.
 Die drei Teilaufgaben sind **unabhängig** voneinander und können in beliebiger Reihenfolge gelöst werden.
 Für alle Aufgaben sind bereits Gerüst-Klassen bzw. `TODO`-Markierungen vorbereitet.
 
-Sie müssen keine neuen Abhängigkeiten hinzufügen (`spring-context` bringt AOP, Resources und SpEL bereits mit).
+Sie müssen keine neuen Abhängigkeiten hinzufügen: `spring-context` bringt Spring AOP, Resources und SpEL mit, und
+für die Aspekt-Annotationen (`@Aspect`, `@Around`, ...) steht `aspectjweaver` bereits in `pom.xml` bzw. `build.gradle`.
 
 ---
 
-## a) AOP -- Tracing- und Profiling-Aspekt
+## a) AOP -- Profiling- und Tracing-Aspekt
 
-Ziel: Methodenaufrufe einer bestehenden Bean mittels Spring AOP "umwickeln", ohne deren Code zu ändern.
+Ziel: Methodenaufrufe einer bestehenden Bean mit Aspekten "umwickeln", ohne deren Code zu ändern.
 
-1. Im Package `pizza.aop` finden Sie zwei vorbereitete Klassen:
-    - **`TraceBeforeMethodAdvice`** implementiert Springs `MethodBeforeAdvice`.
-      Implementieren Sie die `before(...)`-Methode so, dass **vor** jedem Methodenaufruf eine Nachricht
-      auf `System.out` geschrieben wird (z.B. `About to execute getProduct(P-10)`).
-    - **`ProfilingInterceptor`** soll das AOP-Alliance-Interface
-      `org.aopalliance.intercept.MethodInterceptor` implementieren, um Code **vor und nach** einem Aufruf
-      ausführen zu können. Die Zeitmessung um `invocation.proceed()` ist bereits fertig vorgegeben, aber
-      auskommentiert. Ihre Aufgabe ist es, aus der Klasse eine echte `MethodInterceptor`-Implementierung zu
-      machen: Ergänzen Sie das `implements MethodInterceptor`, passen Sie die Signatur der vorgegebenen
-      Methode `foo()` an die Interface-Methode an (umbenennen in `invoke(...)`, Parameter
-      `MethodInvocation invocation` ergänzen, Rückgabetyp `Object` und `throws Throwable`, mit `@Override`
-      markieren) und aktivieren Sie den vorgegebenen Rumpf, indem Sie die Kommentare entfernen.
+1. Im Package `pizza.aop` finden Sie die Klasse **`ProfilingAspect`**. Die Zeitmessung um `joinPoint.proceed()`
+   ist bereits fertig. Machen Sie daraus einen echten Aspekt:
+    - Markieren Sie die Klasse als Aspekt (`@Aspect`) und als Bean (`@Component`).
+    - Machen Sie die Methode `profile(...)` zu einem **Around-Advice** (`@Around`), dessen Pointcut-Expression alle
+      Methoden der Klasse `pizza.product.ProductService` erfasst.
 
-2. Die Proxy-Erzeugung soll in einer eigenen `CommandLineRunner`-Implementierung **`AopRunner`**
-   (Package `pizza`) erfolgen -- ein Gerüst ist vorbereitet. Der `AopRunner` ist als `@Component`
-   registriert und läuft per `@Order(2)` nach dem `LogicRunner` (`@Order(1)`), sodass bereits Produkte
-   geladen sind.
+2. Damit Spring für Beans, auf die ein Aspekt passt, automatisch einen Proxy erzeugt, muss die Verarbeitung der
+   Aspekte eingeschaltet werden: Ergänzen Sie an der Konfigurationsklasse `PizzaApp` die Annotation
+   `@EnableAspectJAutoProxy`.
 
-   Implementieren Sie die `todo` Stellen in `AopRunner`: Erzeugen Sie mit Springs `ProxyFactory` einen
-   AOP-Proxy der `ProductService`-Bean, fügen Sie beide Advices hinzu (`addAdvice(...)`) und rufen Sie eine
-   Methode auf dem Proxy auf (z.B. `getProduct("P-10")`).
+   ➡️ Starten Sie die Anwendung. Da `LogicRunner` und `DataLoader` den `ProductService` nutzen, sehen Sie nun für
+   jeden Aufruf eine Zeile wie `Execution of getAllProducts() took 0 ms` -- ohne dass Sie diese Klassen angefasst
+   haben.
 
-   Da `PizzaApp.main()` alle `CommandLineRunner`-Beans ausführt, kommt automatisch auch der neue `AopRunner` zum Zug.
+3. Schreiben Sie in der vorbereiteten Klasse **`TraceAspect`** einen **Before-Advice** (`@Before`) für dieselben
+   Methoden, der vor jedem Aufruf den Methodennamen und die Argumente ausgibt, z.B.
+   `About to execute getProduct(P-10)`. Name und Argumente liefert ein Parameter vom Typ `JoinPoint`
+   (`getSignature().getName()` bzw. `getArgs()`).
+
+> **Bonus:** Lassen Sie sich im `LogicRunner` mit `productService.getClass().getName()` die Klasse der injizierten
+> Bean ausgeben. Was sehen Sie, und warum?
 
 ## b) Resources -- CSV-DataLoader
 
