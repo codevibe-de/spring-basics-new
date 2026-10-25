@@ -92,3 +92,7 @@ Erstellen Sie zusätzlich die folgenden API-Endpunkte:
   }
 }
 ````
+
+Legen Sie für diesen Body eine Klasse oder einen Record `OrderRequest` mit den Feldern `phoneNumber`
+(`String`) und `itemQuantities` (`Map<String, Integer>`, Produkt-Id auf Menge) an und nehmen Sie ihn
+in der Controller-Methode per `@RequestBody` entgegen.
