@@ -47,7 +47,25 @@ Testen Sie die URL in Ihrem Browser: http://localhost:8080/orders/greeting
 Erstellen Sie die folgenden API-Endpunkte:
 
 * `GET /customers`, der alle Kunden zurückgibt
-* `POST /customers`, der einen neuen Kunden anlegt
+* `POST /customers`, der einen neuen Kunden anlegt. Der Kunde ist durch folgenden JSON Inhalt
+  definiert:
+
+````json
+{
+  "fullName": "Enrico Pallazzo",
+  "address": {
+    "street": "Wasserstr. 123",
+    "postalCode": "40302",
+    "city": "Atlantis"
+  },
+  "phoneNumber": "+49 123 456789"
+}
+````
+
+`Customer` selbst eignet sich nicht als `@RequestBody`: Die Klasse hat zwei Konstruktoren und
+keinen Default-Konstruktor, Jackson weiß daher nicht, wie es sie erzeugen soll. Legen Sie stattdessen
+einen Record `CreateCustomerRequest` mit den drei Feldern aus dem JSON an, nehmen Sie diesen in
+der Controller-Methode entgegen und erzeugen Sie daraus den `Customer` für den `CustomerService`.
 
 ## d) ProductRestController
 
