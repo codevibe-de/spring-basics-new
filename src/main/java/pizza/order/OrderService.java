@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class OrderService {
@@ -28,6 +29,7 @@ public class OrderService {
     private double discountRate = 0.0;
 
     private final ArrayList<Order> orders;
+    private final AtomicLong idSequence = new AtomicLong(1);
 
     //
     // injected beans
@@ -84,7 +86,7 @@ public class OrderService {
                 LocalDateTime.now().plusMinutes(this.deliveryTimeInMinutes));
 
         // persist and return it
-        order.setId(orders.size() + 1);
+        order.setId(idSequence.getAndIncrement());
         this.orders.add(order);
         return order;
     }
