@@ -10,22 +10,16 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Map;
 
 @Service
 public class OrderService {
 
     //
-    // fields
-    //
-
-    private final ArrayList<Order> orders;
-
-    //
     // injected beans
     //
+
+    private final OrderRepository orderRepository;
 
     private final OrderProperties orderProperties;
 
@@ -37,11 +31,11 @@ public class OrderService {
     // constructors and setup
     //
 
-    public OrderService(OrderProperties orderProperties, CustomerService customerService, ProductService productService) {
+    public OrderService(OrderRepository orderRepository, OrderProperties orderProperties, CustomerService customerService, ProductService productService) {
+        this.orderRepository = orderRepository;
         this.orderProperties = orderProperties;
         this.customerService = customerService;
         this.productService = productService;
-        this.orders = new ArrayList<>();
     }
 
     @PostConstruct
@@ -91,9 +85,7 @@ public class OrderService {
                 LocalDateTime.now().plusMinutes(this.orderProperties.deliveryTimeInMinutes()));
 
         // persist and return it
-        order.setId(orders.size() + 1);
-        this.orders.add(order);
-        return order;
+        return this.orderRepository.save(order);
     }
 
     private double getTodaysDiscountRate() {
@@ -106,6 +98,6 @@ public class OrderService {
     }
 
     public Iterable<Order> getOrders() {
-        return Collections.unmodifiableList(this.orders);
+        return this.orderRepository.findAll();
     }
 }
