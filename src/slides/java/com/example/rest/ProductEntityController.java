@@ -18,13 +18,17 @@ import java.net.URI;
 @RestController
 public class ProductEntityController {
 
+    public static final String ROOT = "/products";
+    public static final String GET_ONE_PATH = ROOT + "/{id}";
+    public static final String CREATE_PATH = ROOT;
+
     private final ProductService productService;
 
     public ProductEntityController(ProductService productService) {
         this.productService = productService;
     }
 
-    @GetMapping("/products/{id}")
+    @GetMapping(GET_ONE_PATH)
     public ResponseEntity<Product> getProduct(
             @PathVariable String id
     ) {
@@ -38,7 +42,7 @@ public class ProductEntityController {
 
     // --- Folie „Neuanlage: 201 mit Location“ ---
 
-    @PostMapping("/products")
+    @PostMapping(CREATE_PATH)
     public ResponseEntity<Product> createProduct(
             @RequestBody Product product) {
         var created = productService.createProduct(product);
