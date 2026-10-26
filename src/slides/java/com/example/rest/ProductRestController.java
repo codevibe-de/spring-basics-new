@@ -18,6 +18,7 @@ public class ProductRestController {
     public static final String ROOT = "/products";
     public static final String GET_ONE_PATH = ROOT + "/{id}";
     public static final String UPDATE_PATH = ROOT + "/{id}";
+    public static final String DELETE_PATH = ROOT;
 
     private final ProductService productService;
 
@@ -43,7 +44,7 @@ public class ProductRestController {
 
     // --- Folie 265 ---
 
-    @DeleteMapping("/products")
+    @DeleteMapping(DELETE_PATH)
     public Integer deleteProducts(
             @RequestParam(value = "namePrefix", defaultValue = "") String p)
     {
