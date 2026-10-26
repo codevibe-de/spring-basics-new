@@ -15,8 +15,8 @@ import pizza.customer.CustomerService;
 public class CustomerRestController {
 
     private static final String ROOT = "/customers";
-    public static final String GET_ALL_ENDPOINT = ROOT;
-    public static final String CREATE_ENDPOINT = ROOT;
+    public static final String GET_ALL_PATH = ROOT;
+    public static final String CREATE_PATH = ROOT;
 
     private final CustomerService customerService;
 
@@ -26,7 +26,7 @@ public class CustomerRestController {
 
     // --- Folie 262 ---
 
-    @GetMapping(GET_ALL_ENDPOINT)
+    @GetMapping(GET_ALL_PATH)
     public Iterable<Customer> getAllCustomers() {
         return customerService.getAllCustomers();
     }
@@ -36,7 +36,7 @@ public class CustomerRestController {
     // deserialisieren. Der Hauptcode (pizza.customer.CustomerRestController) nimmt daher einen
     // CreateCustomerRequest-Record entgegen.
 
-    @PostMapping(CREATE_ENDPOINT)
+    @PostMapping(CREATE_PATH)
     @ResponseStatus(HttpStatus.CREATED)
     public Customer createCustomer(@RequestBody Customer c) {
         return customerService.createCustomer(c);
