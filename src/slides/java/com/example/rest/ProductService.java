@@ -1,4 +1,5 @@
-// Folien 263, 265 – Hilfsklasse: pizza.product.ProductService kennt kein deleteProductsWithNamePrefix()
+// Folien 263, 265 und „RestController – PUT“ – Hilfsklasse: pizza.product.ProductService kennt
+// weder deleteProductsWithNamePrefix() noch updateProduct()
 package com.example.rest;
 
 import org.springframework.stereotype.Service;
@@ -19,6 +20,13 @@ public class ProductService {
             throw new ProductNotFoundException("For id " + id);
         }
         return product;
+    }
+
+    public Product updateProduct(String id, Product product) {
+        getProduct(id);
+        var updated = new Product(id, product.getName(), product.getPrice());
+        productsById.put(id, updated);
+        return updated;
     }
 
     public int deleteProductsWithNamePrefix(String namePrefix) {
