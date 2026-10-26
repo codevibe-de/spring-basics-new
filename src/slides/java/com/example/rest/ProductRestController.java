@@ -13,7 +13,7 @@ import pizza.product.Product;
 public class ProductRestController {
 
     public static final String ROOT = "/products";
-    public static final String GET_ONE_ENDPOINT = ROOT + "/{id}";
+    public static final String GET_ONE_PATH = ROOT + "/{id}";
 
     private final ProductService productService;
 
@@ -23,7 +23,7 @@ public class ProductRestController {
 
     // --- Folie 263 ---
 
-    @GetMapping(GET_ONE_ENDPOINT)
+    @GetMapping(GET_ONE_PATH)
     public Product getProduct(@PathVariable("id") String prdId) {
         return this.productService.getProduct(prdId);
     }
