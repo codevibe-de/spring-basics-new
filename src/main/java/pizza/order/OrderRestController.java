@@ -12,9 +12,9 @@ public class OrderRestController {
     //
 
     public static final String ROOT = "/orders";
-    public static final String GREETING_ENDPOINT = ROOT + "/greeting";
-    public static final String PLACE_ORDER_ENDPOINT = ROOT;
-    public static final String GET_MANY_ENDPOINT = ROOT;
+    public static final String GREETING_PATH = ROOT + "/greeting";
+    public static final String PLACE_ORDER_PATH = ROOT;
+    public static final String GET_MANY_PATH = ROOT;
 
     //
     // --- injected beans ---
@@ -36,12 +36,12 @@ public class OrderRestController {
     // --- REST endpoints ---
     //
 
-    @GetMapping(GREETING_ENDPOINT)
+    @GetMapping(GREETING_PATH)
     public String sayHello() {
         return this.greeting;
     }
 
-    @PostMapping(PLACE_ORDER_ENDPOINT)
+    @PostMapping(PLACE_ORDER_PATH)
     @ResponseStatus(HttpStatus.CREATED)
     public Order placeOrder(@RequestBody OrderRequest orderRequest) {
         return this.orderService.placeOrder(
@@ -49,7 +49,7 @@ public class OrderRestController {
                 orderRequest.itemQuantities);
     }
 
-    @GetMapping(GET_MANY_ENDPOINT)
+    @GetMapping(GET_MANY_PATH)
     public Iterable<Order> getOrders() {
         return this.orderService.getOrders();
     }

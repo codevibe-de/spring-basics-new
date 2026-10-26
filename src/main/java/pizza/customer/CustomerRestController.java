@@ -11,8 +11,8 @@ public class CustomerRestController {
     //
 
     public static final String ROOT = "/customers";
-    public static final String GET_ALL_ENDPOINT = ROOT;
-    public static final String CREATE_ENDPOINT = ROOT;
+    public static final String GET_ALL_PATH = ROOT;
+    public static final String CREATE_PATH = ROOT;
 
     //
     // --- injected beans ---
@@ -32,12 +32,12 @@ public class CustomerRestController {
     // --- REST endpoints ---
     //
 
-    @GetMapping(GET_ALL_ENDPOINT)
+    @GetMapping(GET_ALL_PATH)
     public Iterable<Customer> getAllCustomers() {
         return this.customerService.getAllCustomers();
     }
 
-    @PostMapping(CREATE_ENDPOINT)
+    @PostMapping(CREATE_PATH)
     @ResponseStatus(HttpStatus.CREATED)
     public Customer createCustomer(@RequestBody CreateCustomerRequest createCustomerRequest) {
         return this.customerService.createCustomer(
