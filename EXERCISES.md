@@ -56,7 +56,9 @@ Die Datei `src/main/resources/products.csv` hat das Format `id;name;preis`.
 
 ## c) SpEL -- Spring Expression Language
 
-Ziel: Ausdrücke der Spring Expression Language schreiben und auswerten.
+Ziel: Ausdrücke der Spring Expression Language schreiben, auswerten und per `@Value` in eine Bean injizieren.
+
+### 1. Ausdrücke mit dem `SpelExpressionParser`
 
 Die eigenständige Klasse `SpelParserApp` richtet einen `SpelExpressionParser` und einen
 `StandardEvaluationContext` ein. Über einen `BeanFactoryResolver` hat der Ausdruck Zugriff auf die Beans des
@@ -76,5 +78,23 @@ Führen Sie `SpelParserApp` aus und experimentieren Sie anschließend mit weiter
   kombiniert mit einer Projektion: die Namen aller Produkte günstiger als 7,00,
 - `T(java.time.LocalDate).now()` -- eine **Type-Reference** (`T(...)`) mit statischem Methodenaufruf.
 
-> Hinweis: SpEL wird sehr häufig auch direkt in Annotationen genutzt, z.B. in `@Value("#{ ... }")`.
-> Diese Form lernen Sie in der nächsten Lektion kennen.
+### 2. SpEL in `@Value`
+
+In der Praxis steht SpEL meist nicht in einem eigenen Parser-Aufruf, sondern in Annotationen: `@Value("#{ausdruck}")`
+wertet den Ausdruck **einmal beim Erzeugen der Bean** aus und injiziert das Ergebnis in das annotierte Feld.
+
+Die Bean `ShopInfo` gibt beim Start aus, ob heute Pizza-Freitag ist. Belegen Sie ihr Feld `pizzaFriday` per `@Value`
+mit einem SpEL-Ausdruck, der genau dann `true` liefert, wenn heute Freitag ist. Bausteine:
+
+- `T(java.time.LocalDate)` ist eine **Type-Reference**: Sie steht für die Klasse selbst, nicht für ein Objekt. Nur
+  darüber lassen sich statische Methoden wie `LocalDate.now()` aufrufen. Klassen außerhalb von `java.lang` brauchen den
+  voll qualifizierten Namen.
+- `.dayOfWeek` ist Property-Zugriff (`getDayOfWeek()`) und liefert das Enum `DayOfWeek`.
+- `.name()` liefert dessen Namen als String, z.B. `'FRIDAY'`. Den können Sie mit `==` gegen ein String-Literal
+  vergleichen: Anders als in Java vergleicht `==` in SpEL die Werte (`equals()`), nicht die Referenzen.
+
+Starten Sie `SpelParserApp` oder `PizzaApp` und prüfen Sie die Ausgabe. Ist heute kein Freitag, tauschen Sie zum
+Ausprobieren `'FRIDAY'` gegen den heutigen Wochentag.
+
+Bonus: Vergleichen Sie direkt mit der Enum-Konstante statt mit ihrem Namen. Auch statische Felder erreichen Sie über
+`T(...)`, hier `T(java.time.DayOfWeek).FRIDAY`.
