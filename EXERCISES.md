@@ -23,6 +23,53 @@ Folgendes wurde für Sie **bereits vorbereitet**:
 - Das Template `src/main/resources/templates/products/single-product.html` ist als Grundgerüst vorbereitet
   (HTML-Struktur inkl. Bootstrap). Die eigentliche Datenanbindung tragen Sie in Aufgabe b) selbst nach.
 
+## Anwendung starten
+
+`PizzaApp.main()` startet weiterhin nur den Spring-Kontext, aber keinen Webserver. Damit der `DispatcherServlet` Requests
+bekommt, muss ein Servlet-Container die Anwendung laden und dabei `AppInitializer` aufrufen. Spring Framework 7 setzt
+Servlet 6.1 voraus, also **Tomcat 11** oder neuer; mit Tomcat 10 startet die Anwendung nicht.
+
+Es gibt drei Wege. Geprüft wird jeweils mit dem Produkt "P-10" (Pizza Margarita).
+
+### Variante 1: Eingebetteter Tomcat (in jeder IDE)
+
+Das ist Aufgabe c) unten: Abhängigkeit `tomcat-embed-core` ergänzen und eine `main`-Methode schreiben, die einen
+Tomcat startet. Gestartet wird wie jede andere Java-Klasse, in IntelliJ über den grünen Pfeil neben `main` bzw. eine
+Run Configuration vom Typ **Application**.
+
+➡️ URL: `http://localhost:8080/web/products/P-10`
+
+### Variante 2: IntelliJ IDEA mit lokalem Tomcat
+
+Voraussetzung: ein entpackter Tomcat 11 (Download unter https://tomcat.apache.org/download-11.cgi, "Core") und eine
+IntelliJ-Installation mit dem Plugin "Tomcat and TomEE". Je nach Lizenz fehlt es; dann Variante 1 oder 3 nehmen.
+
+1. *Run → Edit Configurations… → + → Tomcat Server → Local*
+2. Bei *Application server* über *Configure…* das Tomcat-Verzeichnis auswählen
+3. Reiter *Deployment*: *+ → Artifact… → pizza-app:war exploded*
+4. Im selben Reiter *Application context* auf `/` setzen. Sonst hängt IntelliJ einen aus dem Artefaktnamen gebildeten
+   Pfad vor alle URLs.
+5. Run Configuration starten; IntelliJ baut das Artefakt, startet Tomcat und deployt die Anwendung
+
+➡️ URL: `http://localhost:8080/web/products/P-10`
+
+### Variante 3: WAR in einen Tomcat deployen
+
+Das ist der klassische Weg ohne IDE, wie im Betrieb.
+
+1. WAR bauen: `mvn package` erzeugt `target/pizza-app-075.war`, `./gradlew war` erzeugt `build/libs/pizza-app-075.war`
+2. Die Datei in das Verzeichnis `webapps/` des Tomcat kopieren
+3. Tomcat starten mit `bin/startup.sh` (Windows: `bin\startup.bat`), beenden mit `bin/shutdown.sh`. Dafür muss
+   `JAVA_HOME` auf ein JDK 17 oder neuer zeigen.
+
+Tomcat nimmt den Dateinamen des WAR als Kontextpfad, er steht daher in jeder URL:
+
+➡️ URL: `http://localhost:8080/pizza-app-075/web/products/P-10`
+
+> **Hinweis:** Links im Template deshalb immer mit Thymeleafs `@{…}` schreiben, z. B.
+> `th:href="@{/bootstrap-5.3.3.css}"`. Thymeleaf setzt den Kontextpfad davor; ein festes `href="/bootstrap-5.3.3.css"`
+> würde unter `/pizza-app-075` ins Leere zeigen.
+
 ## a) ProductWebController
 
 Schreiben Sie einen Controller namens `ProductWebController` (z. B. im Paket `pizza.product`), der ein Produkt lädt
