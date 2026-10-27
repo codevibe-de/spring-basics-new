@@ -53,6 +53,11 @@ IntelliJ-Installation mit dem Plugin "Tomcat and TomEE". Je nach Lizenz fehlt es
 
 ➡️ URL: `http://localhost:8080/web/products/P-10`
 
+> **Falls IntelliJ "deployment source 'pizza-app:war exploded' is not valid" meldet:** Das Artefakt gibt es nur,
+> solange die `pom.xml` `<packaging>war</packaging>` hat, also nur in den 075-Branches. Nach einem Branch-Wechsel zeigt
+> die Run Configuration manchmal noch auf das alte Artefakt. Dann im Reiter *Deployment* das Artefakt mit *–*
+> entfernen, über *+ → Artifact…* neu hinzufügen und *Application context* wieder auf `/` setzen.
+
 ### Variante 3: WAR in einen Tomcat deployen
 
 Das ist der klassische Weg ohne IDE, wie im Betrieb.
