@@ -21,6 +21,7 @@ public class BeanContainer {
      * Adds a bean-definition to this container. Replaces an existing definition with the same name.
      */
     public void defineBean(String name, Class<?> beanClass) {
+        // TODO Demo 1: eine bestehende Definition gleichen Namens ersetzen (siehe Javadoc)
         this.beanDefinitions.add(new BeanDefinition(name, beanClass));
     }
 
@@ -29,6 +30,12 @@ public class BeanContainer {
      * Removes all existing beans, then create all beans that were defined with {@link #defineBean(String, Class)}.
      */
     public void refresh() {
+        // TODO Demo 4: erste Version -- Schleife über die BeanDefinitions, jede per
+        //  def.getType().newInstance() erzeugen und in beansByNameMap ablegen
+        // TODO Demo 7: statt newInstance() den Konstruktor nutzen (findConstructor), dessen
+        //  Parameter per resolveBeanNames() und getBean() auflösen, ausgelagert in createBean()
+        // TODO Demo 10: Erzeugungsreihenfolge über createBeanDependencyGraph() und
+        //  getNextBeanName() bestimmen, null heißt zirkuläre Abhängigkeit
     }
 
     private BeanDefinition getBeanDefinition(String beanName) {
@@ -45,6 +52,8 @@ public class BeanContainer {
      */
     @SuppressWarnings("unchecked")
     public <T> T getBean(Class<T> requiredType) throws NoSuchBeanDefinitionException, NoUniqueBeanDefinitionException {
+        // TODO Demo 6: Lookup per Typ -- wie findet man die Bean zum Interface ProductRepository?
+        //  resolveBeanName() erklären und nutzen
         return null;
     }
 
@@ -55,6 +64,7 @@ public class BeanContainer {
      * @throws NoSuchBeanDefinitionException if no bean with that name exists
      */
     public Object getBean(String name) throws NoSuchBeanDefinitionException {
+        // TODO Demo 2: Bean aus beansByNameMap holen
         return null;
     }
 

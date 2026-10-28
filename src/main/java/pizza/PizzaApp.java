@@ -23,6 +23,8 @@ public class PizzaApp {
 
     public static void main(String[] args) {
         // Instantiate beans ---
+        // TODO Demo 3 und 5: BeanContainer anlegen, z. B. HashMapProductRepository definieren,
+        //  refresh() aufrufen und die Bean per getBean() ausgeben
         ProductService productService = new ProductService(new HashMapProductRepository());
         CustomerService customerService = new CustomerService();
         OrderService orderService = new OrderService(customerService, productService);
