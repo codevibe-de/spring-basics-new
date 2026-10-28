@@ -23,6 +23,8 @@ public class PizzaApp {
 
     public static void main(String[] args) {
         // Instantiate beans ---
+        // TODO Übung: Beans nicht mehr selbst erzeugen, sondern im summer.BeanContainer definieren
+        //  (defineBean), refresh() aufrufen und per getBean(Class) abholen
         ProductService productService = new ProductService(new HashMapProductRepository());
         CustomerService customerService = new CustomerService();
         OrderService orderService = new OrderService(customerService, productService);
