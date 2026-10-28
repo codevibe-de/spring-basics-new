@@ -12,8 +12,6 @@ import pizza.product.Product;
 import pizza.product.ProductService;
 import summer.BeanContainer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +24,8 @@ public class PizzaApp {
 
     public static void main(String[] args) {
         // Instantiate beans ---
+        // TODO Übung: Bean-Definitionen in src/main/resources/beans.xml auslagern und den Container per
+        //  new XmlConfigBeanContainer("/beans.xml") erzeugen
         BeanContainer beanContainer = new BeanContainer();
         beanContainer.defineBean("prdRepo", HashMapProductRepository.class);
         beanContainer.defineBean("prdService", ProductService.class);
