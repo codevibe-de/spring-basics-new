@@ -44,15 +44,18 @@ Hinweis für die anschließende Übung: Innere statische Klassen brauchen beim L
 
 # 014 Ablauf der Demo zur Umstellung auf Springs ClassPathXmlApplicationContext
 
-1. In der `PizzaApp` legen Instanz vom ClassPathXmlApplicationContext anlegen
+Im Branch `014-xmlConfig-demo` sind die Stellen in `PizzaApp` und `src/main/resources/beans.xml` mit
+`TODO Demo <Schritt>` markiert.
+
+1. In der `PizzaApp` eine Instanz von `ClassPathXmlApplicationContext` anlegen (`TODO Demo 1 bis 3`)
 2. Typ von `beanContainer` ändert sich entsprechend
-3. Da `ClassPathXmlApplicationContext` bzw. `ConfigurableApplicationContext` ein `Closable` ist, kann man auch try with
+3. Da `ClassPathXmlApplicationContext` bzw. `ConfigurableApplicationContext` ein `Closeable` ist, kann man auch try with
    resource nehmen:
     ```java
             try (ClassPathXmlApplicationContext beanContainer = new ClassPathXmlApplicationContext("/beans.xml")) {
             }
     ```
 4. Die beans.xml Datei braucht nun noch Xml-Schema Deklaration, kann man gut von hier nehmen:
-   https://docs.spring.io/spring-framework/reference/core/appendix/xsd-schemas.html
+   https://docs.spring.io/spring-framework/reference/core/appendix/xsd-schemas.html (`TODO Demo 4`)
 5. Start der App zeigt aber noch Fehler -- manche Klassen brauchen Konstruktor-Args, daher Ergänzung
-   um `autowire="constructor"` in entsprechenden `<bean>` Elementen
+   um `autowire="constructor"` in entsprechenden `<bean>` Elementen (`TODO Demo 5`)

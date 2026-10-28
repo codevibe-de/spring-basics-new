@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+<!-- TODO Demo 4: XML-Schema-Deklaration für Springs <beans> ergänzen, siehe
+     https://docs.spring.io/spring-framework/reference/core/appendix/xsd-schemas.html -->
 <beans>
     <!-- util beans -->
+    <!-- TODO Demo 5: autowire="constructor" für alle Beans mit Konstruktor-Argumenten -->
     <bean name="dataLoader" class="pizza.DataLoader$Sample"/>
 
     <!-- persistence beans -->

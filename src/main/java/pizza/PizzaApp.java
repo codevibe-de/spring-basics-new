@@ -24,6 +24,8 @@ public class PizzaApp {
 
     public static void main(String[] args) {
         // Instantiate beans ---
+        // TODO Demo 1 bis 3: ClassPathXmlApplicationContext statt XmlConfigBeanContainer anlegen, Typ der
+        //  Variable anpassen und den Kontext per try-with-resources schließen (er ist Closeable)
         BeanContainer beanContainer = new XmlConfigBeanContainer("/beans.xml");
 
         // query and use beans
