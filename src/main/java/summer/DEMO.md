@@ -1,7 +1,7 @@
 # Ablauf Bean Container Demo-Programmierung
 
-Die Stellen im Code sind mit `TODO Demo <Schritt>` markiert. In IntelliJ listet sie das
-Tool-Fenster „TODO“ (View → Tool Windows → TODO) der Reihe nach.
+Im Branch `011-beanContainer-demo` sind die Stellen im Code mit `TODO Demo <Schritt>` markiert.
+In IntelliJ listet sie das Tool-Fenster „TODO“ (View → Tool Windows → TODO) der Reihe nach.
 
 1. Ergänzung der Implementierung von `defineBean()` (`TODO Demo 1`)
 2. Implementierung `getBean(String name)` (`TODO Demo 2`)
