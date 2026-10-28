@@ -1,7 +1,4 @@
 // Folie 182 – Beans überschreiben
-// Korrigiert gegenüber Folie v3.1: keine Boot-Annotation @TestConfiguration, sondern eine innere
-// @Configuration wie auf Folie 175; kein Boot-Property spring.main.allow-bean-definition-overriding
-// (reines Spring erlaubt das Überschreiben per Default); Bean-Name der Kapitel-040-App statt "productJdbcDao".
 package com.example.testing;
 
 import org.junit.jupiter.api.Test;
@@ -25,21 +22,20 @@ public class BeanOverrideTest {
     @Configuration
     static class SomeTestConfig {
 
-        // this will REPLACE an existing bean with name "hashMapProductRepository"
-        // (Spring Boot only allows this with spring.main.allow-bean-definition-overriding=true)
+        // REPLACES the scanned bean "hashMapProductRepository"
         @Bean("hashMapProductRepository")
-        public ProductRepository noOpProductRepository1() {
-            return new NoOpProductRepository();
+        public ProductRepository dummyProductRepository1() {
+            return new DummyProductRepository();
         }
 
-        // ----- ODER ------
+        // ----- OR ------
 
-        // this will create an ADDITIONAL bean, which will be used in
-        // regular injection since it's primary
-        @Bean("noOpProductRepository")
+        // creates an ADDITIONAL bean, which wins
+        // in regular injection since it's primary
+        @Bean
         @Primary
-        public ProductRepository noOpProductRepository2() {
-            return new NoOpProductRepository();
+        public ProductRepository dummyProductRepository2() {
+            return new DummyProductRepository();
         }
     }
 }
