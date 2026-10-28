@@ -26,11 +26,21 @@ In IntelliJ listet sie das Tool-Fenster „TODO“ (View → Tool Windows → TO
 
 # 013 Ablauf der XmlConfigBeanContainer Demo-Programmierung
 
-1. Neue Klasse `XmlConfigBeanContainer` anlegen, die von `BeanContainer` vererbt (da dessen Verhalten ergänzt wird)
-2. Klassen `BeansElement` und `BeanElement` anlegen, welche die XML-Elemente der XML-Konfiguration repräsentieren (z.B.
-   als nicht public top-level Klassen in `XmlConfigBeanContainer`)
-3. Konstruktor von `XmlConfigBeanContainer` implementieren, der die XML-Datei einliest (`this.load(..)`), parst
-   und die Bean-Definitionen in `BeanContainer` einträgt (über `defineBean(..)`)
+Im Branch `013-xmlBeanContainer-demo` sind die Stellen im Code mit `TODO Demo <Schritt>` markiert. Vorgegeben sind das
+Gerüst von `XmlConfigBeanContainer` (erbt von `BeanContainer`, da dessen Verhalten nur ergänzt wird), die
+`BeanDefinitionStoreException` und die JAXB-Dependencies in `pom.xml` bzw. `build.gradle`.
+
+1. Klassen `BeansElement` und `BeanElement` anlegen, welche die XML-Elemente der XML-Konfiguration repräsentieren (als
+   nicht public top-level Klassen in `XmlConfigBeanContainer`), mit `@XmlRootElement`, `@XmlElement` und
+   `@XmlAttribute` (`TODO Demo 1`)
+2. Konstruktor: erst `load(..)`, dann `refresh()` (`TODO Demo 2`)
+3. `load(..)` implementieren: XML-Datei per `getResourceAsStream` öffnen, per JAXB parsen und die Bean-Definitionen
+   über `defineBean(..)` eintragen; `Class.forName` macht aus dem Klassennamen das `Class`-Objekt (`TODO Demo 3`)
+4. `@Disabled` in `XmlConfigBeanContainerTest` entfernen und die Tests laufen lassen, `init()` liest
+   `src/test/resources/test-beans.xml` (`TODO Demo 4`)
+
+Hinweis für die anschließende Übung: Innere statische Klassen brauchen beim Laden per Reflection ein `$` zwischen
+äußerem und innerem Klassennamen (`pizza.DataLoader$Sample`).
 
 # 014 Ablauf der Demo zur Umstellung auf Springs ClassPathXmlApplicationContext
 
