@@ -12,12 +12,12 @@ import pizza.product.ProductService;
 
 @Configuration
 @ComponentScan("pizza.product")
-@ImportResource("classpath:context.xml")
+@ImportResource("classpath:beans.xml")
 public class MixedConfigApp {
 
     public static void main(String[] args) {
         try (var context = new AnnotationConfigApplicationContext(MixedConfigApp.class)) {
-            // ProductService kommt aus dem Scan, CustomerService aus context.xml
+            // ProductService kommt aus dem Scan, CustomerService aus beans.xml
             ProductService productService = context.getBean(ProductService.class);
             CustomerService customerService = context.getBean(CustomerService.class);
             System.out.println(productService.getAllProducts());
